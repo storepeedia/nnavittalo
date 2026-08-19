@@ -109,7 +109,7 @@ button{cursor:pointer;font-family:inherit}
 .filters-apply{display:block;width:calc(100% - 44px);margin:18px 22px;background:#2952c8;color:#fff;border:none;padding:12px;border-radius:8px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem}
 /* WhatsApp Button Styling */
 .btn-whatsapp {
-    background-color: #25D366 !important;
+    background-color: #25D366;
     color: white !important;
     border: none !important;
 }
@@ -646,19 +646,7 @@ button{cursor:pointer;font-family:inherit}
     <div id="modalPrice" class="booking-price"></div>
     <div id="modalIncluded" style="font-size:.78rem;color:#7a8599;margin-bottom:16px"></div>
     
-    <label class="form-label">Your Name *</label>
-    <input class="form-input" id="bookName" placeholder="Full name" required />
-    
-    <label class="form-label">Mobile Number *</label>
-    <input class="form-input" type="tel" id="bookPhone" placeholder="+48 000 000 000" required />
-    
-    <div class="guest-selector-row" style="display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 12px 15px; border: 1px solid #dde4f5; border-radius: 10px; margin-bottom: 20px;">
-  <span style="font-weight: 600; font-size: 0.9rem; color: #4a5568;">Number of Guests</span>
-  <select id="bookGuests" onchange="updateLivePrice()" style="width: 70px; padding: 6px; border: 1px solid #cbd5e0; border-radius: 6px; font-weight: 700; color: #2952c8; background: #fff;">
-      </select>
-</div>
-    
-    <button class="btn-book-modal" onclick="confirmBooking()">🎉 Book Your Spot</button>
+    <button class="btn-book-modal btn-whatsapp" style="display:flex; align-items:center; justify-content:center; gap:8px;" onclick="window.open(`https://wa.me/${window.APP_CONFIG.phoneNumber.replace('+', '')}`, '_blank')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Chat</button>
     <p style="font-size:.72rem;color:#7a8599;text-align:center;margin-top:10px">Free cancellation up to 7 days before departure</p>
   </div>
   <div class="trust-box">🏆 Trusted by 150+ adventurers<br><span style="font-weight:400;color:#4a5568">4.9 ⭐ average rating</span></div>
@@ -669,26 +657,13 @@ button{cursor:pointer;font-family:inherit}
 
 <script>
   
-  // Function to generate guest options from 1 to 30
-function populateGuestDropdown() {
-    const select = document.getElementById('bookGuests');
-    if (!select) return;
-    
-    select.innerHTML = ''; // Clear old options
-    for (let i = 1; i <= 30; i++) {
-        let opt = document.createElement('option');
-        opt.value = i;
-        opt.innerHTML = i;
-        select.appendChild(opt);
-    }
-}
 
 // Function to calculate the price based on guest count
 function updateLivePrice() {
     if (!currentTrip || currentTrip.comingSoon) return;
 
     // 1. Get number of guests from the dropdown
-    const guestCount = parseInt(document.getElementById('bookGuests').value) || 1;
+    const guestCount = document.getElementById('bookGuests') ? parseInt(document.getElementById('bookGuests').value) : 1;
     
     // 2. Use the FIXED prices from your TRIPS array multiplied by guests
     const totalPln = currentTrip.price * guestCount;
@@ -953,40 +928,19 @@ function openModal(id) {
   
   document.getElementById('modalIncluded').textContent = '✓ ' + (t.included || 'Equipment & guide included');
 
-  // --- NEW LOGIC START: Update Form & Guest Selector ---
-  const bookName = document.getElementById('bookName');
-  const bookPhone = document.getElementById('bookPhone');
-  const bookBtn = document.querySelector('.btn-book-modal');
-  const guestSelect = document.getElementById('bookGuests');
-
-  // Generate 1-30 guests
-  if (guestSelect) {
-    guestSelect.innerHTML = Array.from({length: 30}, (_, i) => `<option value="${i+1}">${i+1}</option>`).join('');
-    guestSelect.disabled = isComingSoon;
-  }
-
-  // Lock inputs if Coming Soon
-  if (bookName) bookName.disabled = isComingSoon;
-  if (bookPhone) bookPhone.disabled = isComingSoon;
   
+  const bookBtn = document.querySelector(".btn-book-modal");
   // Lock button and change style if Coming Soon
   if (bookBtn) {
     bookBtn.disabled = isComingSoon;
-    bookBtn.innerText = isComingSoon ? 'Coming Soon' : '🎉 Book Your Spot';
-    bookBtn.style.background = isComingSoon ? '#cbd5e0' : ''; // Grey if locked
+    bookBtn.innerHTML = isComingSoon ? 'Coming Soon' : '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Chat';
+    bookBtn.style.background = isComingSoon ? '#cbd5e0' : '#25D366'; // Grey if locked
     bookBtn.style.cursor = isComingSoon ? 'not-allowed' : '';
   }
   // --- NEW LOGIC END ---
 
   document.getElementById('modal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
-  // 1. Create the 1-30 list
-    populateGuestDropdown();
-    
-    // 2. Set default to 1 guest
-    document.getElementById('bookGuests').value = "1";
-    
-    // 3. Run the initial price calculation
     updateLivePrice();
 }
 
@@ -995,67 +949,6 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-async function confirmBooking() {
-
-  // 3. Get values from the inputs
-  const fullName = document.getElementById('bookName').value.trim();
-  const phone = document.getElementById('bookPhone').value.trim();
-  
-  // Get the guest count from the dropdown
-  const guestCount = parseInt(document.getElementById('bookGuests').value) || 1;
-
-  // 4. MANDATORY CHECK: stop if fields are empty
-  if (!fullName || !phone) {
-    showToast("⚠️ Name and Mobile Number are required!");
-    return; 
-  }
-
-  // --- NEW: Calculate Total Prices based on your Fixed Inputs ---
-  const totalPln = currentTrip.price * guestCount;
-  const totalEur = currentTrip.priceEur * guestCount;
-
-  // 5. Save the booking to Supabase
-  // Ensure your Supabase table has these columns: guests, total_price_pln, total_price_eur
-  const { error } = await _supabase
-    .from('bookings')
-    .insert([
-      { 
-        user_id: 'guest',
-        event_id: currentTrip.id,
-        event_name: currentTrip.title, 
-        customer_name: fullName, 
-        phone_number: phone,      
-        guests: guestCount,                // <--- Added
-        total_price_pln: totalPln,         // <--- Added
-        total_price_eur: totalEur,         // <--- Added
-        booking_date: new Date().toISOString().split('T')[0],
-        status: 'pending' 
-      }
-    ]);
-
-  if (error) {
-    console.error("Supabase Error:", error);
-    showToast("❌ Error: " + error.message);
-  } else {
-    // 6. SUCCESS STATE
-    showToast("🎉 Booking confirmed! Check 'My Adventures' for details.");
-if (document.activeElement) {
-        document.activeElement.blur();
-    }
-    const btn = document.querySelector('.btn-book-modal');
-    if(btn) {
-        btn.disabled = true;
-        btn.innerText = "✅ Confirmed";
-    }
-
-    // 7. Wait 5 seconds before closing
-    setTimeout(() => {
-      closeModal();
-      // 4. Force the window back to the top-left to reset the zoom/offset
-      window.scrollTo(0, 0);
-    }, 1500); 
-  }
-}
 
 let toastTimer = null; // Ensure this is declared at the top of your script
 
