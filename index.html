@@ -107,6 +107,13 @@ button{cursor:pointer;font-family:inherit}
 .diff-btn{font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;padding:5px 12px;border-radius:50px;border:1.5px solid #dde4f5;cursor:pointer;background:#fff;color:#4a5568}
 .diff-btn.active{background:#2952c8;color:#fff;border-color:#2952c8}
 .filters-apply{display:block;width:calc(100% - 44px);margin:18px 22px;background:#2952c8;color:#fff;border:none;padding:12px;border-radius:8px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem}
+/* WhatsApp Button Styling */
+.btn-whatsapp {
+    background-color: #25D366 !important;
+    color: white !important;
+    border: none !important;
+}
+.btn-whatsapp:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(37,211,102,.3) !important; }
 .filters-apply:hover{background:#1a3a9e}
 
 /* TRIPS LIST */
@@ -408,7 +415,7 @@ button{cursor:pointer;font-family:inherit}
  <!-- <span>🏔️ All Passes are icluded in the price!</span>
  <!-- <div style="display:flex;gap:20px;flex-wrap:wrap">
  <!--   <a href="mailto:info@nnavittalo.com">📧 info@nnavittalo.com</a>
- <!--   <a href="https://wa.me/48729648977" target="_blank">📞 Call / WhatsApp: +48729648977</a>
+ <!--   <a href="#" class="dynamic-wa-link" target="_blank">📞 Call / WhatsApp: <span class="dynamic-phone"></span></a>
  <!-- </div>
 <!--</div>
 
@@ -428,8 +435,7 @@ button{cursor:pointer;font-family:inherit}
       <a href="#contact" style="color:#1a1f36">Contact</a>
     </div>
     <div class="nav-actions">
-      <button class="btn-outline" onclick="document.getElementById('authModal').style.display='flex'">Log In</button>
-      <button class="btn-solid" onclick="document.querySelector('#packages').scrollIntoView({ behavior: 'smooth' })">Book a Trip</button>
+      <button class="btn-solid btn-whatsapp" style="display:flex; align-items:center; gap:8px;" onclick="window.open(`https://wa.me/${window.APP_CONFIG.phoneNumber.replace('+', '')}`, '_blank')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Chat</button>
     </div>
     <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -440,8 +446,7 @@ button{cursor:pointer;font-family:inherit}
     <a href="#about" onclick="closeMobileMenu()">ℹ️ About Us</a>
     <a href="#contact" onclick="closeMobileMenu()">📞 Contact</a>
     <div class="mobile-menu-btns">
-      <button class="btn-outline" style="border-radius:6px" onclick="closeMobileMenu(); document.getElementById('authModal').style.display='flex'">Log In</button>
-      <button class="btn-solid" style="border-radius:6px" onclick="closeMobileMenu();document.querySelector('#packages').scrollIntoView({behavior:'smooth'})">Book a Trip</button>
+      <button class="btn-solid btn-whatsapp" style="border-radius:6px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="closeMobileMenu(); window.open(`https://wa.me/${window.APP_CONFIG.phoneNumber.replace('+', '')}`, '_blank')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Chat</button>
     </div>
   </div>
 </nav>
@@ -564,9 +569,9 @@ button{cursor:pointer;font-family:inherit}
         <span class="contact-card-icon">📧</span>
         <div><div class="contact-card-label">Email Us</div><div class="contact-card-val">info@nnavittalo.com</div></div>
       </a>
-      <a href="https://wa.me/487294877" target="_blank" class="contact-card">
+      <a href="#" class="contact-card dynamic-wa-link" target="_blank">
         <span class="contact-card-icon">📞</span>
-        <div><div class="contact-card-label">Call / WhatsApp Us</div><div class="contact-card-val">+48729648977</div></div>
+        <div><div class="contact-card-label">Call / WhatsApp Us</div><div class="contact-card-val"><span class="dynamic-phone"></span></div></div>
       </a>
     </div>
     <p style="font-size:.82rem;margin-bottom:10px;color:rgba(255,255,255,.6)">Join our newsletter — be the first to hear about new trips, discounts and adventures!</p>
@@ -583,11 +588,11 @@ button{cursor:pointer;font-family:inherit}
     <div>
       <div class="footer-brand">⛰️ NNA VITTALO</div>
       <p class="footer-tagline">Europe's premier adventure travel operator. Mountains, oceans, forests — unforgettable journeys crafted for the bold.</p>
-      <div style="font-size:.82rem">📧 info@nnavittalo.com<br>📞 +48729648977</div>
+      <div style="font-size:.82rem">📧 info@nnavittalo.com<br>📞 <span class="dynamic-phone"></span></div>
     </div>
     <div class="footer-col"><h4>Our Trips</h4><a href="#packages">Kayaking Getaway</a><a href="#packages">Ski Trip</a><a href="#packages">Surfing Camp</a><a href="#packages">Hiking in Tatra</a><a href="#packages">Camping Weekend</a></div>
     <div class="footer-col"><h4>Company</h4><a href="#about">About Us</a><a href="#contact">Contact</a><a href="#packages">All Trips</a></div>
-    <div class="footer-col"><h4>Contact</h4><a href="mailto:info@nnavittalo.com">info@nnavittalo.com</a><a href="https://wa.me/487294877">+48729648977</a><a href="#">Warsaw, Poland</a><a href="#">Mon–Fri 9:00–18:00</a></div>
+    <div class="footer-col"><h4>Contact</h4><a href="mailto:info@nnavittalo.com">info@nnavittalo.com</a><a href="#" class="dynamic-wa-link"><span class="dynamic-phone"></span></a><a href="#">Warsaw, Poland</a><a href="#">Mon–Fri 9:00–18:00</a></div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 NNA VITTALO. All rights reserved.</span>
@@ -595,50 +600,9 @@ button{cursor:pointer;font-family:inherit}
   </div>
 </footer>
 <!-- My booking -->
-<div id="bookingsModal" class="modal-overlay" style="display:none" onclick="if(event.target===this) this.style.display='none'">
-  <div class="modal-box" style="max-width:500px; padding:30px; position:relative;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-      <h2 style="font-family:Montserrat,sans-serif; color:#0f2266; font-size:1.5rem;">My Adventures</h2>
-      <button class="btn-outline" style="font-size:.7rem; padding:6px 12px; border-color:#ff4d4d; color:#ff4d4d;" onclick="_supabase.auth.signOut().then(()=>location.reload())">Log Out</button>
-    </div>
-    
-    <div id="bookingsList" style="max-height:350px; overflow-y:auto; padding-right:10px;">
-      <p style="text-align:center; color:#7a8599;">Loading your history...</p>
-    </div>
-
-    <button class="btn-solid" style="width:100%; margin-top:20px;"onclick="closeBookingsModal()">Close</button>
-  </div>
-</div>
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
-<!-- supabase login -->
-<div id="authModal" class="modal-overlay" style="display:none" onclick="if(event.target===this) this.style.display='none'">
-  <div class="modal-box" style="max-width:400px; padding:30px;">
-    <h2 style="font-family:Montserrat,sans-serif; margin-bottom:20px; color:#0f2266; text-align:center;">Client Portal</h2>
-    
-    <div style="margin-bottom:15px;">
-      <label class="form-label">Email Address</label>
-      <input type="email" id="authEmail" class="form-input" placeholder="name@example.com">
-    </div>
-    
-    <div style="margin-bottom:20px;">
-      <label class="form-label">Password</label>
-      <input type="password" id="authPassword" class="form-input" placeholder="••••••••">
-    </div>
-    
-    <div style="display:flex; gap:10px;">
-      <button class="btn-solid" style="flex:1" onclick="handleAuth('login')">Log In</button>
-      <button class="btn-outline" style="flex:1" onclick="handleAuth('signup')">Sign Up</button>
-    </div>
-    
-    <button class="btn-details" style="width:100%; margin-top:15px; background:#f0f4ff;" onclick="document.getElementById('authModal').style.display='none'">Close</button>
-    
-    <p style="font-size:.7rem; color:#7a8599; text-align:center; margin-top:15px;">
-      New here? Enter your details and click <strong>Sign Up</strong> to create an account.
-    </p>
-  </div>
-</div>
 
 <!-- BOOKING MODAL -->
 <div class="modal-overlay" id="modal" style="display:none" onclick="if(event.target===this)closeModal()">
@@ -741,6 +705,12 @@ function updateLivePrice() {
         `;
     }
 }
+
+// --- GLOBAL CONFIGURATION ---
+window.APP_CONFIG = {
+    phoneNumber: '+48512647444' // This can be updated via Admin Panel in the future
+};
+
 // --- REPLACE THE START OF YOUR SCRIPT WITH THIS ---
 const supabaseUrl = 'https://ghwmmkiynmnunotwnenj.supabase.co'; // 👈 Your URL
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdod21ta2l5bm1udW5vdHduZW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5NzkxMjEsImV4cCI6MjA5MDU1NTEyMX0.gC5tdWEciwZbF_1FzmD16V7JX66N7nHJ-G00C4gyG_0'; // 👈 Your Anon Key
@@ -1026,17 +996,6 @@ function closeModal() {
 }
 
 async function confirmBooking() {
-  // 1. Check if user is logged in
-  const { data: { user } } = await _supabase.auth.getUser();
-
-  // 2. If NOT logged in, show Login Modal and stop
-  if (!user) {
-    showToast("⚠️ Please Log In to finish your booking!");
-    const authModal = document.getElementById('authModal');
-    if (authModal) authModal.style.display = 'flex'; 
-    closeModal(); 
-    return;
-  }
 
   // 3. Get values from the inputs
   const fullName = document.getElementById('bookName').value.trim();
@@ -1061,7 +1020,7 @@ async function confirmBooking() {
     .from('bookings')
     .insert([
       { 
-        user_id: user.id, 
+        user_id: 'guest',
         event_id: currentTrip.id,
         event_name: currentTrip.title, 
         customer_name: fullName, 
@@ -1094,7 +1053,6 @@ if (document.activeElement) {
       closeModal();
       // 4. Force the window back to the top-left to reset the zoom/offset
       window.scrollTo(0, 0);
-      if (typeof checkUserSession === "function") checkUserSession();
     }, 1500); 
   }
 }
@@ -1135,172 +1093,27 @@ function toggleMobileMenu() {
 function closeMobileMenu() {
   document.getElementById('mobileMenu').classList.remove('open');
 }
-// STEP 2: USER AUTHENTICATION LOGIC
-async function handleAuth(type) {
-    const email = document.getElementById('authEmail').value;
-    const password = document.getElementById('authPassword').value;
 
-    if (!email || !password) {
-        showToast("⚠️ Please enter both email and password.");
-        return;
-    }
 
-    if (type === 'signup') {
-        // Creates a new user in your Supabase Auth table
-        const { data, error } = await _supabase.auth.signUp({ email, password });
-        if (error) return showToast("❌ " + error.message);
-        showToast("📧 Success! Check your email for a confirmation link.");
-    } else {
-        // Logs in an existing user
-        const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
-        if (error) return showToast("❌ " + error.message);
+// Set phone numbers dynamically based on APP_CONFIG
+document.addEventListener("DOMContentLoaded", () => {
+    if (window.APP_CONFIG && window.APP_CONFIG.phoneNumber) {
+        const phoneText = window.APP_CONFIG.phoneNumber;
+        const waLink = `https://wa.me/${phoneText.replace("+", "")}`;
         
-        showToast("✅ Welcome back, " + data.user.email + "!");
-        document.getElementById('authModal').style.display = 'none';
+        // Update all text occurrences
+        document.querySelectorAll(".dynamic-phone").forEach(el => {
+            el.textContent = phoneText;
+        });
         
-        // This reloads the page to let the app know the user is now 'Active'
-        setTimeout(() => location.reload(), 1500); 
-    }
-}
-// --- MY BOOKINGS & SESSION LOGIC ---
-
-// 1. Function to refresh the UI if a user is logged in
-async function checkUserSession() {
-    // Check with Supabase if a user is currently logged in
-    const { data: { user } } = await _supabase.auth.getUser();
-    
-    if (user) {
-        // Find the "Log In" buttons in your header (Desktop and Mobile)
-        const allButtons = document.querySelectorAll('button');
-allButtons.forEach(btn => {
-    // We look for buttons that say "Log In"
-    if (btn.textContent.trim() === 'Log In') {
-        
-        // Change the text to a Profile icon + "Bookings" instead of the email
-        btn.innerHTML = `👤 Bookings`;
-        
-        // Change the click action to open the "My Bookings" modal
-        btn.onclick = (e) => {
-            e.preventDefault();
-            openMyBookings();
-        }
+        // Update all WhatsApp links
+        document.querySelectorAll(".dynamic-wa-link").forEach(el => {
+            el.href = waLink;
+        });
     }
 });
-    }
-}
 
-// 2. Function to fetch data from Supabase and show it in the modal
-async function openMyBookings() {
-    const modal = document.getElementById('bookingsModal');
-    const list = document.getElementById('bookingsList');
-    modal.style.display = 'flex';
-    list.innerHTML = '<p style="text-align:center;">Fetching your adventures...</p>';
-
-    const { data: { user } } = await _supabase.auth.getUser();
-
-    const { data, error } = await _supabase
-        .from('bookings')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false });
-
-    if (error) {
-        list.innerHTML = `<p style="color:red; text-align:center;">Error: ${error.message}</p>`;
-    } else if (data.length === 0) {
-        list.innerHTML = '<p style="text-align:center; padding:20px;">No adventures found.</p>';
-    } else {
-        list.innerHTML = data.map(b => {
-            const createdDate = new Date(b.created_at).getTime();
-            const expiryDate = createdDate + (24 * 60 * 60 * 1000); // +24 Hours
-            const now = new Date().getTime();
-            const canCancel = now < expiryDate;
-
-            return `
-                <div style="background:#fff; border:1px solid #e2e8f0; padding:15px; border-radius:12px; margin-bottom:12px;">
-                    <div style="display:flex; justify-content:space-between; align-items:start;">
-                        <span style="font-weight:700; color:#0f2266;">${b.event_name}</span>
-                        <span style="font-size:0.7rem; background:#ecfdf5; color:#065f46; padding:2px 8px; border-radius:99px; font-weight:700;">
-                            ${b.status.toUpperCase()}
-                        </span>
-                    </div>
-                    
-                    <div style="margin-top:10px; padding-top:10px; border-top:1px dashed #eee; display:flex; justify-content:space-between; align-items:center;">
-                        <div style="font-size:0.7rem; color:#7a8599;">
-                            ${canCancel ? 
-                                `⏳ Time left to cancel: <span id="timer-${b.id}" class="booking-timer" data-expiry="${expiryDate}">--:--:--</span>` : 
-                                `🔒 Cancellation period ended`}
-                        </div>
-                        
-                        ${canCancel ? 
-                            `<button onclick="cancelBooking('${b.id}')" style="background:#fff1f1; border:1px solid #ffcccc; color:#ff4d4d; padding:4px 10px; border-radius:6px; font-weight:700; cursor:pointer; font-size:0.7rem;">Cancel</button>` 
-                            : ''}
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        // Start the countdown interval
-        startBookingTimers();
-    }
-}
-// 3. CAncel booking
-async function cancelBooking(bookingId) {
-    if (!confirm("Are you sure you want to cancel this booking? This cannot be undone.")) return;
-
-    const { error } = await _supabase
-        .from('bookings')
-        .delete()
-        .eq('id', bookingId);
-
-    if (error) {
-        showToast("❌ Error: " + error.message);
-    } else {
-        showToast("✅ Booking removed successfully.");
-        openMyBookings(); // Refresh the list
-    }
-}
-
-let timerInterval;
-
-function startBookingTimers() {
-    // Clear any old interval if it exists
-    if (timerInterval) clearInterval(timerInterval);
-
-    timerInterval = setInterval(() => {
-        const timerElements = document.querySelectorAll('.booking-timer');
-        
-        if (timerElements.length === 0) {
-            clearInterval(timerInterval);
-            return;
-        }
-
-        timerElements.forEach(el => {
-            const expiry = parseInt(el.getAttribute('data-expiry'));
-            const now = new Date().getTime();
-            const distance = expiry - now;
-
-            if (distance < 0) {
-                el.innerHTML = "EXPIRED";
-                // Optionally refresh the list once to hide the cancel button
-                return;
-            }
-
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            el.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
-        });
-    }, 1000);
-}
-
-// Ensure timers stop when modal closes to save browser memory
-function closeBookingsModal() {
-    document.getElementById('bookingsModal').style.display = 'none';
-    if (timerInterval) clearInterval(timerInterval);
-}
 // 3. RUN THIS IMMEDIATELY when the page loads
-checkUserSession();
 // Init
 renderTrips(TRIPS);
 </script>
