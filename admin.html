@@ -63,12 +63,25 @@
             <label class="block text-sm font-medium text-gray-700"
               >Password</label
             >
-            <input
-              type="password"
-              id="loginPassword"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              required
-            />
+
+            <div class="relative">
+              <input
+                type="password"
+                id="loginPassword"
+                class="mt-1 block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+              <button
+                type="button"
+                id="togglePassword"
+                class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700"
+                style="top: 4px;"
+                onclick="const passInput = document.getElementById('loginPassword'); if (passInput.type === 'password') { passInput.type = 'text'; this.innerHTML = '🙈'; } else { passInput.type = 'password'; this.innerHTML = '👁️'; }"
+              >
+                👁️
+              </button>
+            </div>
+
           </div>
           <button
             type="submit"
@@ -503,7 +516,7 @@
       const supabaseUrl = "https://ghwmmkiynmnunotwnenj.supabase.co";
       const supabaseKey =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdod21ta2l5bm1udW5vdHduZW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5NzkxMjEsImV4cCI6MjA5MDU1NTEyMX0.gC5tdWEciwZbF_1FzmD16V7JX66N7nHJ-G00C4gyG_0";
-      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+      const dbClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
       let quill;
       let currentPackages = [];
@@ -530,7 +543,7 @@
       // ------------------
       // Auth Logic
       // ------------------
-      supabase.auth.onAuthStateChange((event, session) => {
+      dbClient.auth.onAuthStateChange((event, session) => {
         if (session) {
           document.getElementById("loginView").classList.add("hidden");
           document.getElementById("dashboardView").classList.remove("hidden");
@@ -544,7 +557,7 @@
       async function checkSession() {
         const {
           data: { session },
-        } = await supabase.auth.getSession();
+        } = await dbClient.auth.getSession();
         if (session) {
           document.getElementById("loginView").classList.add("hidden");
           document.getElementById("dashboardView").classList.remove("hidden");
@@ -561,20 +574,25 @@
           const errDiv = document.getElementById("loginError");
           errDiv.classList.add("hidden");
 
-          const { data, error } = await supabase.auth.signInWithPassword({
+          const { data, error } = await dbClient.auth.signInWithPassword({
             email,
             password,
           });
           if (error) {
             errDiv.textContent = error.message;
             errDiv.classList.remove("hidden");
+          } else {
+            // force update ui in case onAuthStateChange is slow or misses
+            document.getElementById("loginView").classList.add("hidden");
+            document.getElementById("dashboardView").classList.remove("hidden");
+            loadPackages();
           }
         });
 
       document
         .getElementById("btnLogout")
         .addEventListener("click", async () => {
-          await supabase.auth.signOut();
+          await dbClient.auth.signOut();
         });
 
       // ------------------
@@ -613,7 +631,7 @@
       // ------------------
       async function loadPackages() {
         document.getElementById("packagesLoading").classList.remove("hidden");
-        const { data, error } = await supabase
+        const { data, error } = await dbClient
           .from("packages")
           .select("*")
           .order("priority", { ascending: false });
@@ -752,7 +770,7 @@
               .checked,
           };
 
-          const { error } = await supabase.from("packages").upsert(payload);
+          const { error } = await dbClient.from("packages").upsert(payload);
           if (error) {
             alert("Error saving package: " + error.message);
           } else {
@@ -766,7 +784,7 @@
       // ------------------
       async function loadBookings() {
         document.getElementById("bookingsLoading").classList.remove("hidden");
-        let query = supabase
+        let query = dbClient
           .from("bookings")
           .select("*")
           .order("created_at", { ascending: false });
@@ -881,7 +899,7 @@
             "bookingStatusUpdate",
           ).value;
 
-          const { error } = await supabase
+          const { error } = await dbClient
             .from("bookings")
             .update({ status: newStatus })
             .eq("id", selectedBookingId);
