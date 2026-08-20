@@ -631,7 +631,7 @@
       // ------------------
       async function loadPackages() {
         document.getElementById("packagesLoading").classList.remove("hidden");
-        const { data, error } = await supabase
+        const { data, error } = await dbClient
           .from("packages")
           .select("*")
           .order("priority", { ascending: false });
@@ -784,7 +784,7 @@
       // ------------------
       async function loadBookings() {
         document.getElementById("bookingsLoading").classList.remove("hidden");
-        let query = supabase
+        let query = dbClient
           .from("bookings")
           .select("*")
           .order("created_at", { ascending: false });
@@ -899,7 +899,7 @@
             "bookingStatusUpdate",
           ).value;
 
-          const { error } = await supabase
+          const { error } = await dbClient
             .from("bookings")
             .update({ status: newStatus })
             .eq("id", selectedBookingId);
