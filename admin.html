@@ -246,6 +246,11 @@
                   <th
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
+                    Trip Date
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
                     Total
                   </th>
                   <th
@@ -998,6 +1003,9 @@
                         <div class="text-sm text-gray-500">${b.is_main_booker ? (b.guests || 1) + " Guests" : "Additional Guest"}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        ${b.chosen_trip_date || "N/A"}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         ${b.total_price_pln ? b.total_price_pln + " PLN" : "-"}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -1059,6 +1067,7 @@
                     <div><span class="text-gray-500 text-sm">Phone:</span><br/><strong>${b.mobile_no || "N/A"}</strong></div>
                     <div><span class="text-gray-500 text-sm">DOB:</span><br/><strong>${b.dob || "N/A"}</strong></div>
                     <div><span class="text-gray-500 text-sm">Package:</span><br/><strong>${b.event_name}</strong></div>
+                    <div><span class="text-gray-500 text-sm">Trip Date:</span><br/><strong>${b.chosen_trip_date || "N/A"}</strong></div>
                     <div><span class="text-gray-500 text-sm">Total PLN:</span><br/><strong>${b.total_price_pln || "N/A"}</strong></div>
                     <div><span class="text-gray-500 text-sm">Total EUR:</span><br/><strong>${b.total_price_eur || "N/A"}</strong></div>
                 </div>
