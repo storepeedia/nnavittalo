@@ -1163,9 +1163,10 @@ async function confirmBooking() {
                 customer_name: gName,
                 mobile_no: phone, // Copied from main booker
                 dob: null,        // Blank for additional guests
-                guests: null,
-                total_price_pln: null,
-                total_price_eur: null,
+                chosen_trip_date: chosenDate,
+                guests: guestCount,
+                total_price_pln: totalPln,
+                total_price_eur: totalEur,
                 is_main_booker: false,
                 booking_date: bookingDate,
                 status: 'pending'
