@@ -618,6 +618,7 @@ button{cursor:pointer;font-family:inherit}
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
+      <div id="tripDetailsContainer" style="display:flex; flex-direction:row; flex-wrap:wrap; gap:30px; width:100%;">
       <div class="modal-main">
         <div class="modal-gallery">
           <div class="gallery-grid">
@@ -646,9 +647,53 @@ button{cursor:pointer;font-family:inherit}
     <div id="modalPrice" class="booking-price"></div>
     <div id="modalIncluded" style="font-size:.78rem;color:#7a8599;margin-bottom:16px"></div>
     
-    <button class="btn-book-modal btn-whatsapp" style="display:flex; align-items:center; justify-content:center; gap:8px;" onclick="window.open(`https://wa.me/${window.APP_CONFIG.phoneNumber.replace('+', '')}`, '_blank')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Chat</button>
+    <button class="btn-book-modal" id="btnShowForm" onclick="showBookingForm()">🎉 Book Your Spot</button>
     <p style="font-size:.72rem;color:#7a8599;text-align:center;margin-top:10px">Free cancellation up to 7 days before departure</p>
   </div>
+  </div> <!-- end modal-sidebar -->
+  </div> <!-- end tripDetailsContainer (added to wrap both modal-main and modal-sidebar) -->
+  <!-- NEW BOOKING FORM CONTAINER -->
+  <div id="bookingFormContainer" style="display:none; padding: 20px;">
+      <h3 style="font-family:'Montserrat',sans-serif;color:#0f2266;margin-bottom:15px;text-align:center;">Complete Your Booking</h3>
+      <p style="text-align:center; font-size:0.85rem; color:#4a5568; margin-bottom:20px;">Please fill out the details for all adventurers.</p>
+
+      <label class="form-label">Full Name (Main Booker) *</label>
+      <input class="form-input" id="bookName" placeholder="John Doe" required />
+
+      <label class="form-label">Mobile Number *</label>
+      <input class="form-input" type="tel" id="bookPhone" placeholder="+48 000 000 000" required />
+
+      <label class="form-label">Date of Birth (Main Booker) *</label>
+      <input class="form-input" type="date" id="bookDob" required />
+
+      <div class="guest-selector-row" style="display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 12px 15px; border: 1px solid #dde4f5; border-radius: 10px; margin-bottom: 20px;">
+        <span style="font-weight: 600; font-size: 0.9rem; color: #4a5568;">Number of People</span>
+        <select id="bookGuests" onchange="renderGuestInputs(); updateLivePrice();" style="width: 70px; padding: 6px; border: 1px solid #cbd5e0; border-radius: 6px; font-weight: 700; color: #2952c8; background: #fff;">
+        </select>
+      </div>
+
+      <!-- Dynamic Guest Inputs -->
+      <div id="dynamicGuestsContainer"></div>
+
+      <div class="booking-panel" style="margin-top: 20px;">
+          <div class="booking-label">Total Amount to Pay</div>
+          <div id="formTotalPrice" class="booking-price" style="margin-bottom:15px;"></div>
+          <button class="btn-book-modal" onclick="confirmBooking()">✅ Confirm your booking</button>
+          <button class="btn-details" style="width:100%; margin-top:10px;" onclick="hideBookingForm()">Back to Details</button>
+      </div>
+  </div>
+  <!-- END NEW BOOKING FORM CONTAINER -->
+
+  <!-- SUCCESS SCREEN -->
+  <div id="successContainer" style="display:none; padding: 40px 20px; text-align:center;">
+      <div style="font-size: 4rem; margin-bottom:20px;">🎉</div>
+      <h2 style="font-family:'Montserrat',sans-serif;color:#0f2266;margin-bottom:15px;">Booking Confirmed!</h2>
+      <p style="font-size:0.9rem; color:#4a5568; margin-bottom:30px;">Thank you for choosing NNA VITTALO. Your adventure awaits.</p>
+      <div id="successDetails" style="background: #f8fafc; padding: 15px; border-radius: 10px; text-align:left; margin-bottom:30px; font-size:0.85rem; border:1px solid #dde4f5;"></div>
+      <button class="btn-book-modal" onclick="closeModalAndGoHome()">Back to Home</button>
+  </div>
+  <!-- END SUCCESS SCREEN -->
+
   <div class="trust-box">🏆 Trusted by 150+ adventurers<br><span style="font-weight:400;color:#4a5568">4.9 ⭐ average rating</span></div>
 </div>
     </div>
@@ -929,12 +974,13 @@ function openModal(id) {
   document.getElementById('modalIncluded').textContent = '✓ ' + (t.included || 'Equipment & guide included');
 
   
-  const bookBtn = document.querySelector(".btn-book-modal");
+  const bookBtn = document.getElementById("btnShowForm");
   // Lock button and change style if Coming Soon
   if (bookBtn) {
     bookBtn.disabled = isComingSoon;
-    bookBtn.innerHTML = isComingSoon ? 'Coming Soon' : '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Chat';
-    bookBtn.style.background = isComingSoon ? '#cbd5e0' : '#25D366'; // Grey if locked
+    bookBtn.innerHTML = isComingSoon ? 'Coming Soon' : '🎉 Book Your Spot';
+    bookBtn.classList.remove("btn-whatsapp");
+    bookBtn.style.background = isComingSoon ? '#cbd5e0' : ''; // Grey if locked
     bookBtn.style.cursor = isComingSoon ? 'not-allowed' : '';
   }
   // --- NEW LOGIC END ---
@@ -944,9 +990,198 @@ function openModal(id) {
     updateLivePrice();
 }
 
+
+function showBookingForm() {
+    document.getElementById('tripDetailsContainer').style.display = 'none';
+    // const sbar = document.querySelector('.modal-sidebar');
+    // if(sbar) sbar.style.display = 'none';
+
+    document.getElementById('bookingFormContainer').style.display = 'block';
+
+    // Clear and re-populate the guest dropdown to default (1)
+    populateGuestDropdown();
+    document.getElementById('bookGuests').value = 1;
+    renderGuestInputs();
+    updateLivePrice();
+}
+
+function hideBookingForm() {
+    document.getElementById('bookingFormContainer').style.display = 'none';
+    document.getElementById('tripDetailsContainer').style.display = 'flex';
+    // const sbar = document.querySelector('.modal-sidebar');
+    // if(sbar) sbar.style.display = 'block';
+}
+
+function renderGuestInputs() {
+    const guestCount = parseInt(document.getElementById('bookGuests').value) || 1;
+    const container = document.getElementById('dynamicGuestsContainer');
+    container.innerHTML = '';
+
+    if(guestCount > 1) {
+        for(let i = 2; i <= guestCount; i++) {
+            container.innerHTML += `
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e0;">
+                    <label class="form-label" style="color:#2952c8;">Name: Person ${i}</label>
+                    <input class="form-input guest-name-input" placeholder="Full name for Person ${i}" required />
+                </div>
+            `;
+        }
+    }
+}
+
+function populateGuestDropdown() {
+    const select = document.getElementById('bookGuests');
+    if (!select) return;
+
+    select.innerHTML = '';
+    for (let i = 1; i <= 20; i++) {
+        let opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = i;
+        select.appendChild(opt);
+    }
+}
+
+function updateLivePrice() {
+    if (!currentTrip || currentTrip.comingSoon) return;
+
+    const guestCount = document.getElementById('bookGuests') ? parseInt(document.getElementById('bookGuests').value) : 1;
+
+    const totalPln = currentTrip.price * guestCount;
+    const totalEur = currentTrip.priceEur * guestCount;
+
+    const priceText = `${totalPln} <span style="font-size:1rem">PLN</span> <span style="font-size:.9rem;font-weight:700;color:#4a5568;margin-left:8px">(~${totalEur} EUR)</span>`;
+
+    const display1 = document.getElementById('modalPrice');
+    if(display1) display1.innerHTML = priceText;
+
+    const display2 = document.getElementById('formTotalPrice');
+    if(display2) display2.innerHTML = priceText;
+}
+
+function resetModalState() {
+    document.getElementById('successContainer').style.display = 'none';
+    document.getElementById('tripDetailsContainer').style.display = 'flex';
+    // const sbar = document.querySelector('.modal-sidebar');
+    // if(sbar) sbar.style.display = 'block';
+    hideBookingForm();
+
+    // Clear inputs
+    const nameInp = document.getElementById('bookName');
+    if(nameInp) nameInp.value = '';
+    const phoneInp = document.getElementById('bookPhone');
+    if(phoneInp) phoneInp.value = '';
+    const dobInp = document.getElementById('bookDob');
+    if(dobInp) dobInp.value = '';
+    const guestsInp = document.getElementById('bookGuests');
+    if(guestsInp) guestsInp.value = 1;
+    const dynamicC = document.getElementById('dynamicGuestsContainer');
+    if(dynamicC) dynamicC.innerHTML = '';
+}
+
+function closeModalAndGoHome() {
+    resetModalState();
+    closeModal();
+}
+
+async function confirmBooking() {
+    const fullName = document.getElementById('bookName').value.trim();
+    const phone = document.getElementById('bookPhone').value.trim();
+    const dob = document.getElementById('bookDob').value;
+    const guestCount = parseInt(document.getElementById('bookGuests').value) || 1;
+
+    if (!fullName || !phone || !dob) {
+        showToast("⚠️ Please fill in all required fields (Name, Mobile, DOB)!");
+        return;
+    }
+
+    // Generate a random booking number
+    const bookingNo = 'NV' + Math.floor(10000 + Math.random() * 90000);
+
+    // Price logic
+    const totalPln = currentTrip.price * guestCount;
+    const totalEur = currentTrip.priceEur * guestCount;
+    const bookingDate = new Date().toISOString().split('T')[0];
+
+    // Array to hold all insert payloads
+    const recordsToInsert = [];
+
+    // 1. Add Main Booker
+    recordsToInsert.push({
+        booking_no: bookingNo,
+        event_id: currentTrip.id,
+        event_name: currentTrip.title,
+        customer_name: fullName,
+        mobile_no: phone,
+        dob: dob,
+        guests: guestCount,
+        total_price_pln: totalPln,
+        total_price_eur: totalEur,
+        is_main_booker: true,
+        booking_date: bookingDate,
+        status: 'pending'
+    });
+
+    // 2. Add Additional Guests
+    if (guestCount > 1) {
+        const guestInputs = document.querySelectorAll('.guest-name-input');
+        for (let i = 0; i < guestInputs.length; i++) {
+            const gName = guestInputs[i].value.trim();
+            if (!gName) {
+                showToast(`⚠️ Please enter the name for Person ${i + 2}!`);
+                return;
+            }
+            recordsToInsert.push({
+                booking_no: bookingNo,
+                event_id: currentTrip.id,
+                event_name: currentTrip.title,
+                customer_name: gName,
+                mobile_no: phone, // Copied from main booker
+                dob: null,        // Blank for additional guests
+                guests: null,
+                total_price_pln: null,
+                total_price_eur: null,
+                is_main_booker: false,
+                booking_date: bookingDate,
+                status: 'pending'
+            });
+        }
+    }
+
+    // Insert into Supabase
+    const { error } = await _supabase.from('bookings').insert(recordsToInsert);
+
+    if (error) {
+        console.error("Supabase Error:", error);
+        showToast("❌ Error: " + error.message);
+    } else {
+        // Show Success Screen
+        document.getElementById('bookingFormContainer').style.display = 'none';
+
+        const successDiv = document.getElementById('successDetails');
+        successDiv.innerHTML = ''; // Clear previous
+
+        const lines = [
+            `Booking Reference: ${bookingNo}`,
+            `Trip: ${currentTrip.title}`,
+            `Main Booker: ${fullName}`,
+            `Mobile: ${phone}`,
+            `Total Guests: ${guestCount}`,
+            `Total Amount: ${totalPln} PLN`
+        ];
+
+        lines.forEach(line => {
+            const p = document.createElement('div');
+            p.textContent = line;
+            successDiv.appendChild(p);
+        });
+        document.getElementById('successContainer').style.display = 'block';
+    }
+}
 function closeModal() {
   document.getElementById('modal').style.display = 'none';
   document.body.style.overflow = '';
+  resetModalState();
 }
 
 
