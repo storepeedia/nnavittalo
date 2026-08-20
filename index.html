@@ -803,7 +803,18 @@ function renderTrips(data) {
       <div class="trip-img">
         <img src="${trip.photo}" alt="${trip.title}">
         <div class="trip-badges">
-          ${trip.badges ? trip.badges.map((b, i) => `<span class="badge badge-${i % 2 === 0 ? 'white' : 'green'}">${typeof b === 'object' ? b.l : b}</span>`).join('') : ''}
+          ${trip.badges ? trip.badges.map((b, i) => {
+            let label = typeof b === 'object' ? b.l : b;
+            if (isDisabled && label.toLowerCase() === 'available') {
+              label = 'Unavailable';
+            }
+            let colorClass = i % 2 === 0 ? 'white' : 'green';
+            if (isDisabled) colorClass = 'soon'; // Use grey/orange or similar disabled class if 'soon' exists, otherwise use 'dark' or inline style.
+            if (isDisabled && label.toLowerCase() === 'unavailable') {
+                return `<span class="badge badge-soon" style="background:#cbd5e0; color:#4a5568">${label}</span>`;
+            }
+            return `<span class="badge badge-${colorClass}">${label}</span>`;
+          }).join('') : ''}
         </div>
       </div>
       <div class="trip-body">
