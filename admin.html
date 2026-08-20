@@ -204,9 +204,17 @@
                 <label for="filterBookingDateEnd" class="text-xs text-gray-600 mb-1">Booking Date End</label>
                 <input type="date" id="filterBookingDateEnd" class="px-3 py-2 border rounded shadow-sm" />
               </div>
-              <div class="flex flex-col">
-                <label for="filterTripDate" class="text-xs text-gray-600 mb-1">Trip Date</label>
-                <input type="date" id="filterTripDate" class="px-3 py-2 border rounded shadow-sm" />
+              <div class="flex flex-col relative" id="filterTripDateContainer">
+                <label class="text-xs text-gray-600 mb-1">Trip Dates</label>
+                <div class="relative">
+                  <button type="button" id="filterTripDateBtn" class="w-full px-3 py-2 border rounded shadow-sm bg-white text-left text-gray-700 focus:outline-none flex justify-between items-center">
+                    <span id="filterTripDateLabel" class="truncate pr-2">All Dates</span>
+                    <svg class="h-4 w-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                  </button>
+                  <div id="filterTripDateDropdown" class="hidden absolute z-10 w-full mt-1 bg-white border rounded shadow-lg max-h-60 overflow-y-auto">
+                    <!-- Checkboxes populated by JS -->
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -818,7 +826,41 @@
         if (error) return console.error(error);
 
         currentBookings = data;
+
+        // Populate Trip Dates dropdown
+        const tripDates = [...new Set(data.map(b => b.chosen_trip_date).filter(Boolean))];
+        // Sort descending (latest future date at top, past at bottom)
+        tripDates.sort((a, b) => new Date(b) - new Date(a));
+
+        const dropdown = document.getElementById("filterTripDateDropdown");
+        dropdown.innerHTML = tripDates.map(date => `
+          <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+            <input type="checkbox" value="${date}" class="trip-date-checkbox mr-2 rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+            <span class="text-sm text-gray-700">${date}</span>
+          </label>
+        `).join("");
+
+        // Attach change listeners to new checkboxes
+        document.querySelectorAll('.trip-date-checkbox').forEach(cb => {
+            cb.addEventListener('change', () => {
+                updateTripDateLabel();
+                renderBookingsList();
+            });
+        });
+
         renderBookingsList();
+      }
+
+      function updateTripDateLabel() {
+        const checked = Array.from(document.querySelectorAll('.trip-date-checkbox:checked')).map(cb => cb.value);
+        const label = document.getElementById('filterTripDateLabel');
+        if (checked.length === 0) {
+            label.textContent = "All Dates";
+        } else if (checked.length === 1) {
+            label.textContent = checked[0];
+        } else {
+            label.textContent = checked.length + " Dates Selected";
+        }
       }
 
       function renderBookingsList() {
@@ -829,7 +871,8 @@
         const filterStatus = document.getElementById("filterStatus").value;
         const filterBookingStart = document.getElementById("filterBookingDateStart").value;
         const filterBookingEnd = document.getElementById("filterBookingDateEnd").value;
-        const filterTripDate = document.getElementById("filterTripDate").value;
+
+        const selectedTripDates = Array.from(document.querySelectorAll('.trip-date-checkbox:checked')).map(cb => cb.value);
 
         const filtered = currentBookings.filter((b) => {
           const matchSearch =
@@ -857,18 +900,9 @@
           }
 
           let matchTripDate = true;
-          if (filterTripDate) {
-              if (!b.chosen_trip_date) {
+          if (selectedTripDates.length > 0) {
+              if (!b.chosen_trip_date || !selectedTripDates.includes(b.chosen_trip_date)) {
                   matchTripDate = false;
-              } else {
-                  // Assuming chosen_trip_date is stored in a format compatible with Date or YYYY-MM-DD
-                  const tDate = new Date(b.chosen_trip_date);
-                  tDate.setHours(0, 0, 0, 0);
-                  const filterTDate = new Date(filterTripDate);
-                  filterTDate.setHours(0, 0, 0, 0);
-                  if (tDate.getTime() !== filterTDate.getTime()) {
-                      matchTripDate = false;
-                  }
               }
           }
 
@@ -931,9 +965,22 @@
       document
         .getElementById("filterBookingDateEnd")
         .addEventListener("change", renderBookingsList);
-      document
-        .getElementById("filterTripDate")
-        .addEventListener("change", renderBookingsList);
+
+      // Dropdown toggle logic
+      document.getElementById('filterTripDateBtn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          document.getElementById('filterTripDateDropdown').classList.toggle('hidden');
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+          const dropdown = document.getElementById('filterTripDateDropdown');
+          const btn = document.getElementById('filterTripDateBtn');
+          if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+              dropdown.classList.add('hidden');
+          }
+      });
+      // We removed filterTripDate as an ID, so we also remove the listener for it here.
 
       function openBookingModal(id) {
         const b = currentBookings.find((x) => x.id === id);
