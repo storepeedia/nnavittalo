@@ -214,11 +214,11 @@ button{cursor:pointer;font-family:inherit}
 .amenities-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .amenity-item{font-size:.85rem;color:#1a1f36;background:#e8eefb;padding:8px 12px;border-radius:8px}
 .modal-sidebar{padding:28px 20px}
-.booking-panel{background:#fff;border:1.5px solid #dde4f5;border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 2px 16px rgba(41,82,200,.10)}
+.booking-panel{box-sizing:border-box;background:#fff;border:1.5px solid #dde4f5;border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 2px 16px rgba(41,82,200,.10)}
 .booking-price{font-family:'Montserrat',sans-serif;font-weight:900;font-size:2rem;color:#2952c8;line-height:1}
 .booking-label{font-size:.72rem;font-weight:600;color:#7a8599;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
 .form-label{font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;color:#4a5568;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px}
-.form-input{width:100%;padding:9px 12px;border:1.5px solid #dde4f5;border-radius:8px;font-size:.85rem;margin-bottom:10px;box-sizing:border-box;font-family:'Open Sans',sans-serif;outline:none}
+.form-input{max-width:100%;min-width:0;appearance:none;-webkit-appearance:none;width:100%;padding:9px 12px;border:1.5px solid #dde4f5;border-radius:8px;font-size:.85rem;margin-bottom:10px;box-sizing:border-box;font-family:'Open Sans',sans-serif;outline:none}
 .btn-book-modal{width:100%;background:#2952c8;color:#fff;border:none;padding:13px;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem}
 .btn-book-modal:hover{background:#1a3a9e}
 .trust-box{background:#e8eefb;border-radius:10px;padding:14px;font-size:.8rem;color:#2952c8;font-weight:600;text-align:center}
@@ -617,9 +617,8 @@ button{cursor:pointer;font-family:inherit}
       </div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
-    <div class="modal-body">
-      <div id="tripDetailsContainer" style="display:flex; flex-direction:row; flex-wrap:wrap; gap:30px; width:100%;">
-      <div class="modal-main">
+    <div class="modal-body" id="modalBodyMain">
+      <div class="modal-main" id="modalMainContent">
         <div class="modal-gallery">
           <div class="gallery-grid">
             <img id="galleryMain" src="" alt="" />
@@ -642,18 +641,17 @@ button{cursor:pointer;font-family:inherit}
         </div>
       </div>
 <div class="modal-sidebar">
-  <div class="booking-panel">
+  <div class="booking-panel" id="pricingPanelOriginal">
     <div class="booking-label">Total price</div>
     <div id="modalPrice" class="booking-price"></div>
     <div id="modalIncluded" style="font-size:.78rem;color:#7a8599;margin-bottom:16px"></div>
     
     <button class="btn-book-modal" id="btnShowForm" onclick="showBookingForm()">🎉 Book Your Spot</button>
     <p style="font-size:.72rem;color:#7a8599;text-align:center;margin-top:10px">Free cancellation up to 7 days before departure</p>
-  </div>
-  </div> <!-- end modal-sidebar -->
-  </div> <!-- end tripDetailsContainer (added to wrap both modal-main and modal-sidebar) -->
+    </div>
+
   <!-- NEW BOOKING FORM CONTAINER -->
-  <div id="bookingFormContainer" style="display:none; padding: 20px;">
+  <div id="bookingFormContainer" class="booking-panel" style="display:none;">
       <h3 style="font-family:'Montserrat',sans-serif;color:#0f2266;margin-bottom:15px;text-align:center;">Complete Your Booking</h3>
       <p style="text-align:center; font-size:0.85rem; color:#4a5568; margin-bottom:20px;">Please fill out the details for all adventurers.</p>
 
@@ -667,7 +665,7 @@ button{cursor:pointer;font-family:inherit}
       <input class="form-input" type="date" id="bookDob" required />
 
       <div class="guest-selector-row" style="display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 12px 15px; border: 1px solid #dde4f5; border-radius: 10px; margin-bottom: 20px;">
-        <span style="font-weight: 600; font-size: 0.9rem; color: #4a5568;">Number of People</span>
+        <span style="font-weight: 600; font-size: 0.85rem; color: #4a5568; display:inline-flex; align-items:center; gap:4px; white-space:nowrap;">Number of People <span style="font-size: 0.65rem; font-weight: 400; color: #7a8599;">(including main booker)</span></span>
         <select id="bookGuests" onchange="renderGuestInputs(); updateLivePrice();" style="width: 70px; padding: 6px; border: 1px solid #cbd5e0; border-radius: 6px; font-weight: 700; color: #2952c8; background: #fff;">
         </select>
       </div>
@@ -675,14 +673,18 @@ button{cursor:pointer;font-family:inherit}
       <!-- Dynamic Guest Inputs -->
       <div id="dynamicGuestsContainer"></div>
 
-      <div class="booking-panel" style="margin-top: 20px;">
-          <div class="booking-label">Total Amount to Pay</div>
-          <div id="formTotalPrice" class="booking-price" style="margin-bottom:15px;"></div>
+      <div style="margin-top: 20px;">
+
+
           <button class="btn-book-modal" onclick="confirmBooking()">✅ Confirm your booking</button>
           <button class="btn-details" style="width:100%; margin-top:10px;" onclick="hideBookingForm()">Back to Details</button>
       </div>
   </div>
   <!-- END NEW BOOKING FORM CONTAINER -->
+
+</div> <!-- end modal-sidebar -->
+
+
 
   <!-- SUCCESS SCREEN -->
   <div id="successContainer" style="display:none; padding: 40px 20px; text-align:center;">
@@ -992,9 +994,8 @@ function openModal(id) {
 
 
 function showBookingForm() {
-    document.getElementById('tripDetailsContainer').style.display = 'none';
-    // const sbar = document.querySelector('.modal-sidebar');
-    // if(sbar) sbar.style.display = 'none';
+    document.getElementById('pricingPanelOriginal').style.display = 'none';
+
 
     document.getElementById('bookingFormContainer').style.display = 'block';
 
@@ -1007,9 +1008,8 @@ function showBookingForm() {
 
 function hideBookingForm() {
     document.getElementById('bookingFormContainer').style.display = 'none';
-    document.getElementById('tripDetailsContainer').style.display = 'flex';
-    // const sbar = document.querySelector('.modal-sidebar');
-    // if(sbar) sbar.style.display = 'block';
+    document.getElementById('pricingPanelOriginal').style.display = 'block';
+
 }
 
 function renderGuestInputs() {
@@ -1055,15 +1055,14 @@ function updateLivePrice() {
     const display1 = document.getElementById('modalPrice');
     if(display1) display1.innerHTML = priceText;
 
-    const display2 = document.getElementById('formTotalPrice');
-    if(display2) display2.innerHTML = priceText;
+
 }
 
 function resetModalState() {
     document.getElementById('successContainer').style.display = 'none';
-    document.getElementById('tripDetailsContainer').style.display = 'flex';
-    // const sbar = document.querySelector('.modal-sidebar');
-    // if(sbar) sbar.style.display = 'block';
+document.getElementById('modalBodyMain').style.display = 'grid';
+    document.getElementById('pricingPanelOriginal').style.display = 'block';
+
     hideBookingForm();
 
     // Clear inputs
@@ -1175,6 +1174,7 @@ async function confirmBooking() {
             p.textContent = line;
             successDiv.appendChild(p);
         });
+        document.getElementById('modalBodyMain').style.display = 'none';
         document.getElementById('successContainer').style.display = 'block';
     }
 }
