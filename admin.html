@@ -568,6 +568,11 @@
           if (error) {
             errDiv.textContent = error.message;
             errDiv.classList.remove("hidden");
+          } else {
+            // force update ui in case onAuthStateChange is slow or misses
+            document.getElementById("loginView").classList.add("hidden");
+            document.getElementById("dashboardView").classList.remove("hidden");
+            loadPackages();
           }
         });
 
