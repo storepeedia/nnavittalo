@@ -402,7 +402,10 @@ button{cursor:pointer;font-family:inherit}
   box-shadow: none !important;
 }
 </style>
+
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
+
 <body>
 
 <!-- TOPBAR Scrolling -->
@@ -742,27 +745,14 @@ const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 const PLN_EUR = 0.23;
 // ... (rest of your TRIPS array remains the same)
 
-const TRIPS = [
-  {id:'Hiking',title:'Hiking in Tatra — Mountain Trails',location:'Tatra National Park, Zakopane, Poland',photo:'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&auto=format&fit=crop',emoji:'🥾',badges:[{l:'Intermediate',t:'white'},{l:'Available',t:'green'}],tags:[{l:'Tatra Mts.',t:'tatra'},{l:'Hiking',t:'hiking'}],features:['📅 2 Days / 1 Nights','🏔️ Mountain Guide','🏠 Accommodation','🎒 Backpack & Map'],price:349, priceEur: 81.99, included:'Guide always included',duration:'2 Days / 1 Nights',desc:'Discover the magic of the Polish mountains. Trecking Kościeliska Valley to see the Five Polish Ponds Valley. Experienced Tatra mountain guide included.',activity:'Hiking',priceRange:'Under 400',durationTag:'Weekend (2 days)',difficulty:'Intermediate',tripDate:'18 July 2026'},
-  {id:'Kayaking',title:'Kayaking Getaway — Rivers & Lakes',location:'Masuria Lake District, Poland',photo:'https://images.unsplash.com/photo-1554913968-6ba85b94df1f?w=800&auto=format&fit=crop',emoji:'🛶',badges:[{l:'Beginner',t:'white'},{l:'Coming Soon',t:'soon'}],tags:[{l:'Kayaking',t:'water'},{l:'Sport',t:'sport'}],features:['📅 2 Days / 1 Night','🛶 Kayak Included','🏕️ Riverside Camp','🎯 Guided Tour'],price:249, priceEur: 58, included:'Equipment included',duration:'2 Days / 1 Night',desc:'Paddle through scenic rivers and lakes. Suitable for everyone — beginners to experienced paddlers. Kayak, safety gear and a riverbank campsite all included.',activity:'Kayaking',priceRange:'Under 400',durationTag:'Weekend (2–3 days)',difficulty:'Beginner',showPrice:true,comingSoon:true},
-  {id:'Surfing',title:'Surfing Camp — Catch Your First Wave',location:'Baltic Coast, Gdansk / Poland',photo:'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&auto=format&fit=crop',emoji:'🏄',badges:[{l:'Popular',t:'blue'},{l:'Coming Soon',t:'soon'}],tags:[{l:'Surfing',t:'water'},{l:'Sport',t:'sport'}],features:['📅 5 Days / 4 Nights','🏄 Board & Wetsuit','🏖️ Beach Accommodation','👨‍🏫 Pro Instructor'],price:899,included:'Equipment included',duration:'5 Days / 4 Nights',desc:'Feel the power of the ocean! A 5-day surf camp with pro instructors. Board, wetsuit and beachside accommodation all included.',activity:'Surfing',priceRange:'700–1000 PLN',durationTag:'Short (4–5 days)',difficulty:'Beginner',showPrice:true,comingSoon:true},
-  {id:'Skiing',title:'Ski Trip — Alpine Slopes Adventure',location:'Tatra Mountains / Alps, Poland / Austria',photo:'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&auto=format&fit=crop',emoji:'⛷️',badges:[{l:'Best Seller',t:'accent'},{l:'Coming Soon',t:'soon'}],tags:[{l:'Skiing',t:'winter'},{l:'Sport',t:'sport'}],features:['📅 4 Days / 3 Nights','🎿 Lift Pass Included','🏨 Mountain Lodge','👨‍🏫 Ski Instructor','🍽️ Après-ski'],price:999,included:'Skipass always included',duration:'4 Days / 3 Nights',desc:'White slopes, adrenaline and après-ski. Ski school, equipment rental, lift pass and a cosy mountain lodge all in the price.',activity:'Skiing',priceRange:'1000+ PLN',durationTag:'Short (4–5 days)',difficulty:'Intermediate',comingSoon:true},
-  {id:'Camping',title:'Camping Weekend — Stars & Campfire',location:'Polish Countryside / Forests, Poland',photo:'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&auto=format&fit=crop',emoji:'🏕️',badges:[{l:'Beginner',t:'white'},{l:'Coming Soon',t:'soon'}],tags:[{l:'Camping',t:'chill'},{l:'Family',t:'family'}],features:['📅 3 Days / 2 Nights','⛺ Tent & Sleeping Bag','🔥 Campfire Meals','🎮 Outdoor Games'],price:249,included:'Gear included',duration:'3 Days / 2 Nights',desc:'Escape the city for 3 days of wild adventures, bonfires and sleeping under a sky full of stars. Tent, sleeping bag and all meals included.',activity:'Camping',priceRange:'Under 400',durationTag:'Weekend (2–3 days)',difficulty:'Beginner',comingSoon:true},
-  {id:'Auschwitz',title:'Auschwitz-Birkenau — Memorial & Museum Tour',location:'Oświęcim, Poland',photo:'https://images.unsplash.com/photo-1574715826360-7c02d0153097?w=800&auto=format&fit=crop',emoji:'🕯️',badges:[{l:'Historical',t:'dark'},{l:'Coming Soon',t:'soon'}],tags:[{l:'History',t:'culture'},{l:'Memorial',t:'family'}],features:['📅 1 Day Tour','🎟️ Entry Tickets Included','🎤 Expert Historian Guide','🚌 Transport Included'],price:299,included:'Guide & tickets included',duration:'1 Day Tour',desc:'A deeply moving guided tour of the Auschwitz-Birkenau Memorial and Museum. Expert historians guide you through this UNESCO World Heritage site.',activity:'City Tours',priceRange:'Under 400',durationTag:'Weekend (2–3 days)',difficulty:'Beginner',comingSoon:true},
-];
+let TRIPS = [];
 
-const GALLERY = {
-  Kayaking:['https://images.unsplash.com/photo-1554913968-6ba85b94df1f?w=800','https://images.unsplash.com/photo-1523287281576-5b596107a6ae?w=400','https://images.unsplash.com/photo-1578940695359-2dd6aff3eb84?w=400','https://images.unsplash.com/photo-1601899986654-9d92838359e4?w=400','https://images.unsplash.com/photo-1699190866577-100e090dfe1d?w=400'],
-  Skiing:['https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800','https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400','https://images.unsplash.com/photo-1605540436563-5bca919ae766?w=400','https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=400','https://images.unsplash.com/photo-1586967882046-8dc6b9b3c3ef?w=400'],
-  Surfing:['https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800','https://images.unsplash.com/photo-1455264745730-cb3b76250de8?w=400','https://images.unsplash.com/photo-1531722569936-825d4ebd0de9?w=400','https://images.unsplash.com/photo-1509914398892-963f53e6e2f1?w=400','https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?w=400'],
-  Hiking:['https://images.unsplash.com/photo-1551632811-561732d1e306?w=800','https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400','https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=400','https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400','https://images.unsplash.com/photo-1455156218388-5e61b526818b?w=400'],
-  Camping:['https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800','https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=400','https://images.unsplash.com/photo-1537905569824-f89f14cceb68?w=400','https://images.unsplash.com/photo-1533575770077-052fa2c609fc?w=400','https://images.unsplash.com/photo-1487730116645-74489c55bc79?w=400'],
-  'City Tours':['https://images.unsplash.com/photo-1574715826360-7c02d0153097?w=800','https://images.unsplash.com/photo-1574716625799-161d7bd9056d?w=400','https://images.unsplash.com/photo-1560969184-10fe8719e047?w=400','https://images.unsplash.com/photo-1548013146-72479768bada?w=400','https://images.unsplash.com/photo-1592853598064-f9e2c5b8a769?w=400'],
-};
+
 
 let activeSort = 'Upcoming';
 let activeDiff = 'All';
 let currentTrip = null;
+
 
 function renderTrips(data) {
   const list = document.getElementById('tripsList');
@@ -776,8 +766,12 @@ function renderTrips(data) {
     const card = document.createElement('div');
     card.className = 'trip-card';
     
-    // 1. Logic for the WHOLE CARD click (only if not coming soon)
-    if (!trip.comingSoon) {
+    const isComingSoon = trip.comingSoon === true;
+    const isDisabled = !trip.isActive;
+    const lockBooking = isComingSoon || isDisabled;
+
+    // 1. Logic for the WHOLE CARD click (only if not locked)
+    if (!lockBooking) {
         card.onclick = (e) => {
             // Check if a button was clicked to prevent opening twice
             if (e.target.tagName !== 'BUTTON') {
@@ -786,48 +780,56 @@ function renderTrips(data) {
         };
     } else {
         card.style.cursor = 'default';
+        // Still allow opening modal for disabled packages if you just want to see it,
+        // but the prompt said "If a package is disabled: The Book Now button must become unclickable"
+        // Let's allow modal opening so they can read it, but booking is locked inside.
+        card.onclick = (e) => {
+            if (e.target.tagName !== 'BUTTON') {
+                openModal(trip.id);
+            }
+        };
     }
 
     // 2. Prepare button styles and actions
-    const buttonClass = trip.comingSoon ? 'btn-disabled-home' : '';
-    const clickAction = !trip.comingSoon ? `onclick="openModal('${trip.id}')"` : '';
+    const buttonClass = lockBooking ? 'btn-disabled-home' : '';
+    const clickAction = `onclick="openModal('${trip.id}')"`;
 
     card.innerHTML = `
       <div class="trip-img">
         <img src="${trip.photo}" alt="${trip.title}">
         <div class="trip-badges">
-          ${trip.badges.map(b => `<span class="badge badge-${b.t}">${b.l}</span>`).join('')}
+          ${trip.badges ? trip.badges.map(b => `<span class="badge badge-${b.t}">${b.l}</span>`).join('') : ''}
         </div>
       </div>
       <div class="trip-body">
         <div class="trip-tags">
-          ${trip.tags.map(t => `<span class="tag tag-${t.t}">${t.l}</span>`).join('')}
+          ${trip.tags ? trip.tags.map(t => `<span class="tag tag-${t.t}">${t.l}</span>`).join('') : ''}
         </div>
         <h3 class="trip-title">${trip.title}</h3>
         <div class="trip-loc">📍 ${trip.location}</div>
         <div class="trip-date-text">📅 ${trip.tripDate || 'Dates Coming Soon'}</div>
         
         <div class="trip-features">
-          ${trip.features.slice(0, 3).map(f => `<span class="feature-tag">${f}</span>`).join('')}
+          ${trip.features ? trip.features.slice(0, 3).map(f => `<span class="feature-tag">${f}</span>`).join('') : ''}
         </div>
 
         <div class="trip-footer">
           <div>
             <div class="trip-price-label">Starting from</div>
             <div class="trip-price" style="display: flex; align-items: baseline; font-weight: 800; color: #2952c8;">
-    ${trip.comingSoon ? '---' : trip.price + ' <span style="font-size: 0.75rem; color: #2952c8; margin-left: 2px;">PLN</span>'} 
+    ${isComingSoon ? '---' : trip.price + ' <span style="font-size: 0.75rem; color: #2952c8; margin-left: 2px;">PLN</span>'}
     
     <span style="font-size: 1.1rem; color: #A0AEC0; font-weight: 800; margin-left: 6px;">
-        ${trip.comingSoon ? '' : '/ ~' + trip.priceEur + ' <span style="font-size: 0.75rem; color: #A0AEC0; margin-left: 2px;">EUR</span>'}
+        ${isComingSoon ? '' : '/ ~' + trip.priceEur + ' <span style="font-size: 0.75rem; color: #A0AEC0; margin-left: 2px;">EUR</span>'}
     </span>
 </div>
             <div class="trip-included">
-               ${trip.comingSoon ? '' : '<span>✓</span> ' + (trip.included || 'Equipment included')}
+               ${isComingSoon ? '' : '<span>✓</span> ' + (trip.included || 'Equipment included')}
             </div>
           </div>
           <div class="trip-btns">
-            <button class="btn-book ${buttonClass}" ${trip.comingSoon ? 'disabled' : ''} ${clickAction}>Book Now</button>
-            <button class="btn-details ${buttonClass}" ${trip.comingSoon ? 'disabled' : ''} ${clickAction}>View Details</button>
+            <button class="btn-book ${buttonClass}" ${lockBooking ? 'disabled' : ''} ${clickAction}>${isDisabled ? 'Unavailable' : 'Book Now'}</button>
+            <button class="btn-details" ${clickAction}>View Details</button>
           </div>
         </div>
       </div>
@@ -836,61 +838,8 @@ function renderTrips(data) {
   });
 }
 
-function tripCardHTML(t) {
-  const eur = t.priceEur || 0;
-  const priceHTML = t.showPrice && !t.comingSoon
-    ? `<div class="trip-price" style="color: #2952c8; font-weight: 800; font-size: 1.1rem; display: flex; align-items: baseline; gap: 4px;">
-        ${t.price} <span style="font-size:0.85rem">PLN</span> 
-        <span style="margin: 0 2px">/</span> 
-        ${eurValue} <span style="font-size:0.85rem">EUR</span>
-       </div>`
-    : `<div class="trip-price-na" style="color: #add8e6; font-weight: 800; font-size: 1.1rem;">— <span>PLN</span> / — EUR</div>`;
 
-  const dateHTML = t.showPrice && t.tripDate
-    ? `<div class="trip-date-text" style="color:#2952c8">📅 ${t.tripDate}</div>`
-    : `<div class="trip-date-text" style="color:#b0b8cc">📅 Coming soon</div>`;
 
-  const badges = (t.badges||[]).map(b=>`<span class="badge badge-${b.t}">${b.l}</span>`).join('');
-  const tags = (t.tags||[]).map(t2=>`<span class="tag tag-${t2.t}">${t2.l}</span>`).join('');
-  const features = (t.features||[]).map(f=>`<span class="feature-tag">${f}</span>`).join('');
-
-  return `
-  <div class="trip-card" onclick="if(!${t.comingSoon}) openModal('${t.id}')" style="${t.comingSoon ? 'cursor: default;' : ''}">
-    <div class="trip-img">
-      ${t.photo?`<img src="${t.photo}" alt="${t.title}" loading="lazy" />`:''}
-      <div class="trip-badges">${badges}</div>
-    </div>
-    <div class="trip-body">
-      <div class="trip-tags">${tags}</div>
-      <div class="trip-title">${t.title}</div>
-      <div class="trip-loc">📍 ${t.location}</div>
-      ${dateHTML}
-      <div class="trip-features">${features}</div>
-      <div class="trip-footer">
-        <div>
-          <div class="trip-price-label">Starting from</div>
-          ${priceHTML}
-          <div style="font-size:.72rem;color:#4a5568;margin-top:4px">all inclusive</div>
-          <div class="trip-included" style="color: #22c55e; font-weight: 700; font-size: .72rem; margin-top: 4px; display: flex; align-items: center; gap: 4px;">
-            ${t.comingSoon ? '' : `<span>✓</span> ${t.included || 'Equipment included'}`}
-          </div>
-        </div>
-        <div class="trip-btns">
-          <button class="btn-book ${t.comingSoon ? 'btn-disabled-home' : ''}" 
-                  ${t.comingSoon ? 'disabled' : ''} 
-                  onclick="event.stopPropagation(); openModal('${t.id}')">
-            Book Now
-          </button>
-          <button class="btn-details ${t.comingSoon ? 'btn-disabled-home' : ''}" 
-                  ${t.comingSoon ? 'disabled' : ''} 
-                  onclick="event.stopPropagation(); openModal('${t.id}')">
-            View Details
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>`;
-}
 
 function getFilteredTrips() {
   const activities = [...document.querySelectorAll('#activityFilters input:checked')].map(i=>i.value);
@@ -944,22 +893,32 @@ function toggleFilters() {
 document.getElementById('filtersBody').style.display = filtersOpen ? 'block' : 'none';
 document.getElementById('filtersArrow').style.transform = filtersOpen ? 'rotate(180deg)' : 'rotate(0deg)';
 
+
 function openModal(id) {
   currentTrip = TRIPS.find(t => t.id === id);
   if (!currentTrip) return;
   const t = currentTrip;
   
-  // --- NEW LOGIC START: Check if trip is Coming Soon ---
+  // --- NEW LOGIC START: Check if trip is Coming Soon or Disabled ---
   const isComingSoon = t.comingSoon === true;
+  const isDisabled = !t.isActive;
+  const lockBooking = isComingSoon || isDisabled;
   // --- NEW LOGIC END ---
 
-  const gallery = GALLERY[t.activity] || GALLERY.Kayaking;
+  const gallery = t.images && t.images.length > 0 ? t.images : [t.photo];
   document.getElementById('modalEmoji').textContent = t.emoji;
   document.getElementById('modalTitle').textContent = t.title;
   document.getElementById('modalMeta').innerHTML = `📍 ${t.location} &nbsp;·&nbsp; 🏷️ ${t.activity} &nbsp;·&nbsp; 📅 ${t.duration}`;
-  document.getElementById('galleryMain').src = gallery[0];
-  document.getElementById('gallerySub').innerHTML = gallery.slice(1, 5).map(img => `<img src="${img}" alt="" loading="lazy" />`).join('');
-  document.getElementById('modalDesc').textContent = t.desc + ' Whether you\'re a first-timer or a seasoned adventurer, this package is carefully designed to deliver an unforgettable experience from start to finish.';
+  document.getElementById('galleryMain').src = gallery[0] || '';
+
+  let subImages = '';
+  if (gallery.length > 1) {
+      subImages = gallery.slice(1, 5).map(img => `<img src="${img}" alt="" loading="lazy" />`).join('');
+  }
+  const gallerySubEl = document.getElementById('gallerySub');
+  if (gallerySubEl) gallerySubEl.innerHTML = subImages;
+
+  document.getElementById('modalDesc').textContent = (t.desc || '') + ' Whether you\'re a first-timer or a seasoned adventurer, this package is carefully designed to deliver an unforgettable experience from start to finish.';
   
   const amenities = ['✅ ' + (t.included || 'Equipment included'), '✅ Professional guide / instructor', '✅ Accommodation included', '✅ Meals & snacks', '✅ Safety gear & insurance', '✅ Transport from meeting point'];
   document.getElementById('amenitiesGrid').innerHTML = amenities.map(a => `<div class="amenity-item">${a}</div>`).join('');
@@ -979,21 +938,47 @@ function openModal(id) {
   
   document.getElementById('modalIncluded').textContent = '✓ ' + (t.included || 'Equipment & guide included');
 
+  // Inject Rich Text Itinerary
+  let itinContainer = document.getElementById('modalItineraryContainer');
+  if (!itinContainer) {
+      // Find where to insert it. After tripDate maybe?
+      const modalDateContainer = document.getElementById('modalDate').parentNode.parentNode;
+      itinContainer = document.createElement('div');
+      itinContainer.id = 'modalItineraryContainer';
+      itinContainer.style.marginTop = '24px';
+      modalDateContainer.parentNode.insertBefore(itinContainer, modalDateContainer.nextSibling);
+  }
+
+  if (t.itineraryText) {
+      itinContainer.innerHTML = `
+        <h4 style="font-family:Montserrat,sans-serif;font-weight:700;font-size:.85rem;color:#1a1f36;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Itinerary</h4>
+        <div style="background:#fff;border:1px solid #d0dcf8;border-radius:10px;padding:20px;color:#4a5568;font-size:0.9rem;line-height:1.6;" class="ql-editor">
+            ${t.itineraryText}
+        </div>
+      `;
+      itinContainer.style.display = 'block';
+  } else {
+      itinContainer.style.display = 'none';
+  }
   
   const bookBtn = document.getElementById("btnShowForm");
-  // Lock button and change style if Coming Soon
+  // Lock button and change style if Coming Soon or Disabled
   if (bookBtn) {
-    bookBtn.disabled = isComingSoon;
-    bookBtn.innerHTML = isComingSoon ? 'Coming Soon' : '🎉 Book Your Spot';
+    bookBtn.disabled = lockBooking;
+
+    if (isComingSoon) bookBtn.innerHTML = 'Coming Soon';
+    else if (isDisabled) bookBtn.innerHTML = 'Currently Unavailable';
+    else bookBtn.innerHTML = '🎉 Book Your Spot';
+
     bookBtn.classList.remove("btn-whatsapp");
-    bookBtn.style.background = isComingSoon ? '#cbd5e0' : ''; // Grey if locked
-    bookBtn.style.cursor = isComingSoon ? 'not-allowed' : '';
+    bookBtn.style.background = lockBooking ? '#cbd5e0' : ''; // Grey if locked
+    bookBtn.style.cursor = lockBooking ? 'not-allowed' : '';
   }
   // --- NEW LOGIC END ---
 
   document.getElementById('modal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
-    updateLivePrice();
+  if (!lockBooking) updateLivePrice();
 }
 
 
@@ -1046,7 +1031,22 @@ function populateGuestDropdown() {
     }
 }
 
+function updateLivePrice() {
+    if (!currentTrip || currentTrip.comingSoon) return;
 
+    const guestElement = document.getElementById('bookGuests');
+    const guestCount = (guestElement && guestElement.value) ? parseInt(guestElement.value) : 1;
+
+    const totalPln = currentTrip.price * guestCount;
+    const totalEur = currentTrip.priceEur * guestCount;
+
+    const priceText = `${totalPln} <span style="font-size:1rem">PLN</span> <span style="font-size:.9rem;font-weight:700;color:#4a5568;margin-left:8px">(~${totalEur} EUR)</span>`;
+
+    const display1 = document.getElementById('modalPrice');
+    if(display1) display1.innerHTML = priceText;
+
+
+}
 
 function resetModalState() {
     document.getElementById('successContainer').style.display = 'none';
@@ -1231,9 +1231,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+
 // 3. RUN THIS IMMEDIATELY when the page loads
 // Init
-renderTrips(TRIPS);
+async function init() {
+    const { data, error } = await _supabase.from('packages').select('*').order('priority', { ascending: false });
+    if (error) {
+        console.error("Error fetching packages", error);
+        return;
+    }
+    TRIPS = data.map(p => ({
+        id: p.id,
+        title: p.title,
+        location: p.location,
+        photo: p.photo,
+        emoji: p.emoji,
+        badges: p.badges || [],
+        tags: p.tags || [],
+        features: p.features || [],
+        price: p.price,
+        priceEur: p.price_eur,
+        included: p.included,
+        duration: p.duration,
+        desc: p.desc_text,
+        activity: p.activity,
+        priceRange: p.price_range,
+        durationTag: p.duration_tag,
+        difficulty: p.difficulty,
+        tripDate: p.trip_date,
+        showPrice: p.show_price,
+        comingSoon: p.coming_soon,
+        isActive: p.is_active !== false, // default true
+        hideWhenDisabled: p.hide_when_disabled === true,
+        itineraryText: p.itinerary_text || '',
+        images: p.images || []
+    })).filter(t => t.isActive || !t.hideWhenDisabled); // Only show if active or if hiddenWhenDisabled is false
+
+    renderTrips(getFilteredTrips());
+}
+init();
+
 </script>
 </body>
 </html>
