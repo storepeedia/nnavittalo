@@ -170,29 +170,45 @@
             Bookings Dashboard
           </h2>
 
-          <div class="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <input
-              type="text"
-              id="searchBookings"
-              placeholder="Search name, email, or ID..."
-              class="px-3 py-2 border rounded shadow-sm"
-            />
-            <select
-              id="filterPackage"
-              class="px-3 py-2 border rounded shadow-sm"
-            >
-              <option value="">All Packages</option>
-            </select>
-            <select
-              id="filterStatus"
-              class="px-3 py-2 border rounded shadow-sm"
-            >
-              <option value="">All Statuses</option>
-              <option value="pending">Pending</option>
-              <option value="paid">Paid</option>
-              <option value="failed">Failed</option>
-              <option value="refunded">Refunded</option>
-            </select>
+          <div class="mb-4 flex flex-col gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <input
+                type="text"
+                id="searchBookings"
+                placeholder="Search name, email, or ID..."
+                class="px-3 py-2 border rounded shadow-sm"
+              />
+              <select
+                id="filterPackage"
+                class="px-3 py-2 border rounded shadow-sm"
+              >
+                <option value="">All Packages</option>
+              </select>
+              <select
+                id="filterStatus"
+                class="px-3 py-2 border rounded shadow-sm"
+              >
+                <option value="">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="paid">Paid</option>
+                <option value="failed">Failed</option>
+                <option value="refunded">Refunded</option>
+              </select>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="flex flex-col">
+                <label for="filterBookingDateStart" class="text-xs text-gray-600 mb-1">Booking Date Start</label>
+                <input type="date" id="filterBookingDateStart" class="px-3 py-2 border rounded shadow-sm" />
+              </div>
+              <div class="flex flex-col">
+                <label for="filterBookingDateEnd" class="text-xs text-gray-600 mb-1">Booking Date End</label>
+                <input type="date" id="filterBookingDateEnd" class="px-3 py-2 border rounded shadow-sm" />
+              </div>
+              <div class="flex flex-col">
+                <label for="filterTripDate" class="text-xs text-gray-600 mb-1">Trip Date</label>
+                <input type="date" id="filterTripDate" class="px-3 py-2 border rounded shadow-sm" />
+              </div>
+            </div>
           </div>
 
           <!-- Loading State -->
@@ -875,6 +891,9 @@
           .value.toLowerCase();
         const filterPkg = document.getElementById("filterPackage").value;
         const filterStatus = document.getElementById("filterStatus").value;
+        const filterBookingStart = document.getElementById("filterBookingDateStart").value;
+        const filterBookingEnd = document.getElementById("filterBookingDateEnd").value;
+        const filterTripDate = document.getElementById("filterTripDate").value;
 
         const filtered = currentBookings.filter((b) => {
           const matchSearch =
@@ -882,7 +901,42 @@
             (b.booking_no || "").toLowerCase().includes(search);
           const matchPkg = filterPkg === "" || b.event_id === filterPkg;
           const matchStatus = filterStatus === "" || b.status === filterStatus;
-          return matchSearch && matchPkg && matchStatus;
+
+          let matchBookingDate = true;
+          if (filterBookingStart || filterBookingEnd) {
+            const bDate = new Date(b.created_at);
+            // Reset time part for comparison
+            bDate.setHours(0, 0, 0, 0);
+
+            if (filterBookingStart) {
+                const sDate = new Date(filterBookingStart);
+                sDate.setHours(0, 0, 0, 0);
+                if (bDate < sDate) matchBookingDate = false;
+            }
+            if (filterBookingEnd) {
+                const eDate = new Date(filterBookingEnd);
+                eDate.setHours(0, 0, 0, 0);
+                if (bDate > eDate) matchBookingDate = false;
+            }
+          }
+
+          let matchTripDate = true;
+          if (filterTripDate) {
+              if (!b.chosen_trip_date) {
+                  matchTripDate = false;
+              } else {
+                  // Assuming chosen_trip_date is stored in a format compatible with Date or YYYY-MM-DD
+                  const tDate = new Date(b.chosen_trip_date);
+                  tDate.setHours(0, 0, 0, 0);
+                  const filterTDate = new Date(filterTripDate);
+                  filterTDate.setHours(0, 0, 0, 0);
+                  if (tDate.getTime() !== filterTDate.getTime()) {
+                      matchTripDate = false;
+                  }
+              }
+          }
+
+          return matchSearch && matchPkg && matchStatus && matchBookingDate && matchTripDate;
         });
 
         const tbody = document.getElementById("bookingsTableBody");
@@ -934,6 +988,15 @@
         .addEventListener("change", renderBookingsList);
       document
         .getElementById("filterStatus")
+        .addEventListener("change", renderBookingsList);
+      document
+        .getElementById("filterBookingDateStart")
+        .addEventListener("change", renderBookingsList);
+      document
+        .getElementById("filterBookingDateEnd")
+        .addEventListener("change", renderBookingsList);
+      document
+        .getElementById("filterTripDate")
         .addEventListener("change", renderBookingsList);
 
       function openBookingModal(id) {
