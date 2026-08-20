@@ -665,7 +665,7 @@ button{cursor:pointer;font-family:inherit}
       <input class="form-input" type="date" id="bookDob" required />
 
       <div class="guest-selector-row" style="display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 12px 15px; border: 1px solid #dde4f5; border-radius: 10px; margin-bottom: 20px;">
-        <span style="font-weight: 600; font-size: 0.85rem; color: #4a5568; display:inline-flex; align-items:center; gap:4px; white-space:nowrap;">Number of People <span style="font-size: 0.65rem; font-weight: 400; color: #7a8599;">(including main booker)</span></span>
+        <span style="font-weight: 600; font-size: 0.85rem; color: #4a5568; display:flex; flex-direction:column; gap:2px;">Number of People <span style="font-size: 0.65rem; font-weight: 400; color: #7a8599;">(including main booker)</span></span>
         <select id="bookGuests" onchange="renderGuestInputs(); updateLivePrice();" style="width: 70px; padding: 6px; border: 1px solid #cbd5e0; border-radius: 6px; font-weight: 700; color: #2952c8; background: #fff;">
         </select>
       </div>
@@ -710,7 +710,8 @@ function updateLivePrice() {
     if (!currentTrip || currentTrip.comingSoon) return;
 
     // 1. Get number of guests from the dropdown
-    const guestCount = document.getElementById('bookGuests') ? parseInt(document.getElementById('bookGuests').value) : 1;
+    const guestElement = document.getElementById('bookGuests');
+    const guestCount = (guestElement && guestElement.value) ? parseInt(guestElement.value) : 1;
     
     // 2. Use the FIXED prices from your TRIPS array multiplied by guests
     const totalPln = currentTrip.price * guestCount;
@@ -964,14 +965,17 @@ function openModal(id) {
   document.getElementById('amenitiesGrid').innerHTML = amenities.map(a => `<div class="amenity-item">${a}</div>`).join('');
   document.getElementById('modalDate').textContent = t.showPrice ? (t.tripDate || '18 July 2026') : '18 July 2026';
   
-  if (t.showPrice) {
-    // Show your fixed PLN and fixed EUR inputs
-    const priceText = t.comingSoon 
-        ? "Price Coming Soon" 
-        : `${t.price} <span style="font-size:1rem">PLN</span> <span style="font-size:.9rem;font-weight:700;color:#4a5568;margin-left:8px">(~${t.priceEur} EUR)</span>`;
-    
-    document.getElementById('modalPrice').innerHTML = priceText;
-}
+  const priceDisplay = document.getElementById('modalPrice');
+  if (t.comingSoon) {
+    if (priceDisplay) priceDisplay.innerHTML = "Price Coming Soon";
+  } else {
+    // Reset guest dropdown to 1 when modal opens to ensure correct initial price calculation
+    const guestSelect = document.getElementById('bookGuests');
+    if (guestSelect) {
+        guestSelect.innerHTML = '<option value="1">1</option>';
+        guestSelect.value = "1";
+    }
+  }
   
   document.getElementById('modalIncluded').textContent = '✓ ' + (t.included || 'Equipment & guide included');
 
@@ -1042,21 +1046,7 @@ function populateGuestDropdown() {
     }
 }
 
-function updateLivePrice() {
-    if (!currentTrip || currentTrip.comingSoon) return;
 
-    const guestCount = document.getElementById('bookGuests') ? parseInt(document.getElementById('bookGuests').value) : 1;
-
-    const totalPln = currentTrip.price * guestCount;
-    const totalEur = currentTrip.priceEur * guestCount;
-
-    const priceText = `${totalPln} <span style="font-size:1rem">PLN</span> <span style="font-size:.9rem;font-weight:700;color:#4a5568;margin-left:8px">(~${totalEur} EUR)</span>`;
-
-    const display1 = document.getElementById('modalPrice');
-    if(display1) display1.innerHTML = priceText;
-
-
-}
 
 function resetModalState() {
     document.getElementById('successContainer').style.display = 'none';
