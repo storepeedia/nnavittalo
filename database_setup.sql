@@ -16,6 +16,7 @@ CREATE TABLE public.bookings (
     total_price_pln NUMERIC, -- Only populated for the main booker
     total_price_eur NUMERIC, -- Only populated for the main booker
     is_main_booker BOOLEAN DEFAULT false,
+    chosen_trip_date TEXT,
     booking_date DATE DEFAULT CURRENT_DATE,
     status TEXT DEFAULT 'pending',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now())

@@ -360,6 +360,17 @@
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700"
+                  >Trip Dates (comma separated)</label
+                >
+                <input
+                  type="text"
+                  id="pkgTripDate"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                  placeholder="e.g. 18 July 2026, 25 July 2026"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700"
                   >Activity Type</label
                 >
                 <input
@@ -678,7 +689,13 @@
                             </div>
                         </div>
                     </div>
-                    <button onclick="openPackageModal('${pkg.id}')" class="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
+
+                    <div class="flex space-x-3">
+                        <button onclick="openPackageModal('${pkg.id}')" class="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
+                        <button onclick="duplicatePackage('${pkg.id}')" class="text-green-600 hover:text-green-900 font-medium">Duplicate</button>
+                        <button onclick="deletePackage('${pkg.id}')" class="text-red-600 hover:text-red-900 font-medium">Delete</button>
+                    </div>
+
                 </li>
             `,
           )
@@ -709,6 +726,7 @@
           document.getElementById("packageModal").classList.remove("hidden");
         });
 
+
       function openPackageModal(id) {
         const pkg = currentPackages.find((p) => p.id === id);
         if (!pkg) return;
@@ -722,6 +740,7 @@
         document.getElementById("pkgPrice").value = pkg.price || "";
         document.getElementById("pkgPriceEur").value = pkg.price_eur || "";
         document.getElementById("pkgDuration").value = pkg.duration || "";
+        document.getElementById("pkgTripDate").value = pkg.trip_date || "";
         document.getElementById("pkgActivity").value = pkg.activity || "";
         document.getElementById("pkgPriority").value = pkg.priority || 0;
         document.getElementById("pkgDesc").value = pkg.desc_text || "";
@@ -738,6 +757,50 @@
 
         quill.root.innerHTML = pkg.itinerary_text || "";
         document.getElementById("packageModal").classList.remove("hidden");
+      }
+
+      function duplicatePackage(id) {
+        const pkg = currentPackages.find((p) => p.id === id);
+        if (!pkg) return;
+
+        // Open modal as if it's a new package, but prepopulated
+        document.getElementById("pkgId").value = "";
+        document.getElementById("pkgTitleId").value = "";
+        document.getElementById("pkgTitleId").readOnly = false;
+        document.getElementById("pkgTitle").value = "Copy of " + pkg.title;
+        document.getElementById("pkgLocation").value = pkg.location || "";
+        document.getElementById("pkgEmoji").value = pkg.emoji || "";
+        document.getElementById("pkgPrice").value = pkg.price || "";
+        document.getElementById("pkgPriceEur").value = pkg.price_eur || "";
+        document.getElementById("pkgDuration").value = pkg.duration || "";
+        document.getElementById("pkgTripDate").value = pkg.trip_date || "";
+        document.getElementById("pkgActivity").value = pkg.activity || "";
+        document.getElementById("pkgPriority").value = pkg.priority || 0;
+        document.getElementById("pkgDesc").value = pkg.desc_text || "";
+        document.getElementById("pkgImages").value = (pkg.images || []).join(
+          "\n",
+        );
+
+        document.getElementById("pkgIsActive").checked =
+          pkg.is_active !== false;
+        document.getElementById("pkgHideWhenDisabled").checked =
+          pkg.hide_when_disabled === true;
+
+        toggleDisableOptions();
+
+        quill.root.innerHTML = pkg.itinerary_text || "";
+        document.getElementById("packageModal").classList.remove("hidden");
+      }
+
+      async function deletePackage(id) {
+        if (confirm("Are you sure you want to completely remove this package?")) {
+            const { error } = await dbClient.from("packages").delete().eq("id", id);
+            if (error) {
+                alert("Error deleting package: " + error.message);
+            } else {
+                loadPackages();
+            }
+        }
       }
 
       function closePackageModal() {
@@ -766,6 +829,7 @@
               ? parseFloat(document.getElementById("pkgPriceEur").value)
               : null,
             duration: document.getElementById("pkgDuration").value,
+            trip_date: document.getElementById("pkgTripDate").value,
             activity: document.getElementById("pkgActivity").value,
             priority:
               parseInt(document.getElementById("pkgPriority").value) || 0,
