@@ -75,13 +75,21 @@
                 type="button"
                 id="togglePassword"
                 class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700"
-                style="top: 4px;"
-                onclick="const passInput = document.getElementById('loginPassword'); if (passInput.type === 'password') { passInput.type = 'text'; this.innerHTML = '🙈'; } else { passInput.type = 'password'; this.innerHTML = '👁️'; }"
+                style="top: 4px"
+                onclick="
+                  const passInput = document.getElementById('loginPassword');
+                  if (passInput.type === 'password') {
+                    passInput.type = 'text';
+                    this.innerHTML = '🙈';
+                  } else {
+                    passInput.type = 'password';
+                    this.innerHTML = '👁️';
+                  }
+                "
               >
                 👁️
               </button>
             </div>
-
           </div>
           <button
             type="submit"

@@ -797,19 +797,19 @@ function renderTrips(data) {
       <div class="trip-img">
         <img src="${trip.photo}" alt="${trip.title}">
         <div class="trip-badges">
-          ${trip.badges ? trip.badges.map(b => `<span class="badge badge-${b.t}">${b.l}</span>`).join('') : ''}
+          ${trip.badges ? trip.badges.map((b, i) => `<span class="badge badge-${i % 2 === 0 ? 'white' : 'green'}">${typeof b === 'object' ? b.l : b}</span>`).join('') : ''}
         </div>
       </div>
       <div class="trip-body">
         <div class="trip-tags">
-          ${trip.tags ? trip.tags.map(t => `<span class="tag tag-${t.t}">${t.l}</span>`).join('') : ''}
+          ${trip.tags ? trip.tags.map(t => `<span class="tag tag-tatra">${typeof t === 'object' ? t.l : t}</span>`).join('') : ''}
         </div>
         <h3 class="trip-title">${trip.title}</h3>
         <div class="trip-loc">📍 ${trip.location}</div>
         <div class="trip-date-text">📅 ${trip.tripDate || 'Dates Coming Soon'}</div>
         
         <div class="trip-features">
-          ${trip.features ? trip.features.slice(0, 3).map(f => `<span class="feature-tag">${f}</span>`).join('') : ''}
+          ${trip.features ? trip.features.map(f => `<span class="feature-tag">${f}</span>`).join('') : ''}
         </div>
 
         <div class="trip-footer">
