@@ -719,7 +719,8 @@ function updateLivePrice() {
     if (!currentTrip || currentTrip.comingSoon) return;
 
     // 1. Get number of guests from the dropdown
-    const guestCount = document.getElementById('bookGuests') ? parseInt(document.getElementById('bookGuests').value) : 1;
+    const bookGuestsEl = document.getElementById('bookGuests');
+    const guestCount = (bookGuestsEl && bookGuestsEl.value) ? parseInt(bookGuestsEl.value) || 1 : 1;
     
     // 2. Use the FIXED prices from your TRIPS array multiplied by guests
     const totalPln = currentTrip.price * guestCount;
@@ -1067,7 +1068,8 @@ function populateGuestDropdown() {
 function updateLivePrice() {
     if (!currentTrip || currentTrip.comingSoon) return;
 
-    const guestCount = document.getElementById('bookGuests') ? parseInt(document.getElementById('bookGuests').value) : 1;
+    const bookGuestsEl = document.getElementById('bookGuests');
+    const guestCount = (bookGuestsEl && bookGuestsEl.value) ? parseInt(bookGuestsEl.value) || 1 : 1;
 
     const totalPln = currentTrip.price * guestCount;
     const totalEur = currentTrip.priceEur * guestCount;
