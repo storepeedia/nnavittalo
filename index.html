@@ -644,17 +644,20 @@ button{cursor:pointer;font-family:inherit}
         </div>
       </div>
 <div class="modal-sidebar">
-  <div class="booking-panel" id="pricingPanelOriginal">
-    <div class="booking-label">Total price</div>
+  <!-- Shared Price Display -->
+  <div class="booking-panel" id="pricingPanelShared" style="border-bottom: none; border-bottom-left-radius: 0; border-bottom-right-radius: 0; padding-bottom: 0; margin-bottom: 0;">
+    <div class="booking-label" id="priceLabel">Price per person</div>
     <div id="modalPrice" class="booking-price"></div>
     <div id="modalIncluded" style="font-size:.78rem;color:#7a8599;margin-bottom:16px"></div>
+  </div>
+  <div class="booking-panel" id="pricingPanelOriginal" style="border-top: none; border-top-left-radius: 0; border-top-right-radius: 0; padding-top: 10px;">
     
     <button class="btn-book-modal" id="btnShowForm" onclick="showBookingForm()">🎉 Book Your Spot</button>
     <p style="font-size:.72rem;color:#7a8599;text-align:center;margin-top:10px">Free cancellation up to 7 days before departure</p>
     </div>
 
   <!-- NEW BOOKING FORM CONTAINER -->
-  <div id="bookingFormContainer" class="booking-panel" style="display:none;">
+  <div id="bookingFormContainer" class="booking-panel" style="display:none; border-top: none; border-top-left-radius: 0; border-top-right-radius: 0; padding-top: 10px;">
       <h3 style="font-family:'Montserrat',sans-serif;color:#0f2266;margin-bottom:15px;text-align:center;">Complete Your Booking</h3>
       <p style="text-align:center; font-size:0.85rem; color:#4a5568; margin-bottom:20px;">Please fill out the details for all adventurers.</p>
 
@@ -724,10 +727,17 @@ function updateLivePrice() {
     
     // 2. Use the FIXED prices from your TRIPS array multiplied by guests
     const totalPln = currentTrip.price * guestCount;
+
     const totalEur = currentTrip.priceEur * guestCount; // This uses your manual input
+
+    const priceLabel = document.getElementById('priceLabel');
+    if (priceLabel) {
+        priceLabel.innerText = guestCount === 1 ? 'Price per person' : 'Total price (' + guestCount + ' people)';
+    }
 
     // 3. Update the sidebar text
     const priceDisplay = document.getElementById('modalPrice');
+
     if (priceDisplay) {
         priceDisplay.innerHTML = `
             ${totalPln} <span style="font-size:1rem">PLN</span> 
@@ -1072,9 +1082,16 @@ function updateLivePrice() {
     const guestCount = (bookGuestsEl && bookGuestsEl.value) ? parseInt(bookGuestsEl.value) || 1 : 1;
 
     const totalPln = currentTrip.price * guestCount;
+
     const totalEur = currentTrip.priceEur * guestCount;
 
+    const priceLabel = document.getElementById('priceLabel');
+    if (priceLabel) {
+        priceLabel.innerText = guestCount === 1 ? 'Price per person' : 'Total price (' + guestCount + ' people)';
+    }
+
     const priceText = `${totalPln} <span style="font-size:1rem">PLN</span> <span style="font-size:.9rem;font-weight:700;color:#4a5568;margin-left:8px">(~${totalEur} EUR)</span>`;
+
 
     const display1 = document.getElementById('modalPrice');
     if(display1) display1.innerHTML = priceText;
