@@ -102,55 +102,46 @@
     </div>
 
     <!-- Main Dashboard View -->
-    <div id="dashboardView" class="hidden">
-      <!-- Header -->
-      <header class="bg-white border-b border-slate-100 sticky top-0 z-30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between items-center h-16">
-            <!-- Left: Menu & Brand -->
-            <div class="flex items-center gap-4">
-              <button class="text-slate-500 hover:text-slate-700">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-              </button>
-              <div class="flex flex-col">
-                <span class="font-bold text-slate-900 leading-tight">NNA VITTALO</span>
-                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Admin</span>
-              </div>
-            </div>
+    <div id="dashboardView" class="hidden relative">
+      <!-- Floating Logout Button -->
+      <div class="absolute top-4 right-4 z-50">
+        <button id="btnLogout" class="bg-white/80 backdrop-blur border border-slate-200 text-slate-600 px-3 py-1.5 rounded-xl text-xs font-medium shadow-sm hover:bg-slate-50 transition-colors flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+          Logout
+        </button>
+      </div>
+      <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
 
-            <!-- Right: Actions & Profile -->
-            <div class="flex items-center gap-5">
-              <button class="text-slate-400 hover:text-slate-600">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-              </button>
-              <button class="text-slate-400 hover:text-slate-600">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-              </button>
-
-              <div class="relative">
-                <div class="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center text-slate-600 font-medium">A</div>
-                <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
-              </div>
-              <button id="btnLogout" class="hidden text-sm text-slate-500 hover:text-slate-700">Logout</button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <!-- Packages Section -->
-        <div id="sectionPackages" class="pb-24"> <!-- Added padding bottom for nav -->
+        <div id="sectionPackages" class="pb-24">
+          <!-- Added padding bottom for nav -->
           <!-- Page Header -->
           <div class="flex justify-between items-start mb-8">
             <div>
-              <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Trips</h2>
-              <p class="text-slate-500 mt-1 text-sm">Manage your adventure trip packages</p>
+              <h2 class="text-3xl font-bold text-slate-900 tracking-tight">
+                Trips
+              </h2>
+              <p class="text-slate-500 mt-1 text-sm">
+                Manage your adventure trip packages
+              </p>
             </div>
             <button
               id="btnCreatePackage"
               class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-2.5 px-5 rounded-2xl shadow-sm hover:shadow flex items-center gap-2 transition-all"
             >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4v16m8-8H4"
+                ></path>
+              </svg>
               Add Trip
             </button>
           </div>
@@ -158,40 +149,106 @@
           <!-- Summary Cards -->
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <!-- Card 1 -->
-            <div class="bg-white rounded-[20px] p-4 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col justify-between">
+            <div
+              class="bg-white rounded-[20px] p-4 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col justify-between"
+            >
               <div class="flex items-center gap-3 mb-2">
-                <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-500">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <div
+                  class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-500"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    ></path>
+                  </svg>
                 </div>
-                <span class="text-xs font-medium text-slate-500">Total Trips</span>
+                <span class="text-xs font-medium text-slate-500"
+                  >Total Trips</span
+                >
               </div>
-              <div class="text-2xl font-bold text-slate-900" id="statTotalTrips">0</div>
+              <div
+                class="text-2xl font-bold text-slate-900"
+                id="statTotalTrips"
+              >
+                0
+              </div>
             </div>
             <!-- Card 2 -->
-            <div class="bg-white rounded-[20px] p-4 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col justify-between">
+            <div
+              class="bg-white rounded-[20px] p-4 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col justify-between"
+            >
               <div class="flex items-center gap-3 mb-2">
-                <div class="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500">
+                <div
+                  class="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500"
+                >
                   <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
                 </div>
-                <span class="text-xs font-medium text-slate-500">Active Trips</span>
+                <span class="text-xs font-medium text-slate-500"
+                  >Active Trips</span
+                >
               </div>
-              <div class="text-2xl font-bold text-slate-900" id="statActiveTrips">0</div>
+              <div
+                class="text-2xl font-bold text-slate-900"
+                id="statActiveTrips"
+              >
+                0
+              </div>
             </div>
             <!-- Card 3 -->
-            <div class="bg-white rounded-[20px] p-4 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col justify-between">
+            <div
+              class="bg-white rounded-[20px] p-4 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col justify-between"
+            >
               <div class="flex items-center gap-3 mb-2">
-                <div class="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-orange-500">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <div
+                  class="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-orange-500"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    ></path>
+                  </svg>
                 </div>
                 <span class="text-xs font-medium text-slate-500">Upcoming</span>
               </div>
               <div class="text-2xl font-bold text-slate-900">0</div>
             </div>
             <!-- Card 4 -->
-            <div class="bg-white rounded-[20px] p-4 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col justify-between">
+            <div
+              class="bg-white rounded-[20px] p-4 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col justify-between"
+            >
               <div class="flex items-center gap-3 mb-2">
-                <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                <div
+                  class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+                    ></path>
+                  </svg>
                 </div>
                 <span class="text-xs font-medium text-slate-500">Archived</span>
               </div>
@@ -202,9 +259,23 @@
           <!-- Section Heading -->
           <div class="flex justify-between items-center mb-4 px-1">
             <h3 class="text-lg font-bold text-slate-900">All Trip Packages</h3>
-            <button class="text-sm font-medium text-slate-500 flex items-center gap-1 hover:text-slate-700">
+            <button
+              class="text-sm font-medium text-slate-500 flex items-center gap-1 hover:text-slate-700"
+            >
               All Status
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
             </button>
           </div>
 
@@ -219,13 +290,34 @@
           </div>
 
           <!-- CTA Panel -->
-          <div class="mt-8 bg-indigo-50/50 border border-indigo-100 rounded-[20px] p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div
+            class="mt-8 bg-indigo-50/50 border border-indigo-100 rounded-[20px] p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+          >
             <div>
-              <h4 class="text-lg font-bold text-slate-900 mb-1">Create Amazing Experiences</h4>
-              <p class="text-sm text-slate-500">Add new trip packages and manage your adventure offerings.</p>
+              <h4 class="text-lg font-bold text-slate-900 mb-1">
+                Create Amazing Experiences
+              </h4>
+              <p class="text-sm text-slate-500">
+                Add new trip packages and manage your adventure offerings.
+              </p>
             </div>
-            <button class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-2.5 px-6 rounded-2xl shadow-sm flex items-center gap-2 whitespace-nowrap transition-all" onclick="document.getElementById('btnCreatePackage').click()">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            <button
+              class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-2.5 px-6 rounded-2xl shadow-sm flex items-center gap-2 whitespace-nowrap transition-all"
+              onclick="document.getElementById('btnCreatePackage').click()"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4v16m8-8H4"
+                ></path>
+              </svg>
               Add Trip
             </button>
           </div>
@@ -264,21 +356,58 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div class="flex flex-col">
-                <label for="filterBookingDateStart" class="text-xs text-gray-600 mb-1">Booking Date Start</label>
-                <input type="date" id="filterBookingDateStart" class="px-3 py-2 border rounded shadow-sm" />
+                <label
+                  for="filterBookingDateStart"
+                  class="text-xs text-gray-600 mb-1"
+                  >Booking Date Start</label
+                >
+                <input
+                  type="date"
+                  id="filterBookingDateStart"
+                  class="px-3 py-2 border rounded shadow-sm"
+                />
               </div>
               <div class="flex flex-col">
-                <label for="filterBookingDateEnd" class="text-xs text-gray-600 mb-1">Booking Date End</label>
-                <input type="date" id="filterBookingDateEnd" class="px-3 py-2 border rounded shadow-sm" />
+                <label
+                  for="filterBookingDateEnd"
+                  class="text-xs text-gray-600 mb-1"
+                  >Booking Date End</label
+                >
+                <input
+                  type="date"
+                  id="filterBookingDateEnd"
+                  class="px-3 py-2 border rounded shadow-sm"
+                />
               </div>
               <div class="flex flex-col relative" id="filterTripDateContainer">
                 <label class="text-xs text-gray-600 mb-1">Trip Dates</label>
                 <div class="relative">
-                  <button type="button" id="filterTripDateBtn" class="w-full px-3 py-2 border rounded shadow-sm bg-white text-left text-gray-700 focus:outline-none flex justify-between items-center">
-                    <span id="filterTripDateLabel" class="truncate pr-2">All Dates</span>
-                    <svg class="h-4 w-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                  <button
+                    type="button"
+                    id="filterTripDateBtn"
+                    class="w-full px-3 py-2 border rounded shadow-sm bg-white text-left text-gray-700 focus:outline-none flex justify-between items-center"
+                  >
+                    <span id="filterTripDateLabel" class="truncate pr-2"
+                      >All Dates</span
+                    >
+                    <svg
+                      class="h-4 w-4 text-gray-400 flex-shrink-0"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      ></path>
+                    </svg>
                   </button>
-                  <div id="filterTripDateDropdown" class="hidden absolute z-10 w-full mt-1 bg-white border rounded shadow-lg max-h-60 overflow-y-auto">
+                  <div
+                    id="filterTripDateDropdown"
+                    class="hidden absolute z-10 w-full mt-1 bg-white border rounded shadow-lg max-h-60 overflow-y-auto"
+                  >
                     <!-- Checkboxes populated by JS -->
                   </div>
                 </div>
@@ -628,26 +757,48 @@
       </div>
 
       <!-- Bottom Navigation (Mobile) -->
-      <nav class="fixed bottom-0 w-full bg-white border-t border-slate-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.02)] z-40">
-        <div class="flex justify-around items-center px-2 py-2 pb-safe">
-          <button class="flex flex-col items-center p-2 text-slate-400 hover:text-slate-600 transition-colors">
-            <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-            <span class="text-[10px] font-medium">Home</span>
-          </button>
-
-          <button id="navBookings" class="flex flex-col items-center p-2 text-slate-400 hover:text-slate-600 transition-colors">
-            <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+      <nav
+        class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-[2rem] z-40"
+      >
+        <div class="flex justify-around items-center px-2 py-2">
+          <button
+            id="navBookings"
+            class="flex-1 flex flex-col items-center px-4 py-2 text-slate-400 hover:text-slate-600 rounded-2xl transition-all"
+          >
+            <svg
+              class="w-6 h-6 mb-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              ></path>
+            </svg>
             <span class="text-[10px] font-medium">Bookings</span>
           </button>
 
-          <button id="navPackages" class="flex flex-col items-center px-4 py-2 text-blue-600 bg-blue-50/50 rounded-2xl transition-all">
-            <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-            <span class="text-[10px] font-semibold">Packages</span>
-          </button>
-
-          <button class="flex flex-col items-center p-2 text-slate-400 hover:text-slate-600 transition-colors">
-            <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-            <span class="text-[10px] font-medium">Settings</span>
+          <button
+            id="navPackages"
+            class="flex-1 flex flex-col items-center px-4 py-2 text-slate-400 hover:text-slate-600 rounded-2xl transition-all"
+          >
+            <svg
+              class="w-6 h-6 mb-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+              ></path>
+            </svg>
+            <span class="text-[10px] font-medium">Trips</span>
           </button>
         </div>
       </nav>
@@ -683,11 +834,34 @@
       // ------------------
       // Auth Logic
       // ------------------
+
+      function showDashboardAndLoadDefault() {
+        document.getElementById("loginView").classList.add("hidden");
+        document.getElementById("dashboardView").classList.remove("hidden");
+
+        // Force Bookings view as default upon login
+        document.getElementById("sectionPackages").classList.add("hidden");
+        document.getElementById("sectionBookings").classList.remove("hidden");
+
+        // Update navigation UI states
+        document
+          .getElementById("navBookings")
+          .classList.remove("text-slate-400");
+        document
+          .getElementById("navBookings")
+          .classList.add("text-blue-600", "bg-blue-50/50");
+        document
+          .getElementById("navPackages")
+          .classList.remove("text-blue-600", "bg-blue-50/50");
+        document.getElementById("navPackages").classList.add("text-slate-400");
+
+        // Load data
+        loadBookings();
+      }
+
       dbClient.auth.onAuthStateChange((event, session) => {
         if (session) {
-          document.getElementById("loginView").classList.add("hidden");
-          document.getElementById("dashboardView").classList.remove("hidden");
-          loadPackages();
+          showDashboardAndLoadDefault();
         } else {
           document.getElementById("loginView").classList.remove("hidden");
           document.getElementById("dashboardView").classList.add("hidden");
@@ -699,9 +873,7 @@
           data: { session },
         } = await dbClient.auth.getSession();
         if (session) {
-          document.getElementById("loginView").classList.add("hidden");
-          document.getElementById("dashboardView").classList.remove("hidden");
-          loadPackages();
+          showDashboardAndLoadDefault();
         }
       }
 
@@ -723,9 +895,7 @@
             errDiv.classList.remove("hidden");
           } else {
             // force update ui in case onAuthStateChange is slow or misses
-            document.getElementById("loginView").classList.add("hidden");
-            document.getElementById("dashboardView").classList.remove("hidden");
-            loadPackages();
+            showDashboardAndLoadDefault();
           }
         });
 
@@ -743,12 +913,18 @@
         document.getElementById("sectionBookings").classList.add("hidden");
 
         // Active styling for Packages
-        document.getElementById("navPackages").classList.remove("text-slate-400", "p-2");
-        document.getElementById("navPackages").classList.add("text-blue-600", "bg-blue-50/50", "rounded-2xl", "px-4", "py-2");
+        document
+          .getElementById("navPackages")
+          .classList.remove("text-slate-400");
+        document
+          .getElementById("navPackages")
+          .classList.add("text-blue-600", "bg-blue-50/50");
 
         // Inactive styling for Bookings
-        document.getElementById("navBookings").classList.remove("text-blue-600", "bg-blue-50/50", "rounded-2xl", "px-4", "py-2");
-        document.getElementById("navBookings").classList.add("text-slate-400", "p-2");
+        document
+          .getElementById("navBookings")
+          .classList.remove("text-blue-600", "bg-blue-50/50");
+        document.getElementById("navBookings").classList.add("text-slate-400");
 
         loadPackages();
       });
@@ -758,12 +934,18 @@
         document.getElementById("sectionPackages").classList.add("hidden");
 
         // Active styling for Bookings
-        document.getElementById("navBookings").classList.remove("text-slate-400", "p-2");
-        document.getElementById("navBookings").classList.add("text-blue-600", "bg-blue-50/50", "rounded-2xl", "px-4", "py-2");
+        document
+          .getElementById("navBookings")
+          .classList.remove("text-slate-400");
+        document
+          .getElementById("navBookings")
+          .classList.add("text-blue-600", "bg-blue-50/50");
 
         // Inactive styling for Packages
-        document.getElementById("navPackages").classList.remove("text-blue-600", "bg-blue-50/50", "rounded-2xl", "px-4", "py-2");
-        document.getElementById("navPackages").classList.add("text-slate-400", "p-2");
+        document
+          .getElementById("navPackages")
+          .classList.remove("text-blue-600", "bg-blue-50/50");
+        document.getElementById("navPackages").classList.add("text-slate-400");
 
         loadBookings();
       });
@@ -798,22 +980,25 @@
 
         // Update stats
         const total = currentPackages.length;
-        const active = currentPackages.filter(p => p.is_active).length;
-        document.getElementById('statTotalTrips').textContent = total;
-        document.getElementById('statActiveTrips').textContent = active;
+        const active = currentPackages.filter((p) => p.is_active).length;
+        document.getElementById("statTotalTrips").textContent = total;
+        document.getElementById("statActiveTrips").textContent = active;
 
         list.innerHTML = currentPackages
-          .map(
-            (pkg) => {
-              // Get short description
-              const shortDesc = pkg.desc_text ? (pkg.desc_text.length > 60 ? pkg.desc_text.substring(0, 60) + '...' : pkg.desc_text) : 'Scenic adventure...';
+          .map((pkg) => {
+            // Get short description
+            const shortDesc = pkg.desc_text
+              ? pkg.desc_text.length > 60
+                ? pkg.desc_text.substring(0, 60) + "..."
+                : pkg.desc_text
+              : "Scenic adventure...";
 
-              // Get duration and group (if you have group info, use it, else default/mock based on design)
-              const duration = pkg.duration || "N/A";
-              // We don't have explicit group size in fields, so we fallback gracefully
-              const group = "6-12 People";
+            // Get duration and group (if you have group info, use it, else default/mock based on design)
+            const duration = pkg.duration || "N/A";
+            // We don't have explicit group size in fields, so we fallback gracefully
+            const group = "6-12 People";
 
-              return `
+            return `
                 <div class="bg-white rounded-[22px] shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)] border border-slate-100 p-3 flex flex-col sm:flex-row gap-4 relative">
                   <!-- Image -->
                   <div class="shrink-0 w-full sm:w-[130px] h-[160px]">
@@ -823,12 +1008,13 @@
                   <!-- Content -->
                   <div class="flex-1 py-1 pr-8">
                     <div class="mb-2">
-                        ${pkg.is_active ?
-                            `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold tracking-wide uppercase">
+                        ${
+                          pkg.is_active
+                            ? `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold tracking-wide uppercase">
                               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                               Active
-                            </span>` :
-                            `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold tracking-wide uppercase">
+                            </span>`
+                            : `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold tracking-wide uppercase">
                               Disabled
                             </span>`
                         }
@@ -879,24 +1065,27 @@
                   </div>
                 </div>
             `;
-            }
-          )
+          })
           .join("");
       }
 
       function toggleMenu(menuId, event) {
         event.stopPropagation();
         const menu = document.getElementById(menuId);
-        const isHidden = menu.classList.contains('hidden');
+        const isHidden = menu.classList.contains("hidden");
         // Hide all others
-        document.querySelectorAll('.action-menu').forEach(el => el.classList.add('hidden'));
+        document
+          .querySelectorAll(".action-menu")
+          .forEach((el) => el.classList.add("hidden"));
         if (isHidden) {
-          menu.classList.remove('hidden');
+          menu.classList.remove("hidden");
         }
       }
 
-      document.addEventListener('click', () => {
-        document.querySelectorAll('.action-menu').forEach(el => el.classList.add('hidden'));
+      document.addEventListener("click", () => {
+        document
+          .querySelectorAll(".action-menu")
+          .forEach((el) => el.classList.add("hidden"));
       });
 
       function toggleDisableOptions() {
@@ -922,7 +1111,6 @@
           toggleDisableOptions();
           document.getElementById("packageModal").classList.remove("hidden");
         });
-
 
       function openPackageModal(id) {
         const pkg = currentPackages.find((p) => p.id === id);
@@ -990,13 +1178,18 @@
       }
 
       async function deletePackage(id) {
-        if (confirm("Are you sure you want to completely remove this package?")) {
-            const { error } = await dbClient.from("packages").delete().eq("id", id);
-            if (error) {
-                alert("Error deleting package: " + error.message);
-            } else {
-                loadPackages();
-            }
+        if (
+          confirm("Are you sure you want to completely remove this package?")
+        ) {
+          const { error } = await dbClient
+            .from("packages")
+            .delete()
+            .eq("id", id);
+          if (error) {
+            alert("Error deleting package: " + error.message);
+          } else {
+            loadPackages();
+          }
         }
       }
 
@@ -1065,38 +1258,46 @@
         currentBookings = data;
 
         // Populate Trip Dates dropdown
-        const tripDates = [...new Set(data.map(b => b.chosen_trip_date).filter(Boolean))];
+        const tripDates = [
+          ...new Set(data.map((b) => b.chosen_trip_date).filter(Boolean)),
+        ];
         // Sort descending (latest future date at top, past at bottom)
         tripDates.sort((a, b) => new Date(b) - new Date(a));
 
         const dropdown = document.getElementById("filterTripDateDropdown");
-        dropdown.innerHTML = tripDates.map(date => `
+        dropdown.innerHTML = tripDates
+          .map(
+            (date) => `
           <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
             <input type="checkbox" value="${date}" class="trip-date-checkbox mr-2 rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
             <span class="text-sm text-gray-700">${date}</span>
           </label>
-        `).join("");
+        `,
+          )
+          .join("");
 
         // Attach change listeners to new checkboxes
-        document.querySelectorAll('.trip-date-checkbox').forEach(cb => {
-            cb.addEventListener('change', () => {
-                updateTripDateLabel();
-                renderBookingsList();
-            });
+        document.querySelectorAll(".trip-date-checkbox").forEach((cb) => {
+          cb.addEventListener("change", () => {
+            updateTripDateLabel();
+            renderBookingsList();
+          });
         });
 
         renderBookingsList();
       }
 
       function updateTripDateLabel() {
-        const checked = Array.from(document.querySelectorAll('.trip-date-checkbox:checked')).map(cb => cb.value);
-        const label = document.getElementById('filterTripDateLabel');
+        const checked = Array.from(
+          document.querySelectorAll(".trip-date-checkbox:checked"),
+        ).map((cb) => cb.value);
+        const label = document.getElementById("filterTripDateLabel");
         if (checked.length === 0) {
-            label.textContent = "All Dates";
+          label.textContent = "All Dates";
         } else if (checked.length === 1) {
-            label.textContent = checked[0];
+          label.textContent = checked[0];
         } else {
-            label.textContent = checked.length + " Dates Selected";
+          label.textContent = checked.length + " Dates Selected";
         }
       }
 
@@ -1106,10 +1307,16 @@
           .value.toLowerCase();
         const filterPkg = document.getElementById("filterPackage").value;
         const filterStatus = document.getElementById("filterStatus").value;
-        const filterBookingStart = document.getElementById("filterBookingDateStart").value;
-        const filterBookingEnd = document.getElementById("filterBookingDateEnd").value;
+        const filterBookingStart = document.getElementById(
+          "filterBookingDateStart",
+        ).value;
+        const filterBookingEnd = document.getElementById(
+          "filterBookingDateEnd",
+        ).value;
 
-        const selectedTripDates = Array.from(document.querySelectorAll('.trip-date-checkbox:checked')).map(cb => cb.value);
+        const selectedTripDates = Array.from(
+          document.querySelectorAll(".trip-date-checkbox:checked"),
+        ).map((cb) => cb.value);
 
         const filtered = currentBookings.filter((b) => {
           const matchSearch =
@@ -1125,25 +1332,34 @@
             bDate.setHours(0, 0, 0, 0);
 
             if (filterBookingStart) {
-                const sDate = new Date(filterBookingStart);
-                sDate.setHours(0, 0, 0, 0);
-                if (bDate < sDate) matchBookingDate = false;
+              const sDate = new Date(filterBookingStart);
+              sDate.setHours(0, 0, 0, 0);
+              if (bDate < sDate) matchBookingDate = false;
             }
             if (filterBookingEnd) {
-                const eDate = new Date(filterBookingEnd);
-                eDate.setHours(0, 0, 0, 0);
-                if (bDate > eDate) matchBookingDate = false;
+              const eDate = new Date(filterBookingEnd);
+              eDate.setHours(0, 0, 0, 0);
+              if (bDate > eDate) matchBookingDate = false;
             }
           }
 
           let matchTripDate = true;
           if (selectedTripDates.length > 0) {
-              if (!b.chosen_trip_date || !selectedTripDates.includes(b.chosen_trip_date)) {
-                  matchTripDate = false;
-              }
+            if (
+              !b.chosen_trip_date ||
+              !selectedTripDates.includes(b.chosen_trip_date)
+            ) {
+              matchTripDate = false;
+            }
           }
 
-          return matchSearch && matchPkg && matchStatus && matchBookingDate && matchTripDate;
+          return (
+            matchSearch &&
+            matchPkg &&
+            matchStatus &&
+            matchBookingDate &&
+            matchTripDate
+          );
         });
 
         const tbody = document.getElementById("bookingsTableBody");
@@ -1207,18 +1423,22 @@
         .addEventListener("change", renderBookingsList);
 
       // Dropdown toggle logic
-      document.getElementById('filterTripDateBtn').addEventListener('click', (e) => {
+      document
+        .getElementById("filterTripDateBtn")
+        .addEventListener("click", (e) => {
           e.stopPropagation();
-          document.getElementById('filterTripDateDropdown').classList.toggle('hidden');
-      });
+          document
+            .getElementById("filterTripDateDropdown")
+            .classList.toggle("hidden");
+        });
 
       // Close dropdown when clicking outside
-      document.addEventListener('click', (e) => {
-          const dropdown = document.getElementById('filterTripDateDropdown');
-          const btn = document.getElementById('filterTripDateBtn');
-          if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
-              dropdown.classList.add('hidden');
-          }
+      document.addEventListener("click", (e) => {
+        const dropdown = document.getElementById("filterTripDateDropdown");
+        const btn = document.getElementById("filterTripDateBtn");
+        if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+          dropdown.classList.add("hidden");
+        }
       });
       // We removed filterTripDate as an ID, so we also remove the listener for it here.
 
