@@ -355,6 +355,11 @@
                   <th
                     class="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
+                    Trip Date
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
                     Total
                   </th>
                   <th
@@ -489,6 +494,17 @@
                   id="pkgDuration"
                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                   placeholder="e.g. 2 Days / 1 Nights"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700"
+                  >Trip Dates (comma separated)</label
+                >
+                <input
+                  type="text"
+                  id="pkgTripDate"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                  placeholder="e.g. 18 July 2026, 25 July 2026"
                 />
               </div>
               <div>
@@ -852,7 +868,7 @@
                                 <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                                 Edit
                             </button>
-                            <button onclick="alert('Duplicate action not implemented yet')" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+                            <button onclick="duplicatePackage('${pkg.id}')" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2">
                                 <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
                                 Duplicate
                             </button>
@@ -860,7 +876,7 @@
                                 <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                 View
                             </button>
-                            <button onclick="alert('Delete action not implemented yet')" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2">
+                            <button onclick="deletePackage('${pkg.id}')" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2">
                                 <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                 Delete
                             </button>
@@ -961,6 +977,7 @@
           document.getElementById("packageModal").classList.remove("hidden");
         });
 
+
       function openPackageModal(id) {
         const pkg = currentPackages.find((p) => p.id === id);
         if (!pkg) return;
@@ -974,6 +991,7 @@
         document.getElementById("pkgPrice").value = pkg.price || "";
         document.getElementById("pkgPriceEur").value = pkg.price_eur || "";
         document.getElementById("pkgDuration").value = pkg.duration || "";
+        document.getElementById("pkgTripDate").value = pkg.trip_date || "";
         document.getElementById("pkgActivity").value = pkg.activity || "";
         document.getElementById("pkgPriority").value = pkg.priority || 0;
         document.getElementById("pkgDesc").value = pkg.desc_text || "";
@@ -990,6 +1008,50 @@
 
         quill.root.innerHTML = pkg.itinerary_text || "";
         document.getElementById("packageModal").classList.remove("hidden");
+      }
+
+      function duplicatePackage(id) {
+        const pkg = currentPackages.find((p) => p.id === id);
+        if (!pkg) return;
+
+        // Open modal as if it's a new package, but prepopulated
+        document.getElementById("pkgId").value = "";
+        document.getElementById("pkgTitleId").value = "";
+        document.getElementById("pkgTitleId").readOnly = false;
+        document.getElementById("pkgTitle").value = "Copy of " + pkg.title;
+        document.getElementById("pkgLocation").value = pkg.location || "";
+        document.getElementById("pkgEmoji").value = pkg.emoji || "";
+        document.getElementById("pkgPrice").value = pkg.price || "";
+        document.getElementById("pkgPriceEur").value = pkg.price_eur || "";
+        document.getElementById("pkgDuration").value = pkg.duration || "";
+        document.getElementById("pkgTripDate").value = pkg.trip_date || "";
+        document.getElementById("pkgActivity").value = pkg.activity || "";
+        document.getElementById("pkgPriority").value = pkg.priority || 0;
+        document.getElementById("pkgDesc").value = pkg.desc_text || "";
+        document.getElementById("pkgImages").value = (pkg.images || []).join(
+          "\n",
+        );
+
+        document.getElementById("pkgIsActive").checked =
+          pkg.is_active !== false;
+        document.getElementById("pkgHideWhenDisabled").checked =
+          pkg.hide_when_disabled === true;
+
+        toggleDisableOptions();
+
+        quill.root.innerHTML = pkg.itinerary_text || "";
+        document.getElementById("packageModal").classList.remove("hidden");
+      }
+
+      async function deletePackage(id) {
+        if (confirm("Are you sure you want to completely remove this package?")) {
+            const { error } = await dbClient.from("packages").delete().eq("id", id);
+            if (error) {
+                alert("Error deleting package: " + error.message);
+            } else {
+                loadPackages();
+            }
+        }
       }
 
       function closePackageModal() {
@@ -1018,6 +1080,7 @@
               ? parseFloat(document.getElementById("pkgPriceEur").value)
               : null,
             duration: document.getElementById("pkgDuration").value,
+            trip_date: document.getElementById("pkgTripDate").value,
             activity: document.getElementById("pkgActivity").value,
             priority:
               parseInt(document.getElementById("pkgPriority").value) || 0,
@@ -1077,6 +1140,18 @@
         });
 
         renderBookingsList();
+      }
+
+      function updateTripDateLabel() {
+        const checked = Array.from(document.querySelectorAll('.trip-date-checkbox:checked')).map(cb => cb.value);
+        const label = document.getElementById('filterTripDateLabel');
+        if (checked.length === 0) {
+            label.textContent = "All Dates";
+        } else if (checked.length === 1) {
+            label.textContent = checked[0];
+        } else {
+            label.textContent = checked.length + " Dates Selected";
+        }
       }
 
       function updateTripDateLabel() {

@@ -658,6 +658,11 @@ button{cursor:pointer;font-family:inherit}
       <h3 style="font-family:'Montserrat',sans-serif;color:#0f2266;margin-bottom:15px;text-align:center;">Complete Your Booking</h3>
       <p style="text-align:center; font-size:0.85rem; color:#4a5568; margin-bottom:20px;">Please fill out the details for all adventurers.</p>
 
+
+      <label class="form-label">Select Trip Date *</label>
+      <select class="form-input" id="bookTripDate" required style="margin-bottom:15px;">
+      </select>
+
       <label class="form-label">Full Name (Main Booker) *</label>
       <input class="form-input" id="bookName" placeholder="John Doe" required />
 
@@ -689,8 +694,7 @@ button{cursor:pointer;font-family:inherit}
   <!-- END NEW BOOKING FORM CONTAINER -->
 
 </div> <!-- end modal-sidebar -->
-
-
+    </div> <!-- end modalBodyMain -->
 
   <!-- SUCCESS SCREEN -->
   <div id="successContainer" style="display:none; padding: 40px 20px; text-align:center;">
@@ -698,15 +702,14 @@ button{cursor:pointer;font-family:inherit}
       <h2 style="font-family:'Montserrat',sans-serif;color:#0f2266;margin-bottom:15px;">Booking Confirmed!</h2>
       <p style="font-size:0.9rem; color:#4a5568; margin-bottom:30px;">Thank you for choosing NNA VITTALO. Your adventure awaits.</p>
       <div id="successDetails" style="background: #f8fafc; padding: 15px; border-radius: 10px; text-align:left; margin-bottom:30px; font-size:0.85rem; border:1px solid #dde4f5;"></div>
-      <button class="btn-book-modal" onclick="closeModalAndGoHome()">Back to Home</button>
+      <button class="btn-book-modal btn-whatsapp" style="margin-bottom: 10px;" onclick="sendWhatsAppMessage()">Contact on WhatsApp</button>
+      <button class="btn-book-modal" style="background-color: #cbd5e0; color: #4a5568;" onclick="closeModalAndGoHome()">Back to Home</button>
   </div>
   <!-- END SUCCESS SCREEN -->
 
   <div class="trust-box">🏆 Trusted by 150+ adventurers<br><span style="font-weight:400;color:#4a5568">4.9 ⭐ average rating</span></div>
-</div>
-    </div>
-  </div>
-</div>
+  </div> <!-- end modal-box -->
+</div> <!-- end modal-overlay -->
 
 <script>
   
@@ -800,7 +803,18 @@ function renderTrips(data) {
       <div class="trip-img">
         <img src="${trip.photo}" alt="${trip.title}">
         <div class="trip-badges">
-          ${trip.badges ? trip.badges.map((b, i) => `<span class="badge badge-${i % 2 === 0 ? 'white' : 'green'}">${typeof b === 'object' ? b.l : b}</span>`).join('') : ''}
+          ${trip.badges ? trip.badges.map((b, i) => {
+            let label = typeof b === 'object' ? b.l : b;
+            if (isDisabled && label.toLowerCase() === 'available') {
+              label = 'Unavailable';
+            }
+            let colorClass = i % 2 === 0 ? 'white' : 'green';
+            if (isDisabled) colorClass = 'soon'; // Use grey/orange or similar disabled class if 'soon' exists, otherwise use 'dark' or inline style.
+            if (isDisabled && label.toLowerCase() === 'unavailable') {
+                return `<span class="badge badge-soon" style="background:#cbd5e0; color:#4a5568">${label}</span>`;
+            }
+            return `<span class="badge badge-${colorClass}">${label}</span>`;
+          }).join('') : ''}
         </div>
       </div>
       <div class="trip-body">
@@ -809,7 +823,7 @@ function renderTrips(data) {
         </div>
         <h3 class="trip-title">${trip.title}</h3>
         <div class="trip-loc">📍 ${trip.location}</div>
-        <div class="trip-date-text">📅 ${trip.tripDate || 'Dates Coming Soon'}</div>
+        <div class="trip-date-text">📅 ${trip.tripDate ? (trip.tripDate.includes(",") ? "Multiple dates available" : trip.tripDate) : 'Dates Coming Soon'}</div>
         
         <div class="trip-features">
           ${trip.features ? trip.features.map(f => `<span class="feature-tag">${f}</span>`).join('') : ''}
@@ -924,7 +938,7 @@ function openModal(id) {
   
   const amenities = ['✅ ' + (t.included || 'Equipment included'), '✅ Professional guide / instructor', '✅ Accommodation included', '✅ Meals & snacks', '✅ Safety gear & insurance', '✅ Transport from meeting point'];
   document.getElementById('amenitiesGrid').innerHTML = amenities.map(a => `<div class="amenity-item">${a}</div>`).join('');
-  document.getElementById('modalDate').textContent = t.showPrice ? (t.tripDate || '18 July 2026') : '18 July 2026';
+  document.getElementById('modalDate').textContent = t.showPrice ? (t.tripDate ? t.tripDate.replace(/,/g, ' & ') : 'Dates Coming Soon') : 'Dates Coming Soon';
   
   if (t.showPrice) {
     let priceText = '';
@@ -979,11 +993,33 @@ function openModal(id) {
 }
 
 
+
 function showBookingForm() {
     document.getElementById('pricingPanelOriginal').style.display = 'none';
 
 
     document.getElementById('bookingFormContainer').style.display = 'block';
+
+    // Populate Trip Date dropdown
+    const dateSelect = document.getElementById('bookTripDate');
+    if (dateSelect) {
+        dateSelect.innerHTML = '';
+        if (currentTrip && currentTrip.tripDate) {
+            const dates = currentTrip.tripDate.split(',').map(d => d.trim()).filter(d => d);
+            dates.forEach(d => {
+                let opt = document.createElement('option');
+                opt.value = d;
+                opt.textContent = d;
+                dateSelect.appendChild(opt);
+            });
+        } else {
+            let opt = document.createElement('option');
+            opt.value = 'Dates Coming Soon';
+            opt.textContent = 'Dates Coming Soon';
+            dateSelect.appendChild(opt);
+        }
+    }
+
 
     // Clear and re-populate the guest dropdown to default (1)
     populateGuestDropdown();
@@ -1081,7 +1117,10 @@ async function confirmBooking() {
     }
 
     // Generate a random booking number
+
     const bookingNo = 'NV' + Math.floor(10000 + Math.random() * 90000);
+    const chosenDate = document.getElementById('bookTripDate') ? document.getElementById('bookTripDate').value : '';
+
 
     // Price logic
     const totalPln = currentTrip.price * guestCount;
@@ -1099,6 +1138,7 @@ async function confirmBooking() {
         customer_name: fullName,
         mobile_no: phone,
         dob: dob,
+        chosen_trip_date: chosenDate,
         guests: guestCount,
         total_price_pln: totalPln,
         total_price_eur: totalEur,
@@ -1123,9 +1163,10 @@ async function confirmBooking() {
                 customer_name: gName,
                 mobile_no: phone, // Copied from main booker
                 dob: null,        // Blank for additional guests
-                guests: null,
-                total_price_pln: null,
-                total_price_eur: null,
+                chosen_trip_date: chosenDate,
+                guests: guestCount,
+                total_price_pln: totalPln,
+                total_price_eur: totalEur,
                 is_main_booker: false,
                 booking_date: bookingDate,
                 status: 'pending'
@@ -1162,8 +1203,20 @@ async function confirmBooking() {
         });
         document.getElementById('modalBodyMain').style.display = 'none';
         document.getElementById('successContainer').style.display = 'block';
+
+        // Store for WA
+        window._lastBookingData = { bookingNo, chosenDate, currentTrip };
     }
 }
+
+function sendWhatsAppMessage() {
+    if (!window._lastBookingData) return;
+    const { bookingNo, chosenDate, currentTrip } = window._lastBookingData;
+    const msg = `Hello! I would like to book the *${currentTrip.title}* package.\nChosen Date: *${chosenDate}*\nMy Booking Reference is: *${bookingNo}*`;
+    const waLink = `https://wa.me/${window.APP_CONFIG.phoneNumber.replace('+', '')}?text=${encodeURIComponent(msg)}`;
+    window.open(waLink, '_blank');
+}
+
 function closeModal() {
   document.getElementById('modal').style.display = 'none';
   document.body.style.overflow = '';
