@@ -104,30 +104,38 @@
     <!-- Main Dashboard View -->
     <div id="dashboardView" class="hidden">
       <!-- Sidebar/Nav -->
-      <nav class="bg-blue-900 text-white">
+            <!-- Sidebar/Nav (Mobile & Desktop) -->
+      <nav class="bg-white sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex items-center justify-between h-16">
-            <div class="flex items-center">
-              <span class="font-bold text-xl">NNA VITTALO Admin</span>
-              <div class="ml-10 flex items-baseline space-x-4">
-                <button
-                  id="navPackages"
-                  class="bg-blue-800 text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Packages
-                </button>
-                <button
-                  id="navBookings"
-                  class="text-blue-100 hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Bookings
-                </button>
+            <div class="flex items-center gap-3">
+              <!-- Hamburger -->
+              <button class="text-slate-500 hover:text-slate-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+              </button>
+              <div class="flex flex-col">
+                <span class="font-bold text-lg text-slate-900 leading-tight">NNA VITTALO</span>
+                <span class="text-xs text-slate-500 font-medium">Admin</span>
               </div>
             </div>
-            <div>
+
+            <div class="flex items-center gap-4">
+              <button class="text-slate-500 hover:text-slate-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </button>
+              <button class="text-slate-500 hover:text-slate-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
+              </button>
+
+              <!-- Avatar -->
+              <div class="relative">
+                <img class="w-8 h-8 rounded-full bg-slate-200" src="https://ui-avatars.com/api/?name=Admin&background=E2E8F0&color=475569" alt="Admin Avatar">
+                <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
+              </div>
+
               <button
                 id="btnLogout"
-                class="text-blue-100 hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium"
+                class="hidden sm:block text-slate-500 hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Logout
               </button>
@@ -136,19 +144,93 @@
         </div>
       </nav>
 
-      <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <!-- Packages Section -->
+      <!-- Bottom Navigation for Mobile (and logic for desktop nav) -->
+      <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-40 sm:hidden">
+        <div class="flex justify-around items-center h-16 px-4">
+          <button class="flex flex-col items-center justify-center w-full h-full text-slate-500">
+            <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            <span class="text-[10px] font-medium">Home</span>
+          </button>
+
+          <button id="navPackages" class="flex flex-col items-center justify-center w-full h-full text-blue-600">
+            <div class="bg-blue-50/50 px-4 py-1 rounded-2xl flex flex-col items-center">
+              <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+              <span class="text-[10px] font-medium">Packages</span>
+            </div>
+          </button>
+
+          <button id="navBookings" class="flex flex-col items-center justify-center w-full h-full text-slate-500">
+            <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+            <span class="text-[10px] font-medium">Bookings</span>
+          </button>
+
+          <button class="flex flex-col items-center justify-center w-full h-full text-slate-500">
+            <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <span class="text-[10px] font-medium">Settings</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Desktop Side Nav Alternative -->
+      <div class="hidden sm:flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 gap-4">
+          <button id="navPackagesDesktop" class="bg-blue-50 text-blue-600 px-4 py-2 rounded-xl text-sm font-medium">Packages</button>
+          <button id="navBookingsDesktop" class="text-slate-500 hover:bg-slate-100 hover:text-slate-900 px-4 py-2 rounded-xl text-sm font-medium">Bookings</button>
+      </div>
+
+      <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 pb-20 sm:pb-6">
+                <!-- Packages Section -->
         <div id="sectionPackages">
-          <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-gray-900">
-              Packages Management
-            </h2>
+          <div class="flex justify-between items-start mb-6 pt-4 sm:pt-0">
+            <div>
+              <h2 class="text-2xl font-bold text-slate-900">Trips & Packages</h2>
+              <p class="text-sm text-slate-500 mt-1">Manage your adventure trip packages</p>
+            </div>
             <button
               id="btnCreatePackage"
-              class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-2 px-4 rounded-xl shadow-sm flex items-center gap-2 transition-all"
             >
-              + New Package
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+              Add Trip
             </button>
+          </div>
+
+          <!-- Summary Cards -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <!-- Card 1 -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col">
+              <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center mb-3">
+                <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </div>
+              <span id="statTotalTrips" class="text-2xl font-bold text-slate-900 leading-none mb-1">2</span>
+              <span class="text-xs text-slate-500 font-medium">Total Trips</span>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col">
+              <div class="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center mb-3">
+                <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+              </div>
+              <span id="statActiveTrips" class="text-2xl font-bold text-slate-900 leading-none mb-1">2</span>
+              <span class="text-xs text-slate-500 font-medium">Active Trips</span>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col">
+              <div class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center mb-3">
+                <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              </div>
+              <span class="text-2xl font-bold text-slate-900 leading-none mb-1">0</span>
+              <span class="text-xs text-slate-500 font-medium">Upcoming</span>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col">
+              <div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center mb-3">
+                <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+              </div>
+              <span class="text-2xl font-bold text-slate-900 leading-none mb-1">0</span>
+              <span class="text-xs text-slate-500 font-medium">Archived</span>
+            </div>
           </div>
 
           <!-- Loading State -->
@@ -156,11 +238,33 @@
             <div class="spinner"></div>
           </div>
 
-          <!-- Packages Table -->
-          <div class="bg-white shadow overflow-hidden sm:rounded-md">
-            <ul id="packagesList" class="divide-y divide-gray-200">
+                    <!-- Package List Heading -->
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-bold text-slate-900">All Trip Packages</h3>
+            <button class="flex items-center gap-2 text-sm font-medium text-slate-600 bg-white border border-slate-200 rounded-lg px-3 py-1.5 shadow-sm hover:bg-slate-50 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+              All Status
+              <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+          </div>
+
+                    <!-- Packages List Wrapper -->
+          <div>
+            <ul id="packagesList" class="space-y-4 pb-8">
               <!-- Populated by JS -->
             </ul>
+          </div>
+
+          <!-- Call-to-Action Panel -->
+          <div class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 mt-4 mb-8">
+            <div>
+              <h4 class="text-lg font-bold text-slate-900 mb-1">Create Amazing Experiences</h4>
+              <p class="text-sm text-slate-600">Add new trip packages and manage your adventure offerings.</p>
+            </div>
+            <button onclick="document.getElementById('btnCreatePackage').click()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-2.5 px-5 rounded-xl shadow-sm flex items-center gap-2 transition-all flex-shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+              Add Trip
+            </button>
           </div>
         </div>
 
@@ -635,33 +739,61 @@
       // ------------------
       // Navigation Logic
       // ------------------
-      document.getElementById("navPackages").addEventListener("click", () => {
-        document.getElementById("sectionPackages").classList.remove("hidden");
-        document.getElementById("sectionBookings").classList.add("hidden");
-        document
-          .getElementById("navPackages")
-          .classList.replace("text-blue-100", "bg-blue-800");
-        document.getElementById("navPackages").classList.add("text-white");
-        document
-          .getElementById("navBookings")
-          .classList.replace("bg-blue-800", "text-blue-100");
-        document.getElementById("navBookings").classList.remove("text-white");
-        loadPackages();
-      });
 
-      document.getElementById("navBookings").addEventListener("click", () => {
-        document.getElementById("sectionBookings").classList.remove("hidden");
-        document.getElementById("sectionPackages").classList.add("hidden");
-        document
-          .getElementById("navBookings")
-          .classList.replace("text-blue-100", "bg-blue-800");
-        document.getElementById("navBookings").classList.add("text-white");
         document
           .getElementById("navPackages")
-          .classList.replace("bg-blue-800", "text-blue-100");
-        document.getElementById("navPackages").classList.remove("text-white");
-        loadBookings();
-      });
+          .addEventListener("click", () => {
+            document.getElementById("sectionPackages").classList.remove("hidden");
+            document.getElementById("sectionBookings").classList.add("hidden");
+
+            // Mobile Nav Classes
+            document.getElementById("navPackages").innerHTML = '<div class="bg-blue-50/50 px-4 py-1 rounded-2xl flex flex-col items-center"><svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg><span class="text-[10px] font-medium">Packages</span></div>';
+            document.getElementById("navPackages").className = "flex flex-col items-center justify-center w-full h-full text-blue-600";
+
+            document.getElementById("navBookings").innerHTML = '<svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg><span class="text-[10px] font-medium">Bookings</span>';
+            document.getElementById("navBookings").className = "flex flex-col items-center justify-center w-full h-full text-slate-500";
+
+            // Desktop Nav Classes
+            const deskPkg = document.getElementById("navPackagesDesktop");
+            const deskBkg = document.getElementById("navBookingsDesktop");
+            if(deskPkg && deskBkg) {
+                deskPkg.className = "bg-blue-50 text-blue-600 px-4 py-2 rounded-xl text-sm font-medium";
+                deskBkg.className = "text-slate-500 hover:bg-slate-100 hover:text-slate-900 px-4 py-2 rounded-xl text-sm font-medium";
+            }
+          });
+
+        document
+          .getElementById("navBookings")
+          .addEventListener("click", () => {
+            document.getElementById("sectionPackages").classList.add("hidden");
+            document.getElementById("sectionBookings").classList.remove("hidden");
+
+            // Mobile Nav Classes
+            document.getElementById("navBookings").innerHTML = '<div class="bg-blue-50/50 px-4 py-1 rounded-2xl flex flex-col items-center"><svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg><span class="text-[10px] font-medium">Bookings</span></div>';
+            document.getElementById("navBookings").className = "flex flex-col items-center justify-center w-full h-full text-blue-600";
+
+            document.getElementById("navPackages").innerHTML = '<svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg><span class="text-[10px] font-medium">Packages</span>';
+            document.getElementById("navPackages").className = "flex flex-col items-center justify-center w-full h-full text-slate-500";
+
+            // Desktop Nav Classes
+            const deskPkg = document.getElementById("navPackagesDesktop");
+            const deskBkg = document.getElementById("navBookingsDesktop");
+            if(deskPkg && deskBkg) {
+                deskBkg.className = "bg-blue-50 text-blue-600 px-4 py-2 rounded-xl text-sm font-medium";
+                deskPkg.className = "text-slate-500 hover:bg-slate-100 hover:text-slate-900 px-4 py-2 rounded-xl text-sm font-medium";
+            }
+
+            loadBookings();
+          });
+
+        // Add listeners for desktop nav buttons
+        if (document.getElementById("navPackagesDesktop")) {
+            document.getElementById("navPackagesDesktop").addEventListener("click", () => document.getElementById("navPackages").click());
+        }
+        if (document.getElementById("navBookingsDesktop")) {
+            document.getElementById("navBookingsDesktop").addEventListener("click", () => document.getElementById("navBookings").click());
+        }
+
 
       // ------------------
       // Package Management
@@ -688,31 +820,122 @@
         renderPackagesList();
       }
 
+                  function updateSummaryCards() {
+        const total = currentPackages.length;
+        const active = currentPackages.filter(p => p.is_active).length;
+        const upcoming = 0; // Placeholder for now, could calculate based on dates if available
+        const archived = currentPackages.filter(p => !p.is_active && !p.hide_when_disabled).length; // Just a dummy definition for archived
+
+        const elTotal = document.getElementById("statTotalTrips");
+        const elActive = document.getElementById("statActiveTrips");
+        if(elTotal) elTotal.textContent = total;
+        if(elActive) elActive.textContent = active;
+      }
+
       function renderPackagesList() {
+                updateSummaryCards();
         const list = document.getElementById("packagesList");
         list.innerHTML = currentPackages
           .map(
             (pkg) => `
-                <li class="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
-                    <div class="flex items-center space-x-4 w-full sm:w-auto">
-                        ${pkg.photo ? `<img src="${pkg.photo}" class="w-16 h-16 object-cover rounded">` : `<div class="w-16 h-16 bg-gray-200 rounded"></div>`}
+                <li class="bg-white rounded-2xl p-3 sm:p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.05)] border border-slate-100 flex gap-4 relative">
+
+                    <!-- Action Menu (Three dots) -->
+                    <div class="absolute top-4 right-4 z-10" onclick="toggleDropdown(event, 'dropdown-${pkg.id}')">
+                        <button class="text-slate-400 hover:text-slate-600 p-1 bg-white rounded-full hover:bg-slate-50 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+                        </button>
+
+                        <!-- Dropdown Menu -->
+                        <div id="dropdown-${pkg.id}" class="hidden absolute right-0 mt-1 w-40 bg-white border border-slate-100 rounded-xl shadow-lg overflow-hidden py-1">
+                            <button onclick="openPackageModal('${pkg.id}')" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+                                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                Edit
+                            </button>
+                            <button onclick="alert('Duplicate action not implemented yet')" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+                                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+                                Duplicate
+                            </button>
+                            <button onclick="alert('View action not implemented yet')" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+                                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                View
+                            </button>
+                            <button onclick="alert('Delete action not implemented yet')" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2">
+                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="flex-shrink-0">
+                        ${pkg.photo ? `<img src="${pkg.photo}" class="w-[120px] sm:w-[140px] h-[150px] sm:h-[190px] object-cover rounded-xl bg-slate-100">` : `<div class="w-[120px] sm:w-[140px] h-[150px] sm:h-[190px] bg-slate-100 rounded-xl flex items-center justify-center text-slate-400"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>`}
+                    </div>
+
+                    <!-- Content -->
+                    <div class="flex flex-col flex-grow py-1 justify-between min-w-0 pr-8">
                         <div>
-                            <h3 class="text-lg font-medium text-gray-900">${pkg.title}</h3>
-                            <p class="text-sm text-gray-500">${pkg.location || ""} • Priority: ${pkg.priority}</p>
-                            <div class="mt-1">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${pkg.is_active ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}">
-                                    ${pkg.is_active ? "Active" : "Disabled"}
+                            <!-- Status -->
+                            <div class="mb-2">
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium ${pkg.is_active ? 'bg-emerald-50 text-emerald-600' : 'bg-slate-100 text-slate-600'}">
+                                    <span class="w-1.5 h-1.5 rounded-full ${pkg.is_active ? 'bg-emerald-500' : 'bg-slate-400'}"></span>
+                                    ${pkg.is_active ? 'Active' : 'Disabled'}
                                 </span>
-                                ${!pkg.is_active && pkg.hide_when_disabled ? '<span class="ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Hidden from Home</span>' : ""}
+                            </div>
+
+                            <!-- Title -->
+                            <h4 class="text-lg font-bold text-slate-900 leading-tight mb-1 truncate">${pkg.title}</h4>
+
+                            <!-- Location -->
+                            <div class="flex items-center gap-1 text-slate-500 text-xs mb-2">
+                                <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <span class="truncate">${pkg.location || 'Location not specified'}</span>
+                            </div>
+
+                            <!-- Description (using a placeholder or short desc if available) -->
+                            <p class="text-xs text-slate-500 line-clamp-2 sm:line-clamp-3 leading-relaxed mb-3">
+                                ${pkg.description ? pkg.description : 'Scenic hiking adventure through the stunning trails.'}
+                            </p>
+                        </div>
+
+                        <!-- Bottom Metadata -->
+                        <div class="flex items-center gap-4 text-xs font-medium text-slate-500">
+                            <!-- Duration -->
+                            <div class="flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>${pkg.duration || 'N/A'}</span>
+                            </div>
+
+                            <!-- Group Size (Mocked if not present in schema) -->
+                            <div class="flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <span>8–12 People</span>
                             </div>
                         </div>
                     </div>
-                    <button onclick="openPackageModal('${pkg.id}')" class="text-blue-600 hover:text-white hover:bg-blue-600 border border-blue-600 px-4 py-2 sm:py-1 sm:px-3 rounded transition-colors w-full sm:w-auto font-medium">Edit</button>
                 </li>
             `,
           )
           .join("");
       }
+
+      function toggleDropdown(event, id) {
+          event.stopPropagation();
+          const dropdowns = document.querySelectorAll('[id^="dropdown-"]');
+          dropdowns.forEach(d => {
+              if(d.id !== id) d.classList.add('hidden');
+          });
+          const target = document.getElementById(id);
+          if (target) {
+              target.classList.toggle('hidden');
+          }
+      }
+
+      // Hide dropdowns when clicking outside
+      document.addEventListener('click', () => {
+          const dropdowns = document.querySelectorAll('[id^="dropdown-"]');
+          dropdowns.forEach(d => d.classList.add('hidden'));
+      });
 
       function toggleDisableOptions() {
         const isActive = document.getElementById("pkgIsActive").checked;
