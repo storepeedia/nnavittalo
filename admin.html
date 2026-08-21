@@ -333,7 +333,7 @@
               <thead class="bg-gray-50">
                 <tr>
                   <th
-                    class="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
                     Booking Info
                   </th>
@@ -343,17 +343,12 @@
                     Customer
                   </th>
                   <th
-                    class="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
                     Package
                   </th>
                   <th
-                    class="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Trip Date
-                  </th>
-                  <th
-                    class="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
                     Trip Date
                   </th>
@@ -363,12 +358,12 @@
                     Total
                   </th>
                   <th
-                    class="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
                     Status
                   </th>
                   <th
-                    class="hidden md:table-cell px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
                     Actions
                   </th>
@@ -528,7 +523,7 @@
                   value="0"
                 />
               </div>
-              <div class="flex items-center space-x-4 w-full sm:w-auto">
+              <div class="flex items-center space-x-4">
                 <label class="flex items-center">
                   <input
                     type="checkbox"
@@ -848,7 +843,20 @@
         if(elActive) elActive.textContent = active;
       }
 
+            function updateSummaryCards() {
+        const total = currentPackages.length;
+        const active = currentPackages.filter(p => p.is_active).length;
+        const upcoming = 0; // Placeholder for now
+        const archived = currentPackages.filter(p => !p.is_active && !p.hide_when_disabled).length;
+
+        const elTotal = document.getElementById("statTotalTrips");
+        const elActive = document.getElementById("statActiveTrips");
+        if(elTotal) elTotal.textContent = total;
+        if(elActive) elActive.textContent = active;
+      }
+
       function renderPackagesList() {
+                updateSummaryCards();
                 updateSummaryCards();
         const list = document.getElementById("packagesList");
         list.innerHTML = currentPackages
@@ -1154,18 +1162,6 @@
         }
       }
 
-      function updateTripDateLabel() {
-        const checked = Array.from(document.querySelectorAll('.trip-date-checkbox:checked')).map(cb => cb.value);
-        const label = document.getElementById('filterTripDateLabel');
-        if (checked.length === 0) {
-            label.textContent = "All Dates";
-        } else if (checked.length === 1) {
-            label.textContent = checked[0];
-        } else {
-            label.textContent = checked.length + " Dates Selected";
-        }
-      }
-
       function renderBookingsList() {
         const search = document
           .getElementById("searchBookings")
@@ -1223,8 +1219,8 @@
               statusColor = "bg-yellow-100 text-yellow-800";
 
             return `
-                <tr class="cursor-pointer md:cursor-auto hover:bg-gray-50" onclick="if(window.innerWidth < 768) openBookingModal('${b.id}')">
-                    <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm font-medium text-gray-900">${b.booking_no}</div>
                         <div class="text-sm text-gray-500">${new Date(b.created_at).toLocaleDateString()}</div>
                     </td>
@@ -1232,22 +1228,22 @@
                         <div class="text-sm text-gray-900">${b.customer_name}</div>
                         <div class="text-sm text-gray-500">${b.mobile_no || ""}</div>
                     </td>
-                    <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                    <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-900">${b.event_name}</div>
                         <div class="text-sm text-gray-500">${b.is_main_booker ? (b.guests || 1) + " Guests" : "Additional Guest"}</div>
                     </td>
-                    <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         ${b.chosen_trip_date || "N/A"}
                     </td>
-                    <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         ${b.total_price_pln ? b.total_price_pln + " PLN" : "-"}
                     </td>
-                    <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                    <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusColor}">
                             ${(b.status || "pending").toUpperCase()}
                         </span>
                     </td>
-                    <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button onclick="openBookingModal('${b.id}')" class="text-blue-600 hover:text-blue-900">View</button>
                     </td>
                 </tr>
