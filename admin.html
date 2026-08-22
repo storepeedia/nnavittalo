@@ -434,54 +434,16 @@
             <div class="spinner"></div>
           </div>
 
-          <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-            <table class="min-w-full divide-y divide-gray-200">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Booking Info
-                  </th>
-                  <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Customer
-                  </th>
-                  <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Package
-                  </th>
-                  <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Trip Date
-                  </th>
-                  <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Total
-                  </th>
-                  <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Status
-                  </th>
-                  <th
-                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody
-                id="bookingsTableBody"
-                class="bg-white divide-y divide-gray-200"
-              >
-                <!-- Populated by JS -->
-              </tbody>
-            </table>
+          <!-- Desktop Header for Bookings List -->
+          <div class="hidden sm:grid sm:grid-cols-4 gap-4 px-4 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+            <div>Booking Info</div>
+            <div>Customer</div>
+            <div>Package</div>
+            <div class="text-right sm:text-left">Status</div>
+          </div>
+          <!-- Bookings List -->
+          <div class="flex flex-col gap-4" id="bookingsList">
+            <!-- Populated by JS -->
           </div>
         </div>
         <!-- Bottom Navigation (Mobile) -->
@@ -1705,46 +1667,67 @@
           );
         });
 
-        const tbody = document.getElementById("bookingsTableBody");
+        const tbody = document.getElementById("bookingsList");
         tbody.innerHTML = filtered
           .map((b) => {
-            let statusColor = "bg-gray-100 text-gray-800";
-            if (b.status === "paid")
-              statusColor = "bg-green-100 text-green-800";
-            if (b.status === "failed") statusColor = "bg-red-100 text-red-800";
-            if (b.status === "pending")
-              statusColor = "bg-yellow-100 text-yellow-800";
+            let statusColor = "bg-slate-100 text-slate-500";
+            let statusDot = "bg-slate-500";
+            let statusLabel = (b.status || "pending").charAt(0).toUpperCase() + (b.status || "pending").slice(1);
+
+            if (b.status === "paid" || b.status === "confirmed") {
+              statusColor = "bg-emerald-50 text-emerald-600";
+              statusDot = "bg-emerald-500";
+              if (b.status === "paid") statusLabel = "Confirmed";
+            }
+            if (b.status === "failed" || b.status === "cancelled") {
+              statusColor = "bg-red-50 text-red-600";
+              statusDot = "bg-red-500";
+              if (b.status === "failed") statusLabel = "Cancelled";
+            }
+            if (b.status === "pending") {
+              statusColor = "bg-orange-50 text-orange-600";
+              statusDot = "bg-orange-500";
+            }
 
             return `
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">${b.booking_no}</div>
-                        <div class="text-sm text-gray-500">${new Date(b.created_at).toLocaleDateString()}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">${b.customer_name}</div>
-                        <div class="text-sm text-gray-500">${b.mobile_no || ""}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">${b.event_name}</div>
-                        <div class="text-sm text-gray-500">${b.is_main_booker ? (b.guests || 1) + " Guests" : "Additional Guest"}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        ${b.chosen_trip_date || "N/A"}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        ${b.total_price_pln ? b.total_price_pln + " PLN" : "-"}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusColor}">
-                            ${(b.status || "pending").toUpperCase()}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button onclick="openBookingModal('${b.id}')" class="text-blue-600 hover:text-blue-900">View</button>
-                    </td>
-                </tr>
-                `;
+              <div class="bg-white rounded-[22px] shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)] border border-slate-100 p-4 sm:p-5 flex flex-col sm:grid sm:grid-cols-4 gap-4 relative cursor-pointer hover:shadow-md transition-shadow" onclick="openBookingModal('${b.id}')">
+                <!-- Booking Info -->
+                <div class="flex flex-col pr-8 sm:pr-0">
+                  <div class="font-bold text-slate-900 text-sm mb-0.5">${b.booking_no}</div>
+                  <div class="text-[13px] text-slate-500 mb-0.5">${new Date(b.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                  <div class="text-[13px] text-slate-500">${new Date(b.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                </div>
+
+                <!-- Customer -->
+                <div class="flex flex-col">
+                  <div class="font-bold text-slate-900 text-sm mb-0.5">${b.customer_name}</div>
+                  <div class="text-[13px] text-slate-500 mb-0.5">${b.mobile_no || ""}</div>
+                  <div class="text-[13px] text-slate-500 truncate" title="${b.email || b.email_address || ""}">${b.email || b.email_address || "No Email"}</div>
+                </div>
+
+                <!-- Package -->
+                <div class="flex flex-col">
+                  <div class="font-bold text-slate-900 text-sm truncate mb-0.5" title="${b.event_name}">${b.event_name}</div>
+                  <div class="text-[13px] text-slate-500">${b.is_main_booker ? (b.guests || 1) + " Guests" : "Additional Guest"}</div>
+                </div>
+
+                <!-- Status & Action -->
+                <div class="flex justify-between sm:justify-end items-center sm:items-start pt-3 sm:pt-0 border-t border-slate-50 sm:border-t-0 mt-1 sm:mt-0">
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${statusColor} text-[11px] font-bold tracking-wide">
+                    <span class="w-1.5 h-1.5 rounded-full ${statusDot}"></span>
+                    ${statusLabel}
+                  </span>
+                  <button class="text-slate-300 hover:text-slate-600 ml-4 hidden sm:block">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                  </button>
+                </div>
+
+                <!-- Mobile Action Arrow -->
+                <button class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 sm:hidden">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+              </div>
+            `;
           })
           .join("");
       }
