@@ -975,59 +975,39 @@
             const group = "6-12 People";
 
             return `
-              <div class="bg-white rounded-2xl shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] border border-slate-100 p-4 sm:p-5 flex flex-col sm:grid sm:grid-cols-4 gap-4 relative cursor-pointer hover:shadow-md transition-shadow" onclick="openBookingModal('${b.id}')">
+              <div class="bg-white rounded-2xl border border-slate-100 p-4 grid grid-cols-[1.2fr_1.5fr_2fr_1fr] gap-4 relative cursor-pointer hover:shadow-sm transition-shadow items-center min-w-[768px]" onclick="openBookingModal('${b.id}')">
 
-                <!-- Mobile Top Row: ID, Status -->
-                <div class="flex justify-between items-start sm:hidden mb-2">
-                  <div class="font-bold text-slate-900 text-sm">${b.booking_no}</div>
-                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full ${statusColor} text-[10px] font-bold tracking-wide">
-                    <span class="w-1.5 h-1.5 rounded-full ${statusDot}"></span>
-                    ${statusLabel}
-                  </span>
-                </div>
-
-                <!-- Desktop Booking Info Column / Mobile 2nd Row -->
+                <!-- Booking Info Column -->
                 <div class="flex flex-col">
-                  <div class="font-bold text-slate-900 text-sm mb-0.5 hidden sm:block">${b.booking_no}</div>
-                  <div class="flex sm:flex-col items-center sm:items-start gap-2 sm:gap-0">
-                      <div class="text-[13px] text-slate-500 mb-0.5">${new Date(b.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
-                      <div class="hidden sm:block text-[13px] text-slate-500">${new Date(b.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
-                      <span class="sm:hidden text-slate-300">•</span>
-                      <div class="sm:hidden text-[13px] text-slate-500">${new Date(b.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
-                  </div>
+                  <div class="font-bold text-slate-900 text-[13px] mb-0.5">${b.booking_no}</div>
+                  <div class="text-[13px] text-slate-500">${new Date(b.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                  <div class="text-[13px] text-slate-500">${new Date(b.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
                 </div>
 
                 <!-- Customer Column -->
                 <div class="flex flex-col">
                   <div class="font-bold text-slate-900 text-[13px] mb-0.5">${b.customer_name}</div>
-                  <div class="flex sm:flex-col items-center sm:items-start gap-2 sm:gap-0">
-                      <div class="text-[13px] text-slate-500 mb-0.5">${b.mobile_no || ""}</div>
-                      <span class="sm:hidden text-slate-300">•</span>
-                      <div class="text-[13px] text-slate-500 truncate" title="${b.email || b.email_address || ""}">${b.email || b.email_address || "No Email"}</div>
-                  </div>
+                  <div class="text-[13px] text-slate-500">${b.mobile_no || ""}</div>
+                  <div class="text-[13px] text-slate-500 truncate" title="${b.email || b.email_address || ""}">${b.email || b.email_address || "No Email"}</div>
                 </div>
 
                 <!-- Package Column -->
-                <div class="flex flex-col pr-6 sm:pr-0">
-                  <div class="font-bold text-slate-900 text-[13px] truncate mb-0.5" title="${b.event_name}">${b.event_name}</div>
+                <div class="flex flex-col pr-4">
+                  <div class="font-bold text-slate-900 text-[13px] mb-0.5 whitespace-normal truncate" title="${b.event_name}">${b.event_name}</div>
                   <div class="text-[13px] text-slate-500">${b.is_main_booker ? (b.guests || 1) + " Guests" : "Additional Guest"}</div>
                 </div>
 
-                <!-- Desktop Status & Action Column -->
-                <div class="hidden sm:flex justify-end items-start mt-0">
-                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${statusColor} text-[11px] font-bold tracking-wide">
+                <!-- Status Column -->
+                <div class="flex items-center justify-start relative">
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${statusColor} text-[11px] font-bold tracking-wide border ${statusColor.replace('bg-', 'border-').split(' ')[0]}">
                     <span class="w-1.5 h-1.5 rounded-full ${statusDot}"></span>
                     ${statusLabel}
                   </span>
-                  <button class="text-slate-300 hover:text-slate-600 ml-4">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                  <!-- Action Arrow -->
+                  <button class="absolute right-0 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                   </button>
                 </div>
-
-                <!-- Mobile Action Arrow -->
-                <button class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 sm:hidden">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </button>
               </div>
             `;
           })
