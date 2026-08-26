@@ -126,24 +126,24 @@
         </button>
       </div>
       <main class="max-w-7xl mx-auto pt-16 pb-6 px-4 sm:px-6 lg:px-8">
-        <!-- Packages Section -->
-        <div id="sectionPackages" class="pb-24">
+        <!-- Camps Section -->
+        <div id="sectionCamps" class="pb-24">
           <!-- Added padding bottom for nav -->
           <!-- Page Header -->
           <div class="flex justify-between items-start mb-8">
             <div>
               <h2 class="text-3xl font-bold text-slate-900 tracking-tight">
-                Trips
+                Camps
               </h2>
               <p class="text-slate-500 mt-1 text-sm">
-                Manage your adventure trip packages
+                Manage your adventure camps
               </p>
             </div>
             <button
-              id="btnCreatePackage"
+              id="btnCreateCamp"
               class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium w-12 h-12 rounded-full shadow-sm hover:shadow flex items-center justify-center transition-all"
-              aria-label="Add Trip"
-              title="Add Trip"
+              aria-label="Add Camp"
+              title="Add Camp"
             >
               <svg
                 class="w-6 h-6"
@@ -186,12 +186,12 @@
                   </svg>
                 </div>
                 <span class="text-xs font-medium text-slate-500"
-                  >Total Trips</span
+                  >Total Camps</span
                 >
               </div>
               <div
                 class="text-2xl font-bold text-slate-900"
-                id="statTotalTrips"
+                id="statTotalCamps"
               >
                 0
               </div>
@@ -207,12 +207,12 @@
                   <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
                 </div>
                 <span class="text-xs font-medium text-slate-500"
-                  >Active Trips</span
+                  >Active Camps</span
                 >
               </div>
               <div
                 class="text-2xl font-bold text-slate-900"
-                id="statActiveTrips"
+                id="statActiveCamps"
               >
                 0
               </div>
@@ -273,7 +273,7 @@
 
           <!-- Section Heading -->
           <div class="flex justify-between items-center mb-4 px-1">
-            <h3 class="text-lg font-bold text-slate-900">All Trip Packages</h3>
+            <h3 class="text-lg font-bold text-slate-900">All Camp Camps</h3>
             <button
               class="text-sm font-medium text-slate-500 flex items-center gap-1 hover:text-slate-700"
             >
@@ -295,12 +295,12 @@
           </div>
 
           <!-- Loading State -->
-          <div id="packagesLoading" class="flex justify-center py-10 hidden">
+          <div id="campsLoading" class="flex justify-center py-10 hidden">
             <div class="spinner"></div>
           </div>
 
-          <!-- Packages List -->
-          <div class="flex flex-col gap-4" id="packagesList">
+          <!-- Camps List -->
+          <div class="flex flex-col gap-4" id="campsList">
             <!-- Populated by JS -->
           </div>
 
@@ -313,14 +313,14 @@
                 Create Amazing Experiences
               </h4>
               <p class="text-sm text-slate-500">
-                Add new trip packages and manage your adventure offerings.
+                Add new camp camps and manage your adventure offerings.
               </p>
             </div>
             <button
               class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium w-12 h-12 rounded-full shadow-sm hover:shadow flex items-center justify-center transition-all"
-              onclick="document.getElementById('btnCreatePackage').click()"
-              aria-label="Add Trip"
-              title="Add Trip"
+              onclick="document.getElementById('btnCreateCamp').click()"
+              aria-label="Add Camp"
+              title="Add Camp"
             >
               <svg
                 class="w-6 h-6"
@@ -346,33 +346,33 @@
           </h2>
 
           <div class="mb-6 flex flex-col gap-4">
-            <!-- Top row: Trip Name & Trip Date -->
+            <!-- Top row: Camp Name & Camp Date -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="flex flex-col">
                 <label
-                  for="filterPackage"
+                  for="filterCamp"
                   class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1"
-                  >Trip Name</label
+                  >Camp Name</label
                 >
                 <select
-                  id="filterPackage"
+                  id="filterCamp"
                   class="px-3 py-2.5 bg-white border border-slate-200 rounded-xl shadow-sm text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                 >
-                  <option value="">All Packages</option>
+                  <option value="">All Camps</option>
                 </select>
               </div>
-              <div class="flex flex-col relative" id="filterTripDateContainer">
+              <div class="flex flex-col relative" id="filterCampDateContainer">
                 <label
                   class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1"
-                  >Trip Date</label
+                  >Camp Date</label
                 >
                 <div class="relative">
                   <button
                     type="button"
-                    id="filterTripDateBtn"
+                    id="filterCampDateBtn"
                     class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl shadow-sm text-sm text-left text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all flex justify-between items-center"
                   >
-                    <span id="filterTripDateLabel" class="truncate pr-2"
+                    <span id="filterCampDateLabel" class="truncate pr-2"
                       >All Dates</span
                     >
                     <svg
@@ -390,7 +390,7 @@
                     </svg>
                   </button>
                   <div
-                    id="filterTripDateDropdown"
+                    id="filterCampDateDropdown"
                     class="hidden absolute z-10 w-full mt-1 bg-white border border-slate-100 rounded-xl shadow-lg max-h-60 overflow-y-auto"
                   >
                     <!-- Checkboxes populated by JS -->
@@ -550,7 +550,7 @@
           >
             <div>Booking Info</div>
             <div>Customer</div>
-            <div>Package</div>
+            <div>Camp</div>
             <div class="text-right sm:text-left">Status</div>
           </div>
           <!-- Bookings List -->
@@ -617,7 +617,7 @@
             </button>
 
             <button
-              id="navPackages"
+              id="navCamps"
               class="flex-1 flex flex-col items-center px-4 py-2 text-slate-400 hover:text-slate-600 rounded-2xl transition-all"
             >
               <svg
@@ -633,16 +633,16 @@
                   d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
                 ></path>
               </svg>
-              <span class="text-[10px] font-medium">Trips</span>
+              <span class="text-[10px] font-medium">Camps</span>
             </button>
           </div>
         </nav>
       </main>
     </div>
 
-    <!-- Package Modal -->
+    <!-- Camp Modal -->
     <div
-      id="packageModal"
+      id="campModal"
       class="fixed z-50 inset-0 overflow-y-auto hidden"
       aria-labelledby="modal-title"
       role="dialog"
@@ -654,7 +654,7 @@
         <div
           class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm"
           aria-hidden="true"
-          onclick="closePackageModal()"
+          onclick="closeCampModal()"
         ></div>
         <span
           class="hidden sm:inline-block sm:align-middle sm:h-screen"
@@ -687,14 +687,14 @@
                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                   ></path>
                 </svg>
-                Create / Edit Trip Package
+                Create / Edit Camp Camp
               </h3>
               <p class="text-sm text-gray-500 mt-1">
-                Add or update adventure trip package
+                Add or update adventure camp camp
               </p>
             </div>
             <button
-              onclick="closePackageModal()"
+              onclick="closeCampModal()"
               class="text-gray-400 hover:text-gray-600 transition-colors p-2 hover:bg-gray-100 rounded-full"
             >
               <svg
@@ -714,7 +714,7 @@
           </div>
 
           <!-- Body -->
-          <form id="packageForm" class="flex flex-col overflow-hidden h-full">
+          <form id="campForm" class="flex flex-col overflow-hidden h-full">
             <div class="overflow-y-auto p-6 space-y-8 flex-1">
               <input type="hidden" id="pkgId" />
 
@@ -1015,7 +1015,7 @@
                 </div>
               </div>
 
-              <!-- Trip Dates Section -->
+              <!-- Camp Dates Section -->
               <div class="bg-gray-50/50 rounded-xl p-5 border border-gray-100">
                 <h4
                   class="text-sm font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2 mb-4 pb-3 border-b border-gray-200"
@@ -1033,19 +1033,19 @@
                       d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                     ></path>
                   </svg>
-                  Trip Dates
+                  Camp Dates
                 </h4>
                 <div>
                   <input
                     type="text"
-                    id="pkgTripDate"
+                    id="pkgCampDate"
                     class="block w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     placeholder="e.g. 05 September 2026, 18 September 2026"
                   />
                 </div>
               </div>
 
-              <!-- Trip Images Section -->
+              <!-- Camp Images Section -->
               <div class="bg-gray-50/50 rounded-xl p-5 border border-gray-100">
                 <h4
                   class="text-sm font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2 mb-4 pb-3 border-b border-gray-200"
@@ -1063,7 +1063,7 @@
                       d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                     ></path>
                   </svg>
-                  Trip Images
+                  Camp Images
                 </h4>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2"
@@ -1078,7 +1078,7 @@
                 </div>
               </div>
 
-              <!-- About the Trip Section -->
+              <!-- About the Camp Section -->
               <div class="bg-gray-50/50 rounded-xl p-5 border border-gray-100">
                 <h4
                   class="text-sm font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2 mb-4 pb-3 border-b border-gray-200"
@@ -1096,7 +1096,7 @@
                       d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     ></path>
                   </svg>
-                  About the Trip
+                  About the Camp
                 </h4>
                 <!-- New Tags, Features, Badges, Difficulty -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
@@ -1175,8 +1175,8 @@
             >
               <button
                 type="button"
-                onclick="deleteCurrentPackage()"
-                title="Delete Package"
+                onclick="deleteCurrentCamp()"
+                title="Delete Camp"
                 class="inline-flex items-center p-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
               >
                 <svg
@@ -1197,7 +1197,7 @@
               <div class="flex gap-3">
                 <button
                   type="button"
-                  onclick="closePackageModal()"
+                  onclick="closeCampModal()"
                   title="Cancel"
                   class="inline-flex items-center p-3 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
                 >
@@ -1217,7 +1217,7 @@
                 </button>
                 <button
                   type="submit"
-                  title="Save Package"
+                  title="Save Camp"
                   class="inline-flex items-center p-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
                 >
                   <svg
@@ -1402,7 +1402,7 @@
       const dbClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
       let quill;
-      let currentPackages = [];
+      let currentCamps = [];
       let currentBookings = [];
       let currentFilteredBookings = [];
       let selectedBookingId = null;
@@ -1433,7 +1433,7 @@
         document.getElementById("dashboardView").classList.remove("hidden");
 
         // Force Bookings view as default upon login
-        document.getElementById("sectionPackages").classList.add("hidden");
+        document.getElementById("sectionCamps").classList.add("hidden");
         document.getElementById("sectionBookings").classList.remove("hidden");
 
         // Update navigation UI states
@@ -1444,9 +1444,9 @@
           .getElementById("navBookings")
           .classList.add("text-blue-600", "bg-blue-50/50");
         document
-          .getElementById("navPackages")
+          .getElementById("navCamps")
           .classList.remove("text-blue-600", "bg-blue-50/50");
-        document.getElementById("navPackages").classList.add("text-slate-400");
+        document.getElementById("navCamps").classList.add("text-slate-400");
 
         // Load data
         loadBookings();
@@ -1501,16 +1501,16 @@
       // ------------------
       // Navigation Logic
       // ------------------
-      document.getElementById("navPackages").addEventListener("click", () => {
-        document.getElementById("sectionPackages").classList.remove("hidden");
+      document.getElementById("navCamps").addEventListener("click", () => {
+        document.getElementById("sectionCamps").classList.remove("hidden");
         document.getElementById("sectionBookings").classList.add("hidden");
 
-        // Active styling for Packages
+        // Active styling for Camps
         document
-          .getElementById("navPackages")
+          .getElementById("navCamps")
           .classList.remove("text-slate-400");
         document
-          .getElementById("navPackages")
+          .getElementById("navCamps")
           .classList.add("text-blue-600", "bg-blue-50/50");
 
         // Inactive styling for Bookings
@@ -1519,12 +1519,12 @@
           .classList.remove("text-blue-600", "bg-blue-50/50");
         document.getElementById("navBookings").classList.add("text-slate-400");
 
-        loadPackages();
+        loadCamps();
       });
 
       document.getElementById("navBookings").addEventListener("click", () => {
         document.getElementById("sectionBookings").classList.remove("hidden");
-        document.getElementById("sectionPackages").classList.add("hidden");
+        document.getElementById("sectionCamps").classList.add("hidden");
 
         // Active styling for Bookings
         document
@@ -1534,50 +1534,50 @@
           .getElementById("navBookings")
           .classList.add("text-blue-600", "bg-blue-50/50");
 
-        // Inactive styling for Packages
+        // Inactive styling for Camps
         document
-          .getElementById("navPackages")
+          .getElementById("navCamps")
           .classList.remove("text-blue-600", "bg-blue-50/50");
-        document.getElementById("navPackages").classList.add("text-slate-400");
+        document.getElementById("navCamps").classList.add("text-slate-400");
 
         loadBookings();
       });
 
       // ------------------
-      // Package Management
+      // Camp Management
       // ------------------
-      async function loadPackages() {
-        document.getElementById("packagesLoading").classList.remove("hidden");
+      async function loadCamps() {
+        document.getElementById("campsLoading").classList.remove("hidden");
         const { data, error } = await dbClient
-          .from("packages")
+          .from("camps")
           .select("*")
           .order("priority", { ascending: false });
-        document.getElementById("packagesLoading").classList.add("hidden");
+        document.getElementById("campsLoading").classList.add("hidden");
         if (error) return console.error(error);
 
-        currentPackages = data;
+        currentCamps = data;
 
         // Populate bookings filter
-        const filterPkg = document.getElementById("filterPackage");
+        const filterPkg = document.getElementById("filterCamp");
         filterPkg.innerHTML =
-          '<option value="">All Packages</option>' +
+          '<option value="">All Camps</option>' +
           data
             .map((p) => `<option value="${p.id}">${p.title}</option>`)
             .join("");
 
-        renderPackagesList();
+        renderCampsList();
       }
 
-      function renderPackagesList() {
-        const list = document.getElementById("packagesList");
+      function renderCampsList() {
+        const list = document.getElementById("campsList");
 
         // Update stats
-        const total = currentPackages.length;
-        const active = currentPackages.filter((p) => p.is_active).length;
-        document.getElementById("statTotalTrips").textContent = total;
-        document.getElementById("statActiveTrips").textContent = active;
+        const total = currentCamps.length;
+        const active = currentCamps.filter((p) => p.is_active).length;
+        document.getElementById("statTotalCamps").textContent = total;
+        document.getElementById("statActiveCamps").textContent = active;
 
-        list.innerHTML = currentPackages
+        list.innerHTML = currentCamps
           .map((pkg) => {
             // Get short description
             const shortDesc = pkg.desc_text
@@ -1598,8 +1598,8 @@
             const statusLabel = pkg.is_active ? "Active" : "Inactive";
 
             return `
-              <div class="bg-white rounded-[22px] shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)] border border-slate-100 p-4 sm:p-5 flex flex-col sm:grid sm:grid-cols-[2fr_1.5fr_1.5fr_1fr] gap-4 relative cursor-pointer hover:shadow-md transition-shadow" onclick="openPackageModal('${pkg.id}')">
-                <!-- Package Info Column -->
+              <div class="bg-white rounded-[22px] shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)] border border-slate-100 p-4 sm:p-5 flex flex-col sm:grid sm:grid-cols-[2fr_1.5fr_1.5fr_1fr] gap-4 relative cursor-pointer hover:shadow-md transition-shadow" onclick="openCampModal('${pkg.id}')">
+                <!-- Camp Info Column -->
                 <div class="flex flex-col pr-8 sm:pr-0">
                   <div class="font-bold text-slate-900 text-sm mb-0.5 flex items-center gap-2">
                     <span class="text-lg">${pkg.emoji || "🏔️"}</span>
@@ -1676,9 +1676,9 @@
       }
 
       document
-        .getElementById("btnCreatePackage")
+        .getElementById("btnCreateCamp")
         .addEventListener("click", () => {
-          document.getElementById("packageForm").reset();
+          document.getElementById("campForm").reset();
           document.getElementById("pkgId").value = "";
           document.getElementById("pkgTitleId").readOnly = false;
           document.getElementById("pkgDifficulty").value = "";
@@ -1687,13 +1687,13 @@
           document.getElementById("pkgBadges").value = "";
           quill.root.innerHTML = "";
           toggleDisableOptions();
-          document.getElementById("packageModal").classList.remove("hidden");
+          document.getElementById("campModal").classList.remove("hidden");
           const bottomNav = document.getElementById("bottomNav");
           if (bottomNav) bottomNav.classList.add("hidden");
         });
 
-      function openPackageModal(id) {
-        const pkg = currentPackages.find((p) => p.id === id);
+      function openCampModal(id) {
+        const pkg = currentCamps.find((p) => p.id === id);
         if (!pkg) return;
 
         document.getElementById("pkgId").value = pkg.id;
@@ -1705,7 +1705,7 @@
         document.getElementById("pkgPrice").value = pkg.price || "";
         document.getElementById("pkgPriceEur").value = pkg.price_eur || "";
         document.getElementById("pkgDuration").value = pkg.duration || "";
-        document.getElementById("pkgTripDate").value = pkg.trip_date || "";
+        document.getElementById("pkgCampDate").value = pkg.camp_date || "";
         document.getElementById("pkgActivity").value = pkg.activity || "";
         document.getElementById("pkgDifficulty").value = pkg.difficulty || "";
         document.getElementById("pkgTags").value = pkg.tags
@@ -1731,16 +1731,16 @@
         toggleDisableOptions();
 
         quill.root.innerHTML = pkg.itinerary_text || "";
-        document.getElementById("packageModal").classList.remove("hidden");
+        document.getElementById("campModal").classList.remove("hidden");
         const bottomNav = document.getElementById("bottomNav");
         if (bottomNav) bottomNav.classList.add("hidden");
       }
 
-      function duplicatePackage(id) {
-        const pkg = currentPackages.find((p) => p.id === id);
+      function duplicateCamp(id) {
+        const pkg = currentCamps.find((p) => p.id === id);
         if (!pkg) return;
 
-        // Open modal as if it's a new package, but prepopulated
+        // Open modal as if it's a new camp, but prepopulated
         document.getElementById("pkgId").value = "";
         document.getElementById("pkgTitleId").value = "";
         document.getElementById("pkgTitleId").readOnly = false;
@@ -1754,7 +1754,7 @@
         document.getElementById("pkgPrice").value = pkg.price || "";
         document.getElementById("pkgPriceEur").value = pkg.price_eur || "";
         document.getElementById("pkgDuration").value = pkg.duration || "";
-        document.getElementById("pkgTripDate").value = pkg.trip_date || "";
+        document.getElementById("pkgCampDate").value = pkg.camp_date || "";
         document.getElementById("pkgActivity").value = pkg.activity || "";
         document.getElementById("pkgDifficulty").value = pkg.difficulty || "";
         document.getElementById("pkgTags").value = pkg.tags
@@ -1780,43 +1780,43 @@
         toggleDisableOptions();
 
         quill.root.innerHTML = pkg.itinerary_text || "";
-        document.getElementById("packageModal").classList.remove("hidden");
+        document.getElementById("campModal").classList.remove("hidden");
         const bottomNav = document.getElementById("bottomNav");
         if (bottomNav) bottomNav.classList.add("hidden");
       }
 
-      async function deletePackage(id) {
+      async function deleteCamp(id) {
         if (
-          confirm("Are you sure you want to completely remove this package?")
+          confirm("Are you sure you want to completely remove this camp?")
         ) {
           const { error } = await dbClient
-            .from("packages")
+            .from("camps")
             .delete()
             .eq("id", id);
           if (error) {
-            alert("Error deleting package: " + error.message);
+            alert("Error deleting camp: " + error.message);
           } else {
-            loadPackages();
+            loadCamps();
           }
         }
       }
 
-      function deleteCurrentPackage() {
+      function deleteCurrentCamp() {
         const id = document.getElementById("pkgTitleId").value;
         if (id) {
-          deletePackage(id);
-          closePackageModal();
+          deleteCamp(id);
+          closeCampModal();
         }
       }
 
-      function closePackageModal() {
-        document.getElementById("packageModal").classList.add("hidden");
+      function closeCampModal() {
+        document.getElementById("campModal").classList.add("hidden");
         const bottomNav = document.getElementById("bottomNav");
         if (bottomNav) bottomNav.classList.remove("hidden");
       }
 
       document
-        .getElementById("packageForm")
+        .getElementById("campForm")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
 
@@ -1839,7 +1839,7 @@
               ? parseFloat(document.getElementById("pkgPriceEur").value)
               : null,
             duration: document.getElementById("pkgDuration").value,
-            trip_date: document.getElementById("pkgTripDate").value,
+            camp_date: document.getElementById("pkgCampDate").value,
             activity: document.getElementById("pkgActivity").value,
             difficulty: document.getElementById("pkgDifficulty").value,
             tags: document.getElementById("pkgTags").value
@@ -1874,12 +1874,12 @@
               .checked,
           };
 
-          const { error } = await dbClient.from("packages").upsert(payload);
+          const { error } = await dbClient.from("camps").upsert(payload);
           if (error) {
-            alert("Error saving package: " + error.message);
+            alert("Error saving camp: " + error.message);
           } else {
-            closePackageModal();
-            loadPackages();
+            closeCampModal();
+            loadCamps();
           }
         });
 
@@ -1899,19 +1899,19 @@
 
         currentBookings = data;
 
-        // Populate Trip Dates dropdown
-        const tripDates = [
-          ...new Set(data.map((b) => b.chosen_trip_date).filter(Boolean)),
+        // Populate Camp Dates dropdown
+        const campDates = [
+          ...new Set(data.map((b) => b.chosen_camp_date).filter(Boolean)),
         ];
         // Sort descending (latest future date at top, past at bottom)
-        tripDates.sort((a, b) => new Date(b) - new Date(a));
+        campDates.sort((a, b) => new Date(b) - new Date(a));
 
-        const dropdown = document.getElementById("filterTripDateDropdown");
-        dropdown.innerHTML = tripDates
+        const dropdown = document.getElementById("filterCampDateDropdown");
+        dropdown.innerHTML = campDates
           .map(
             (date) => `
           <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
-            <input type="checkbox" value="${date}" class="trip-date-checkbox mr-2 rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+            <input type="checkbox" value="${date}" class="camp-date-checkbox mr-2 rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
             <span class="text-sm text-gray-700">${date}</span>
           </label>
         `,
@@ -1919,9 +1919,9 @@
           .join("");
 
         // Attach change listeners to new checkboxes
-        document.querySelectorAll(".trip-date-checkbox").forEach((cb) => {
+        document.querySelectorAll(".camp-date-checkbox").forEach((cb) => {
           cb.addEventListener("change", () => {
-            updateTripDateLabel();
+            updateCampDateLabel();
             renderBookingsList();
           });
         });
@@ -1929,11 +1929,11 @@
         renderBookingsList();
       }
 
-      function updateTripDateLabel() {
+      function updateCampDateLabel() {
         const checked = Array.from(
-          document.querySelectorAll(".trip-date-checkbox:checked"),
+          document.querySelectorAll(".camp-date-checkbox:checked"),
         ).map((cb) => cb.value);
-        const label = document.getElementById("filterTripDateLabel");
+        const label = document.getElementById("filterCampDateLabel");
         if (checked.length === 0) {
           label.textContent = "All Dates";
         } else if (checked.length === 1) {
@@ -1947,7 +1947,7 @@
         const search = document
           .getElementById("searchBookings")
           .value.toLowerCase();
-        const filterPkg = document.getElementById("filterPackage").value;
+        const filterPkg = document.getElementById("filterCamp").value;
         const filterStatus = document.getElementById("filterStatus").value;
         const filterBookingStart = document.getElementById(
           "filterBookingDateStart",
@@ -1956,8 +1956,8 @@
           "filterBookingDateEnd",
         ).value;
 
-        const selectedTripDates = Array.from(
-          document.querySelectorAll(".trip-date-checkbox:checked"),
+        const selectedCampDates = Array.from(
+          document.querySelectorAll(".camp-date-checkbox:checked"),
         ).map((cb) => cb.value);
 
         const filtered = currentBookings.filter((b) => {
@@ -1985,13 +1985,13 @@
             }
           }
 
-          let matchTripDate = true;
-          if (selectedTripDates.length > 0) {
+          let matchCampDate = true;
+          if (selectedCampDates.length > 0) {
             if (
-              !b.chosen_trip_date ||
-              !selectedTripDates.includes(b.chosen_trip_date)
+              !b.chosen_camp_date ||
+              !selectedCampDates.includes(b.chosen_camp_date)
             ) {
-              matchTripDate = false;
+              matchCampDate = false;
             }
           }
 
@@ -2000,7 +2000,7 @@
             matchPkg &&
             matchStatus &&
             matchBookingDate &&
-            matchTripDate
+            matchCampDate
           );
         });
 
@@ -2054,7 +2054,7 @@
         .getElementById("searchBookings")
         .addEventListener("input", renderBookingsList);
       document
-        .getElementById("filterPackage")
+        .getElementById("filterCamp")
         .addEventListener("change", renderBookingsList);
       document
         .getElementById("filterStatus")
@@ -2084,23 +2084,23 @@
 
       // Dropdown toggle logic
       document
-        .getElementById("filterTripDateBtn")
+        .getElementById("filterCampDateBtn")
         .addEventListener("click", (e) => {
           e.stopPropagation();
           document
-            .getElementById("filterTripDateDropdown")
+            .getElementById("filterCampDateDropdown")
             .classList.toggle("hidden");
         });
 
       // Close dropdown when clicking outside
       document.addEventListener("click", (e) => {
-        const dropdown = document.getElementById("filterTripDateDropdown");
-        const btn = document.getElementById("filterTripDateBtn");
+        const dropdown = document.getElementById("filterCampDateDropdown");
+        const btn = document.getElementById("filterCampDateBtn");
         if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
           dropdown.classList.add("hidden");
         }
       });
-      // We removed filterTripDate as an ID, so we also remove the listener for it here.
+      // We removed filterCampDate as an ID, so we also remove the listener for it here.
 
       document
         .getElementById("btnCopyBookings")
@@ -2163,9 +2163,9 @@
                     <div><span class="text-gray-500 text-xs uppercase tracking-wide">Customer Name:</span><br/><strong class="text-gray-900">${b.customer_name}</strong></div>
                     <div id="container-mobile_no"><span class="text-gray-500 text-xs uppercase tracking-wide">Mobile No:</span><br/><strong class="text-gray-900" id="val-mobile_no">${b.mobile_no || "-"}</strong></div>
                     <div id="container-dob"><span class="text-gray-500 text-xs uppercase tracking-wide">DOB:</span><br/><strong class="text-gray-900" id="val-dob">${b.dob || "-"}</strong></div>
-                    <div id="container-chosen_trip_date"><span class="text-gray-500 text-xs uppercase tracking-wide">Chosen Date (Trip):</span><br/><strong class="text-gray-900 text-blue-600" id="val-chosen_trip_date">${b.chosen_trip_date || "-"}</strong></div>
+                    <div id="container-chosen_camp_date"><span class="text-gray-500 text-xs uppercase tracking-wide">Chosen Date (Camp):</span><br/><strong class="text-gray-900 text-blue-600" id="val-chosen_camp_date">${b.chosen_camp_date || "-"}</strong></div>
                     <div><span class="text-gray-500 text-xs uppercase tracking-wide">Booking Date:</span><br/><strong class="text-gray-900">${new Date(b.created_at).toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</strong></div>
-                    <div><span class="text-gray-500 text-xs uppercase tracking-wide">Package Name:</span><br/><strong class="text-gray-900">${b.event_name}</strong></div>
+                    <div><span class="text-gray-500 text-xs uppercase tracking-wide">Camp Name:</span><br/><strong class="text-gray-900">${b.event_name}</strong></div>
                     <div><span class="text-gray-500 text-xs uppercase tracking-wide">Amount (PLN):</span><br/><strong class="text-gray-900">${b.total_price_pln ? b.total_price_pln + " PLN" : "-"}</strong></div>
                     ${b.total_price_eur ? `<div><span class="text-gray-500 text-xs uppercase tracking-wide">Amount (EUR):</span><br/><strong class="text-gray-900">${b.total_price_eur} EUR</strong></div>` : ""}
                     <div id="container-email" class="col-span-2 sm:col-span-1"><span class="text-gray-500 text-xs uppercase tracking-wide">Email:</span><br/><strong class="text-gray-900 break-all" id="val-email">${b.email || b.email_address || "-"}</strong></div>
@@ -2236,28 +2236,28 @@
           document.getElementById("val-email").innerHTML =
             `<input type="email" id="edit-email" class="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md text-sm" value="${emailVal}" />`;
 
-          // Chosen Trip Date - lookup package
+          // Chosen Camp Date - lookup camp
           let dateOptions = "";
-          const pkg = currentPackages.find(
+          const pkg = currentCamps.find(
             (p) => p.id === b.event_id || p.title === b.event_name,
           );
-          if (pkg && pkg.trip_date) {
-            const dates = pkg.trip_date
+          if (pkg && pkg.camp_date) {
+            const dates = pkg.camp_date
               .split(",")
               .map((d) => d.trim())
               .filter((d) => d);
             dateOptions = dates
               .map(
                 (d) =>
-                  `<option value="${d}" ${b.chosen_trip_date === d ? "selected" : ""}>${d}</option>`,
+                  `<option value="${d}" ${b.chosen_camp_date === d ? "selected" : ""}>${d}</option>`,
               )
               .join("");
           }
           if (!dateOptions) {
-            dateOptions = `<option value="${b.chosen_trip_date || ""}">${b.chosen_trip_date || "No dates found"}</option>`;
+            dateOptions = `<option value="${b.chosen_camp_date || ""}">${b.chosen_camp_date || "No dates found"}</option>`;
           }
-          document.getElementById("val-chosen_trip_date").innerHTML =
-            `<select id="edit-chosen_trip_date" class="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md text-sm">${dateOptions}</select>`;
+          document.getElementById("val-chosen_camp_date").innerHTML =
+            `<select id="edit-chosen_camp_date" class="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md text-sm">${dateOptions}</select>`;
         } else {
           // View Mode (re-render)
           openBookingModal(b.id);
@@ -2284,14 +2284,14 @@
           const newMobile = document.getElementById("edit-mobile_no").value;
           const newDob = document.getElementById("edit-dob").value;
           const newEmail = document.getElementById("edit-email").value;
-          const newTripDate = document.getElementById(
-            "edit-chosen_trip_date",
+          const newCampDate = document.getElementById(
+            "edit-chosen_camp_date",
           ).value;
 
           const updateData = {
             mobile_no: newMobile,
             dob: newDob || null,
-            chosen_trip_date: newTripDate,
+            chosen_camp_date: newCampDate,
             email: newEmail,
           };
 
@@ -2307,7 +2307,7 @@
             if (currentEditBooking) {
               currentEditBooking.mobile_no = newMobile;
               currentEditBooking.dob = newDob || null;
-              currentEditBooking.chosen_trip_date = newTripDate;
+              currentEditBooking.chosen_camp_date = newCampDate;
               currentEditBooking.email = newEmail;
             }
 
