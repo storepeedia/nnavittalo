@@ -34,3 +34,6 @@ CREATE POLICY "Allow public inserts" ON public.bookings
 CREATE POLICY "Allow public select" ON public.bookings
     FOR SELECT
     USING (true);
+-- 5. Drop old B2B tables if they exist
+DROP TABLE IF EXISTS public.b2b_packages;
+DROP TABLE IF EXISTS public.b2b_requests;
