@@ -117,17 +117,17 @@ button{cursor:pointer;font-family:inherit}
 .filters-apply:hover{background:#1a3a9e}
 
 /* TRIPS LIST */
-.trips-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.camps-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
 .sort-btns{display:flex;gap:4px}
 .sort-btn{font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:600;padding:6px 14px;border-radius:6px;border:1.5px solid #dde4f5;background:#fff;color:#4a5568}
 .sort-btn.active{background:#2952c8;color:#fff;border-color:#2952c8}
 
 /* TRIP CARD */
-.trip-card{background:#fff;border:1px solid #dde4f5;border-radius:14px;overflow:hidden;box-shadow:0 2px 16px rgba(41,82,200,.10);display:grid;grid-template-columns:300px 1fr;transition:box-shadow .2s,transform .2s;cursor:pointer;margin-bottom:20px}
-.trip-card:hover{box-shadow:0 8px 40px rgba(41,82,200,.18);transform:translateY(-2px)}
-.trip-img{position:relative;min-height:220px;overflow:hidden;background:linear-gradient(145deg,#1a3a9e,#2952c8)}
-.trip-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.trip-badges{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:6px;z-index:2}
+.camp-card{background:#fff;border:1px solid #dde4f5;border-radius:14px;overflow:hidden;box-shadow:0 2px 16px rgba(41,82,200,.10);display:grid;grid-template-columns:300px 1fr;transition:box-shadow .2s,transform .2s;cursor:pointer;margin-bottom:20px}
+.camp-card:hover{box-shadow:0 8px 40px rgba(41,82,200,.18);transform:translateY(-2px)}
+.camp-img{position:relative;min-height:220px;overflow:hidden;background:linear-gradient(145deg,#1a3a9e,#2952c8)}
+.camp-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.camp-badges{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:6px;z-index:2}
 .badge{font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;padding:4px 10px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
 .badge-blue{background:#2952c8;color:#fff}
 .badge-white{background:#fff;color:#2952c8}
@@ -135,9 +135,9 @@ button{cursor:pointer;font-family:inherit}
 .badge-green{background:#22c55e;color:#fff}
 .badge-soon{background:#fff;color:#ff6b35}
 .badge-dark{background:#0f2266;color:#fff}
-.trip-date-badge{position:absolute;bottom:12px;right:12px;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.68rem;padding:4px 10px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase;z-index:2}
-.trip-body{padding:24px 28px;display:flex;flex-direction:column}
-.trip-tags{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.camp-date-badge{position:absolute;bottom:12px;right:12px;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.68rem;padding:4px 10px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase;z-index:2}
+.camp-body{padding:24px 28px;display:flex;flex-direction:column}
+.camp-tags{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .tag{font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px}
 .tag-water{background:#e0f2fe;color:#0369a1}
 .tag-sport{background:#e8eefb;color:#2952c8}
@@ -147,21 +147,21 @@ button{cursor:pointer;font-family:inherit}
 .tag-family{background:#fef3e8;color:#c05900}
 .tag-culture{background:#fefce8;color:#854d0e}
 .tag-hiking{background:#e8eefb;color:#2952c8}
-.trip-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:#1a1f36;margin-bottom:6px;line-height:1.3}
-.trip-loc{font-size:.83rem;color:#7a8599;font-weight:500;margin-bottom:4px}
-.trip-date-text{font-size:.78rem;font-weight:600;margin-bottom:14px}
-.trip-features{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.camp-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:#1a1f36;margin-bottom:6px;line-height:1.3}
+.camp-loc{font-size:.83rem;color:#7a8599;font-weight:500;margin-bottom:4px}
+.camp-date-text{font-size:.78rem;font-weight:600;margin-bottom:14px}
+.camp-features{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .feature-tag{font-size:.75rem;font-weight:600;color:#4a5568;background:#f5f7fc;border:1px solid #dde4f5;padding:4px 10px;border-radius:50px}
-.trip-footer{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;padding-top:16px;border-top:1px solid #dde4f5;flex-wrap:wrap;gap:12px}
-.trip-price-label{font-size:.72rem;font-weight:600;color:#7a8599;text-transform:uppercase;letter-spacing:.5px}
-.trip-price{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.7rem;color:#2952c8;line-height:1}
-.trip-price span{font-size:.9rem;font-weight:700}
-.trip-price small{font-size:.85rem;font-weight:700;color:#4a5568;margin-left:6px}
-.trip-price-na{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.7rem;color:#b0b8cc;line-height:1}
-.trip-price-na span{font-size:.9rem;font-weight:700}
-.trip-price-na small{font-size:.85rem;font-weight:700;color:#b0b8cc;margin-left:6px}
-.trip-included{font-size:.72rem;font-weight:700;color:#22c55e;display:flex;align-items:center;gap:4px;margin-top:4px}
-.trip-btns{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.camp-footer{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;padding-top:16px;border-top:1px solid #dde4f5;flex-wrap:wrap;gap:12px}
+.camp-price-label{font-size:.72rem;font-weight:600;color:#7a8599;text-transform:uppercase;letter-spacing:.5px}
+.camp-price{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.7rem;color:#2952c8;line-height:1}
+.camp-price span{font-size:.9rem;font-weight:700}
+.camp-price small{font-size:.85rem;font-weight:700;color:#4a5568;margin-left:6px}
+.camp-price-na{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.7rem;color:#b0b8cc;line-height:1}
+.camp-price-na span{font-size:.9rem;font-weight:700}
+.camp-price-na small{font-size:.85rem;font-weight:700;color:#b0b8cc;margin-left:6px}
+.camp-included{font-size:.72rem;font-weight:700;color:#22c55e;display:flex;align-items:center;gap:4px;margin-top:4px}
+.camp-btns{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
 .btn-book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;background:#2952c8;color:#fff;padding:10px 22px;border-radius:8px;border:none;letter-spacing:.3px;white-space:nowrap}
 .btn-book:hover{background:#1a3a9e}
 .btn-details{font-family:'Montserrat',sans-serif;font-weight:600;font-size:.78rem;color:#2952c8;background:#e8eefb;padding:8px 22px;border-radius:8px;border:none;letter-spacing:.3px;white-space:nowrap}
@@ -285,9 +285,9 @@ button{cursor:pointer;font-family:inherit}
   .footer{padding:36px 16px 20px}
 }
 @media(max-width:640px){
-  .trip-card{grid-template-columns:1fr}
-  .trip-img{min-height:200px}
-  .trip-body{padding:16px}
+  .camp-card{grid-template-columns:1fr}
+  .camp-img{min-height:200px}
+  .camp-body{padding:16px}
   .topbar{padding:8px 16px;font-size:.72rem}
   .modal-body{grid-template-columns:1fr}
   .gallery-sub{display:none}
@@ -381,7 +381,7 @@ button{cursor:pointer;font-family:inherit}
     text-align: center;
 }
 
-/* Style for when the trip is Coming Soon */
+/* Style for when the camp is Coming Soon */
 .guest-select-box:disabled {
     background: #edf2f7;
     color: #a0aec0;
@@ -434,7 +434,7 @@ button{cursor:pointer;font-family:inherit}
     <div class="nav-links">
       <a href="#">Home</a>
       <a href="#about" style="color:#1a1f36">About Us</a>
-      <a href="#packages" style="color:#1a1f36">Camps</a>
+      <a href="#camps" style="color:#1a1f36">Camps</a>
       <a href="#contact" style="color:#1a1f36">Contact</a>
     </div>
     <div class="nav-actions">
@@ -445,7 +445,7 @@ button{cursor:pointer;font-family:inherit}
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#packages" onclick="closeMobileMenu()">🏄 Camps</a>
+    <a href="#camps" onclick="closeMobileMenu()">🏄 Camps</a>
     <a href="#about" onclick="closeMobileMenu()">ℹ️ About Us</a>
     <a href="#contact" onclick="closeMobileMenu()">📞 Contact</a>
     <div class="mobile-menu-btns">
@@ -460,7 +460,7 @@ button{cursor:pointer;font-family:inherit}
   <div class="hero-inner">
     <div class="hero-badge">🏆 Europe's Premier Adventure Operator</div>
     <h1>Your Next<br><span>Epic Adventure</span><br>Starts with<br>NNA VITTALO</h1>
-    <p>From mountain peaks to ocean waves — we craft unforgettable travel and adventure packages. Skipass, equipment, guides and accommodation always included.</p>
+    <p>From mountain peaks to ocean waves — we craft unforgettable travel and adventure camps. Skipass, equipment, guides and accommodation always included.</p>
     <div class="hero-stats">
       <div><strong>150+</strong><small>Happy Adventurers</small></div>
       <div><strong>3+</strong><small>Destinations</small></div>
@@ -471,11 +471,11 @@ button{cursor:pointer;font-family:inherit}
 <!-- BANNER -->
 <div class="banner">
   <span class="banner-pill">Always Included</span>
-  Skipass, equipment &amp; guide are included in every package price — no hidden extras!
+  Skipass, equipment &amp; guide are included in every camp price — no hidden extras!
 </div>
 
 <!-- MAIN CONTENT -->
-<div class="main-wrap" id="packages">
+<div class="main-wrap" id="camps">
   <!-- Filters -->
   <aside class="filters-sidebar">
     <div class="filters-header" onclick="toggleFilters()">
@@ -527,10 +527,10 @@ button{cursor:pointer;font-family:inherit}
     </div>
   </aside>
 
-  <!-- Trips -->
+  <!-- Camps -->
   <div>
-    <div class="trips-header">
-      <div id="tripCount" style="font-family:Montserrat,sans-serif;font-weight:700;font-size:.88rem;color:#4a5568">Showing <span style="color:#2952c8">6 trips</span> available</div>
+    <div class="camps-header">
+      <div id="campCount" style="font-family:Montserrat,sans-serif;font-weight:700;font-size:.88rem;color:#4a5568">Showing <span style="color:#2952c8">6 camps</span> available</div>
       <div style="display:flex;align-items:center;gap:8px">
         <span style="font-size:.82rem;font-weight:600;color:#4a5568">Sort:</span>
         <div class="sort-btns">
@@ -540,7 +540,7 @@ button{cursor:pointer;font-family:inherit}
         </div>
       </div>
     </div>
-    <div id="tripsList"></div>
+    <div id="campsList"></div>
   </div>
 </div>
 
@@ -548,16 +548,16 @@ button{cursor:pointer;font-family:inherit}
 <div class="info-grid" id="about">
   <div class="info-card">
     <div class="info-icon">🏔️</div>
-    <h2>Adventure Trips — Mountains & Trails</h2>
-    <p>NNA VITTALO has been organising adventure travel packages for <strong style="color:#2952c8">over 1 year</strong>. From the iconic Tatra Mountains to the Alpine slopes of Austria and Switzerland, every trip is built around your passion for the outdoors.</p>
-    <p>Our mountain trips include an experienced guide, all necessary equipment, accommodation and full board. Whether you're a first-time hiker or a seasoned mountaineer, we have the perfect package for you.</p>
+    <h2>Adventure Camps — Mountains & Trails</h2>
+    <p>NNA VITTALO has been organising adventure travel camps for <strong style="color:#2952c8">over 1 year</strong>. From the iconic Tatra Mountains to the Alpine slopes of Austria and Switzerland, every camp is built around your passion for the outdoors.</p>
+    <p>Our mountain camps include an experienced guide, all necessary equipment, accommodation and full board. Whether you're a first-time hiker or a seasoned mountaineer, we have the perfect camp for you.</p>
     <p>Expert local guides ensure your safety and help you get the most from every destination. <strong style="color:#2952c8">All essential gear and permits are always included.</strong></p>
   </div>
   <div class="info-card">
     <div class="info-icon">🌊</div>
     <h2>Water Sports — Surf, Kayak & Sail</h2>
     <p>From the calm lakes of Masuria to the powerful Atlantic swells of Portugal, NNA VITTALO offers <strong style="color:#2952c8">water sports experiences</strong> for every level. Kayaking, surfing, sailing and more.</p>
-    <p>Each water sports package includes professional instruction, certified safety equipment and accommodation near the water. Our instructors are accredited and experienced with first-time participants.</p>
+    <p>Each water sports camp includes professional instruction, certified safety equipment and accommodation near the water. Our instructors are accredited and experienced with first-time participants.</p>
     <p>Starting your water sports adventure? Don't worry — our beginner-friendly programmes are designed to have you paddling or surfing with confidence on day one.</p>
   </div>
 </div>
@@ -566,7 +566,7 @@ button{cursor:pointer;font-family:inherit}
 <section class="contact" id="contact">
   <div class="contact-inner">
     <h2>Questions? Get in Touch! 🗺️</h2>
-    <p>Looking for a custom trip, group booking or just want to know more? Our team is here to help plan your perfect adventure.</p>
+    <p>Looking for a custom camp, group booking or just want to know more? Our team is here to help plan your perfect adventure.</p>
     <div class="contact-cards">
       <a href="mailto:info@nnavittalo.com" class="contact-card">
         <span class="contact-card-icon">📧</span>
@@ -577,7 +577,7 @@ button{cursor:pointer;font-family:inherit}
         <div><div class="contact-card-label">Call / WhatsApp Us</div><div class="contact-card-val"><span class="dynamic-phone"></span></div></div>
       </a>
     </div>
-    <p style="font-size:.82rem;margin-bottom:10px;color:rgba(255,255,255,.6)">Join our newsletter — be the first to hear about new trips, discounts and adventures!</p>
+    <p style="font-size:.82rem;margin-bottom:10px;color:rgba(255,255,255,.6)">Join our newsletter — be the first to hear about new camps, discounts and adventures!</p>
     <div class="nl-form">
       <input type="email" id="nlEmail" placeholder="Your email address..." />
       <button onclick="subscribeNewsletter()">Subscribe</button>
@@ -593,8 +593,8 @@ button{cursor:pointer;font-family:inherit}
       <p class="footer-tagline">Europe's premier adventure travel operator. Mountains, oceans, forests — unforgettable journeys crafted for the bold.</p>
       <div style="font-size:.82rem">📧 info@nnavittalo.com<br>📞 <span class="dynamic-phone"></span></div>
     </div>
-    <div class="footer-col"><h4>Our Trips</h4><a href="#packages">Kayaking Getaway</a><a href="#packages">Ski Trip</a><a href="#packages">Surfing Camp</a><a href="#packages">Hiking in Tatra</a><a href="#packages">Camping Weekend</a></div>
-    <div class="footer-col"><h4>Company</h4><a href="#about">About Us</a><a href="#contact">Contact</a><a href="#packages">All Trips</a></div>
+    <div class="footer-col"><h4>Our Camps</h4><a href="#camps">Kayaking Getaway</a><a href="#camps">Ski Camp</a><a href="#camps">Surfing Camp</a><a href="#camps">Hiking in Tatra</a><a href="#camps">Camping Weekend</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="#about">About Us</a><a href="#contact">Contact</a><a href="#camps">All Camps</a></div>
     <div class="footer-col"><h4>Contact</h4><a href="mailto:info@nnavittalo.com">info@nnavittalo.com</a><a href="#" class="dynamic-wa-link"><span class="dynamic-phone"></span></a><a href="#">Warsaw, Poland</a><a href="#">Mon–Fri 9:00–18:00</a></div>
   </div>
   <div class="footer-bottom">
@@ -633,7 +633,7 @@ button{cursor:pointer;font-family:inherit}
         <h4 style="font-family:Montserrat,sans-serif;font-weight:700;font-size:.85rem;color:#1a1f36;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px">Most Popular Amenities</h4>
         <div class="amenities-grid" id="amenitiesGrid"></div>
         <div style="margin-top:24px">
-          <h4 style="font-family:Montserrat,sans-serif;font-weight:700;font-size:.85rem;color:#1a1f36;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Trip Date</h4>
+          <h4 style="font-family:Montserrat,sans-serif;font-weight:700;font-size:.85rem;color:#1a1f36;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Camp Date</h4>
           <div style="background:#e8eefb;border:1px solid #d0dcf8;border-radius:10px;padding:14px 20px;display:flex;align-items:center;gap:12px">
             <span style="font-size:1.4rem">📅</span>
             <div>
@@ -659,8 +659,8 @@ button{cursor:pointer;font-family:inherit}
       <p style="text-align:center; font-size:0.85rem; color:#4a5568; margin-bottom:20px;">Please fill out the details for all adventurers.</p>
 
 
-      <label class="form-label">Select Trip Date *</label>
-      <select class="form-input" id="bookTripDate" required style="margin-bottom:15px;">
+      <label class="form-label">Select Camp Date *</label>
+      <select class="form-input" id="bookCampDate" required style="margin-bottom:15px;">
       </select>
 
       <label class="form-label">Full Name (Main Booker) *</label>
@@ -716,15 +716,15 @@ button{cursor:pointer;font-family:inherit}
 
 // Function to calculate the price based on guest count
 function updateLivePrice() {
-    if (!currentTrip || currentTrip.comingSoon) return;
+    if (!currentCamp || currentCamp.comingSoon) return;
 
     // 1. Get number of guests from the dropdown
     const bookGuestsEl = document.getElementById('bookGuests');
     const guestCount = (bookGuestsEl && bookGuestsEl.value) ? parseInt(bookGuestsEl.value) || 1 : 1;
     
     // 2. Use the FIXED prices from your TRIPS array multiplied by guests
-    const totalPln = currentTrip.price ? (currentTrip.price * guestCount) : '--';
-    const totalEur = currentTrip.priceEur ? (currentTrip.priceEur * guestCount) : '--'; // This uses your manual input
+    const totalPln = currentCamp.price ? (currentCamp.price * guestCount) : '--';
+    const totalEur = currentCamp.priceEur ? (currentCamp.priceEur * guestCount) : '--'; // This uses your manual input
 
     // 3. Update the sidebar text
     const priceDisplay = document.getElementById('modalPrice');
@@ -757,23 +757,23 @@ let TRIPS = [];
 
 let activeSort = 'Upcoming';
 let activeDiff = 'All';
-let currentTrip = null;
+let currentCamp = null;
 
 
-function renderTrips(data) {
-  const list = document.getElementById('tripsList');
-  const count = document.getElementById('tripCount');
+function renderCamps(data) {
+  const list = document.getElementById('campsList');
+  const count = document.getElementById('campCount');
   if (!list) return;
 
   list.innerHTML = '';
-  count.innerHTML = `Showing <span style="color:#2952c8">${data.length} trips</span> available`;
+  count.innerHTML = `Showing <span style="color:#2952c8">${data.length} camps</span> available`;
 
-  data.forEach(trip => {
+  data.forEach(camp => {
     const card = document.createElement('div');
-    card.className = 'trip-card';
+    card.className = 'camp-card';
     
-    const isComingSoon = trip.comingSoon === true;
-    const isDisabled = !trip.isActive;
+    const isComingSoon = camp.comingSoon === true;
+    const isDisabled = !camp.isActive;
     const lockBooking = isComingSoon || isDisabled;
 
     // 1. Logic for the WHOLE CARD click (only if not locked)
@@ -781,30 +781,30 @@ function renderTrips(data) {
         card.onclick = (e) => {
             // Check if a button was clicked to prevent opening twice
             if (e.target.tagName !== 'BUTTON') {
-                openModal(trip.id);
+                openModal(camp.id);
             }
         };
     } else {
         card.style.cursor = 'default';
-        // Still allow opening modal for disabled packages if you just want to see it,
-        // but the prompt said "If a package is disabled: The Book Now button must become unclickable"
+        // Still allow opening modal for disabled camps if you just want to see it,
+        // but the prompt said "If a camp is disabled: The Book Now button must become unclickable"
         // Let's allow modal opening so they can read it, but booking is locked inside.
         card.onclick = (e) => {
             if (e.target.tagName !== 'BUTTON') {
-                openModal(trip.id);
+                openModal(camp.id);
             }
         };
     }
 
     // 2. Prepare button styles and actions
     const buttonClass = lockBooking ? 'btn-disabled-home' : '';
-    const clickAction = `onclick="openModal('${trip.id}')"`;
+    const clickAction = `onclick="openModal('${camp.id}')"`;
 
     card.innerHTML = `
-      <div class="trip-img">
-        <img src="${trip.photo}" alt="${trip.title}">
-        <div class="trip-badges">
-          ${trip.badges ? trip.badges.map((b, i) => {
+      <div class="camp-img">
+        <img src="${camp.photo}" alt="${camp.title}">
+        <div class="camp-badges">
+          ${camp.badges ? camp.badges.map((b, i) => {
             let label = typeof b === 'object' ? b.l : b;
             if (isDisabled && label.toLowerCase() === 'available') {
               label = 'Unavailable';
@@ -818,33 +818,33 @@ function renderTrips(data) {
           }).join('') : ''}
         </div>
       </div>
-      <div class="trip-body">
-        <div class="trip-tags">
-          ${trip.tags ? trip.tags.map(t => `<span class="tag tag-tatra">${typeof t === 'object' ? t.l : t}</span>`).join('') : ''}
+      <div class="camp-body">
+        <div class="camp-tags">
+          ${camp.tags ? camp.tags.map(t => `<span class="tag tag-tatra">${typeof t === 'object' ? t.l : t}</span>`).join('') : ''}
         </div>
-        <h3 class="trip-title">${trip.title}</h3>
-        <div class="trip-loc">📍 ${trip.location}</div>
-        <div class="trip-date-text">📅 ${trip.tripDate ? (trip.tripDate.includes(",") ? "Multiple dates available" : trip.tripDate) : 'Dates Coming Soon'}</div>
+        <h3 class="camp-title">${camp.title}</h3>
+        <div class="camp-loc">📍 ${camp.location}</div>
+        <div class="camp-date-text">📅 ${camp.campDate ? (camp.campDate.includes(",") ? "Multiple dates available" : camp.campDate) : 'Dates Coming Soon'}</div>
         
-        <div class="trip-features">
-          ${trip.features ? trip.features.map(f => `<span class="feature-tag">${f}</span>`).join('') : ''}
+        <div class="camp-features">
+          ${camp.features ? camp.features.map(f => `<span class="feature-tag">${f}</span>`).join('') : ''}
         </div>
 
-        <div class="trip-footer">
+        <div class="camp-footer">
           <div>
-            <div class="trip-price-label">Starting from</div>
-            <div class="trip-price" style="display: flex; align-items: baseline; font-weight: 800; color: #2952c8;">
-    ${isComingSoon ? '---' : (trip.price ? trip.price : '--') + ' <span style="font-size: 0.75rem; color: #2952c8; margin-left: 2px;">PLN</span>'}
+            <div class="camp-price-label">Starting from</div>
+            <div class="camp-price" style="display: flex; align-items: baseline; font-weight: 800; color: #2952c8;">
+    ${isComingSoon ? '---' : (camp.price ? camp.price : '--') + ' <span style="font-size: 0.75rem; color: #2952c8; margin-left: 2px;">PLN</span>'}
     
     <span style="font-size: 1.1rem; color: #A0AEC0; font-weight: 800; margin-left: 6px;">
-        ${isComingSoon ? '' : '/ ~' + (trip.priceEur ? trip.priceEur : '--') + ' <span style="font-size: 0.75rem; color: #A0AEC0; margin-left: 2px;">EUR</span>'}
+        ${isComingSoon ? '' : '/ ~' + (camp.priceEur ? camp.priceEur : '--') + ' <span style="font-size: 0.75rem; color: #A0AEC0; margin-left: 2px;">EUR</span>'}
     </span>
 </div>
-            <div class="trip-included">
-               ${isComingSoon ? '' : '<span>✓</span> ' + (trip.included || 'Equipment included')}
+            <div class="camp-included">
+               ${isComingSoon ? '' : '<span>✓</span> ' + (camp.included || 'Equipment included')}
             </div>
           </div>
-          <div class="trip-btns">
+          <div class="camp-btns">
             <button class="btn-book ${buttonClass}" ${lockBooking ? 'disabled' : ''} ${clickAction}>${isDisabled ? 'Unavailable' : 'Book Now'}</button>
             <button class="btn-details" ${clickAction}>View Details</button>
           </div>
@@ -858,23 +858,23 @@ function renderTrips(data) {
 
 
 
-function getFilteredTrips() {
+function getFilteredCamps() {
   const activities = [...document.querySelectorAll('#activityFilters input:checked')].map(i=>i.value);
   const durations = [...document.querySelectorAll('#durationFilters input:checked')].map(i=>i.value);
   const prices = [...document.querySelectorAll('#priceFilters input:checked')].map(i=>i.value);
-  let trips = TRIPS.filter(t => {
+  let camps = TRIPS.filter(t => {
     if(activities.length && !activities.includes(t.activity)) return false;
     if(durations.length && !durations.includes(t.durationTag)) return false;
     if(prices.length && !prices.includes(t.priceRange)) return false;
     if(activeDiff !== 'All' && t.difficulty !== activeDiff) return false;
     return true;
   });
-  if(activeSort === 'Price') trips = [...trips].sort((a,b)=>a.price-b.price);
-  return trips;
+  if(activeSort === 'Price') camps = [...camps].sort((a,b)=>a.price-b.price);
+  return camps;
 }
 
 function applyFilters() {
-  renderTrips(getFilteredTrips());
+  renderCamps(getFilteredCamps());
   const anyActive = document.querySelectorAll('#activityFilters input:checked, #durationFilters input:checked, #priceFilters input:checked').length > 0 || activeDiff !== 'All';
   document.getElementById('filtersClear').style.display = anyActive ? 'inline' : 'none';
 }
@@ -912,11 +912,11 @@ document.getElementById('filtersArrow').style.transform = filtersOpen ? 'rotate(
 
 
 function openModal(id) {
-  currentTrip = TRIPS.find(t => t.id === id);
-  if (!currentTrip) return;
-  const t = currentTrip;
+  currentCamp = TRIPS.find(t => t.id === id);
+  if (!currentCamp) return;
+  const t = currentCamp;
   
-  // --- NEW LOGIC START: Check if trip is Coming Soon or Disabled ---
+  // --- NEW LOGIC START: Check if camp is Coming Soon or Disabled ---
   const isComingSoon = t.comingSoon === true;
   const isDisabled = !t.isActive;
   const lockBooking = isComingSoon || isDisabled;
@@ -935,11 +935,11 @@ function openModal(id) {
   const gallerySubEl = document.getElementById('gallerySub');
   if (gallerySubEl) gallerySubEl.innerHTML = subImages;
 
-  document.getElementById('modalDesc').textContent = (t.desc || '') + ' Whether you\'re a first-timer or a seasoned adventurer, this package is carefully designed to deliver an unforgettable experience from start to finish.';
+  document.getElementById('modalDesc').textContent = (t.desc || '') + ' Whether you\'re a first-timer or a seasoned adventurer, this camp is carefully designed to deliver an unforgettable experience from start to finish.';
   
   const amenities = ['✅ ' + (t.included || 'Equipment included'), '✅ Professional guide / instructor', '✅ Accommodation included', '✅ Meals & snacks', '✅ Safety gear & insurance', '✅ Transport from meeting point'];
   document.getElementById('amenitiesGrid').innerHTML = amenities.map(a => `<div class="amenity-item">${a}</div>`).join('');
-  document.getElementById('modalDate').textContent = t.showPrice ? (t.tripDate ? t.tripDate.replace(/,/g, ' & ') : 'Dates Coming Soon') : 'Dates Coming Soon';
+  document.getElementById('modalDate').textContent = t.showPrice ? (t.campDate ? t.campDate.replace(/,/g, ' & ') : 'Dates Coming Soon') : 'Dates Coming Soon';
   
   if (t.showPrice) {
     let priceText = '';
@@ -953,7 +953,7 @@ function openModal(id) {
   // Inject Rich Text Itinerary
   let itinContainer = document.getElementById('modalItineraryContainer');
   if (!itinContainer) {
-      // Find where to insert it. After tripDate maybe?
+      // Find where to insert it. After campDate maybe?
       const modalDateContainer = document.getElementById('modalDate').parentNode.parentNode;
       itinContainer = document.createElement('div');
       itinContainer.id = 'modalItineraryContainer';
@@ -1001,12 +1001,12 @@ function showBookingForm() {
 
     document.getElementById('bookingFormContainer').style.display = 'block';
 
-    // Populate Trip Date dropdown
-    const dateSelect = document.getElementById('bookTripDate');
+    // Populate Camp Date dropdown
+    const dateSelect = document.getElementById('bookCampDate');
     if (dateSelect) {
         dateSelect.innerHTML = '';
-        if (currentTrip && currentTrip.tripDate) {
-            const dates = currentTrip.tripDate.split(',').map(d => d.trim()).filter(d => d);
+        if (currentCamp && currentCamp.campDate) {
+            const dates = currentCamp.campDate.split(',').map(d => d.trim()).filter(d => d);
             dates.forEach(d => {
                 let opt = document.createElement('option');
                 opt.value = d;
@@ -1066,13 +1066,13 @@ function populateGuestDropdown() {
 }
 
 function updateLivePrice() {
-    if (!currentTrip || currentTrip.comingSoon) return;
+    if (!currentCamp || currentCamp.comingSoon) return;
 
     const bookGuestsEl = document.getElementById('bookGuests');
     const guestCount = (bookGuestsEl && bookGuestsEl.value) ? parseInt(bookGuestsEl.value) || 1 : 1;
 
-    const totalPln = currentTrip.price ? (currentTrip.price * guestCount) : '--';
-    const totalEur = currentTrip.priceEur ? (currentTrip.priceEur * guestCount) : '--';
+    const totalPln = currentCamp.price ? (currentCamp.price * guestCount) : '--';
+    const totalEur = currentCamp.priceEur ? (currentCamp.priceEur * guestCount) : '--';
 
     const priceText = `${totalPln} <span style="font-size:1rem">PLN</span> <span style="font-size:.9rem;font-weight:700;color:#4a5568;margin-left:8px">(~${totalEur} EUR)</span>`;
 
@@ -1121,12 +1121,12 @@ async function confirmBooking() {
     // Generate a random booking number
 
     const bookingNo = 'NV' + Math.floor(10000 + Math.random() * 90000);
-    const chosenDate = document.getElementById('bookTripDate') ? document.getElementById('bookTripDate').value : '';
+    const chosenDate = document.getElementById('bookCampDate') ? document.getElementById('bookCampDate').value : '';
 
 
     // Price logic
-    const totalPln = currentTrip.price ? (currentTrip.price * guestCount) : null;
-    const totalEur = currentTrip.priceEur ? (currentTrip.priceEur * guestCount) : null;
+    const totalPln = currentCamp.price ? (currentCamp.price * guestCount) : null;
+    const totalEur = currentCamp.priceEur ? (currentCamp.priceEur * guestCount) : null;
     const bookingDate = new Date().toISOString().split('T')[0];
 
     // Array to hold all insert payloads
@@ -1135,12 +1135,12 @@ async function confirmBooking() {
     // 1. Add Main Booker
     recordsToInsert.push({
         booking_no: bookingNo,
-        event_id: currentTrip.id,
-        event_name: currentTrip.title,
+        event_id: currentCamp.id,
+        event_name: currentCamp.title,
         customer_name: fullName,
         mobile_no: phone,
         dob: dob,
-        chosen_trip_date: chosenDate,
+        chosen_camp_date: chosenDate,
         guests: guestCount,
         total_price_pln: totalPln,
         total_price_eur: totalEur,
@@ -1160,12 +1160,12 @@ async function confirmBooking() {
             }
             recordsToInsert.push({
                 booking_no: bookingNo,
-                event_id: currentTrip.id,
-                event_name: currentTrip.title,
+                event_id: currentCamp.id,
+                event_name: currentCamp.title,
                 customer_name: gName,
                 mobile_no: phone, // Copied from main booker
                 dob: null,        // Blank for additional guests
-                chosen_trip_date: chosenDate,
+                chosen_camp_date: chosenDate,
                 guests: guestCount,
                 total_price_pln: totalPln,
                 total_price_eur: totalEur,
@@ -1191,7 +1191,7 @@ async function confirmBooking() {
 
         const lines = [
             `Booking Reference: ${bookingNo}`,
-            `Trip: ${currentTrip.title}`,
+            `Camp: ${currentCamp.title}`,
             `Main Booker: ${fullName}`,
             `Mobile: ${phone}`,
             `Total Guests: ${guestCount}`,
@@ -1207,14 +1207,14 @@ async function confirmBooking() {
         document.getElementById('successContainer').style.display = 'block';
 
         // Store for WA
-        window._lastBookingData = { bookingNo, chosenDate, currentTrip };
+        window._lastBookingData = { bookingNo, chosenDate, currentCamp };
     }
 }
 
 function sendWhatsAppMessage() {
     if (!window._lastBookingData) return;
-    const { bookingNo, chosenDate, currentTrip } = window._lastBookingData;
-    const msg = `Hello! I would like to book the *${currentTrip.title}* package.\nChosen Date: *${chosenDate}*\nMy Booking Reference is: *${bookingNo}*`;
+    const { bookingNo, chosenDate, currentCamp } = window._lastBookingData;
+    const msg = `Hello! I would like to book the *${currentCamp.title}* camp.\nChosen Date: *${chosenDate}*\nMy Booking Reference is: *${bookingNo}*`;
     const waLink = `https://wa.me/${window.APP_CONFIG.phoneNumber.replace('+', '')}?text=${encodeURIComponent(msg)}`;
     window.open(waLink, '_blank');
 }
@@ -1286,9 +1286,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // 3. RUN THIS IMMEDIATELY when the page loads
 // Init
 async function init() {
-    const { data, error } = await _supabase.from('packages').select('*').order('priority', { ascending: false });
+    const { data, error } = await _supabase.from('camps').select('*').order('priority', { ascending: false });
     if (error) {
-        console.error("Error fetching packages", error);
+        console.error("Error fetching camps", error);
         return;
     }
     TRIPS = data.map(p => ({
@@ -1309,7 +1309,7 @@ async function init() {
         priceRange: p.price_range,
         durationTag: p.duration_tag,
         difficulty: p.difficulty,
-        tripDate: p.trip_date,
+        campDate: p.camp_date,
         showPrice: p.show_price,
         comingSoon: p.coming_soon,
         isActive: p.is_active !== false, // default true
@@ -1318,7 +1318,7 @@ async function init() {
         images: p.images || []
     })).filter(t => t.isActive || !t.hideWhenDisabled); // Only show if active or if hiddenWhenDisabled is false
 
-    renderTrips(getFilteredTrips());
+    renderCamps(getFilteredCamps());
 }
 init();
 
